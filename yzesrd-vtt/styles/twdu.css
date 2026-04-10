@@ -1,0 +1,1460 @@
+@font-face {
+  font-family: "Blue Highway";
+  src: url("../assets/fonts/BlueHighway-bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Ash";
+  src: url("../assets/fonts/DCC - Ash.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Impact";
+  src: url("../assets/fonts/impact.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Minion Pro";
+  src: url("../assets/fonts/MinionPro-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Minion Pro";
+  src: url("../assets/fonts/MinionPro-it.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Nu Gothic";
+  src: url("../assets/fonts/nu_century_gothic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Sabon";
+  src: url("../assets/fonts/SabonLTStd-Italic.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Zapf Dingbats";
+  src: url("../assets/fonts/ZapfDingbatsStd.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+.ash-font {
+  font-family: "Ash", sans-serif;
+  font-weight: bolder;
+}
+
+:root {
+  --fa-display: inherit;
+}
+
+body {
+  --color-light-4: $neutral-4;
+}
+
+.sidebar {
+  float: left;
+  color: hsl(0, 0%, 100%);
+  width: 60%;
+  background: hsl(57, 15%, 55%);
+  padding-block: 1rem;
+  padding-left: 1.2rem;
+  padding-right: 2rem;
+  margin-inline: 0.5rem;
+}
+
+.directory .directory-header .header-search input {
+  color: hsl(57, 15%, 26%);
+}
+
+.mainset {
+  color: hsl(57, 15%, 6%) !important;
+}
+
+a.content-link {
+  background: unset;
+  border: none;
+  text-indent: unset;
+}
+
+.chat-message .message-header .flavor-text {
+  color: hsl(57, 15%, 26%);
+}
+
+#pause {
+  background: none;
+}
+
+#pause > img {
+  content: url("../assets/images/misc/hand.png");
+  filter: drop-shadow(5px 7px 1px hsl(353, 24%, 85%));
+  width: 200px;
+  height: auto;
+  top: -50px;
+  left: calc(50% - 100px);
+  opacity: 1;
+}
+
+#pause > figcaption {
+  color: hsl(353, 24%, 85%);
+  font-family: "Nu Gothic", sans-serif;
+  font-size: 1.5rem;
+  text-shadow: 0px 3px 5px rgb(0, 0, 0);
+}
+
+figure figcaption {
+  font-family: "Ash", sans-serif;
+  font-size: 1.2rem;
+  color: hsl(53, 10%, 68%);
+  margin-top: 0;
+  text-align: center;
+}
+
+.fa-spin {
+  animation: none;
+}
+
+.category-tab {
+  color: hsl(53, 14%, 75%);
+}
+
+input[type=search] {
+  color: hsl(53, 14%, 75%);
+  background: hsl(0, 0%, 27%);
+}
+
+.app {
+  background: url(/systems/twdu/assets/images/denim075.png) repeat;
+}
+
+.twdu .sheet .actor {
+  width: min(100%, 900px);
+}
+
+.window-app .window-content {
+  background: url(/systems/twdu/assets/images/background.webp) no-repeat;
+  background-size: cover;
+}
+
+.intro {
+  filter: saturate(0.5);
+}
+
+.chapter-header-text h1 {
+  padding: 0 !important;
+}
+.chapter-header-text .flavor-text {
+  text-shadow: hsl(0, 0%, 0%) 1px 1px 2px;
+  filter: drop-shadow(1px 1px 2px hsl(0, 0%, 0%));
+}
+
+.entry-name {
+  color: hsl(53, 14%, 75%);
+  padding-inline: 15px;
+  background: url(/systems/twdu/assets/images/misc/scene-bg.webp);
+  font-size: 1.1em;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 2px hsla(36, 11%, 53%, 0.3);
+  text-shadow: 2px 2px 0 hsl(57, 15%, 6%), -1px -1px 0 hsl(57, 15%, 6%), 1px -1px 0 hsl(57, 15%, 6%), -1px 1px 0 hsl(57, 15%, 6%), 1px 1px 0 hsl(57, 15%, 6%);
+}
+
+@layer blocks.ui {
+  #context-menu {
+    position: absolute;
+    z-index: 9999;
+  }
+  .chat-message {
+    background: url(/systems/twdu/assets/images/background.webp) no-repeat;
+    background-size: cover;
+  }
+  .chat-message .flavor-text {
+    color: hsl(355, 53%, 31%) !important;
+  }
+  .chat-message.whisper {
+    background: url(/systems/twdu/assets/images/background_whisper.webp) no-repeat;
+  }
+  .chat-message.blind {
+    background: url(/systems/twdu/assets/images/background_blind.webp) no-repeat;
+  }
+  .chat-message.blind .message-content {
+    filter: saturate(20%) grayscale(0.95) brightness(120%);
+  }
+  .chat-message.blind img {
+    filter: saturate(20%) grayscale(0.95) brightness(120%);
+  }
+  .chat-input {
+    background: hsl(53, 14%, 75%);
+  }
+}
+.window-title,
+.header-button {
+  color: hsl(53, 10%, 68%) !important;
+  font-size: 1.1rem;
+}
+
+a:hover {
+  text-shadow: 1px 1px 2px hsla(353, 45%, 30%, 0.3);
+}
+
+#sidebar h2 {
+  color: hsl(53, 10%, 68%);
+}
+
+#sidebar .tabs {
+  color: hsl(53, 10%, 68%);
+}
+#sidebar .tabs a:hover {
+  text-shadow: 1px 1px 1px black;
+}
+
+.sheet nav.sheet-tabs {
+  margin: 0px;
+  border-top: 1px solid hsl(353, 45%, 30%);
+  border-bottom: 1px solid hsl(353, 45%, 30%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+}
+
+.tabs {
+  background-color: hsla(36, 11%, 68%, 0.5);
+  font: 1.5em "Ash", sans-serif;
+  color: hsl(57, 15%, 26%);
+  text-transform: uppercase;
+  font-weight: normal;
+}
+.tabs .item.active {
+  color: hsl(53, 14%, 15%);
+  text-shadow: 1px 1px 2px hsla(353, 45%, 30%, 0.3);
+  background-color: hsla(36, 11%, 43%, 0.5);
+  border-right: 1px solid hsl(353, 45%, 30%);
+  border-left: 1px solid hsl(353, 45%, 30%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+}
+
+nav.tabs [data-tab] {
+  color: hsl(53, 14%, 15%);
+}
+
+img {
+  border: none;
+}
+
+h1.input {
+  margin-bottom: 0px;
+  padding-block: 0.25rem;
+}
+
+h2.header {
+  margin: 0px;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+
+h1 {
+  font-family: "Ash", sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  border: none;
+}
+h1 input {
+  height: 2rem !important;
+}
+
+h2 {
+  font-family: "Ash", sans-serif;
+  font-size: 1.5rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: hsl(57, 15%, 26%);
+  border: none;
+}
+
+input[type=text] {
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid hsl(57, 15%, 26%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  background-color: transparent;
+}
+input[type=text]:hover {
+  cursor: text;
+}
+input[type=text].box {
+  min-width: 50px;
+  border: 2px solid hsl(355, 53%, 31%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+}
+
+textarea {
+  border-radius: 0;
+  border: 2px solid hsl(355, 53%, 31%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  background-color: transparent;
+  color: hsl(57, 15%, 26%);
+  font-family: "Nu Gothic", sans-serif;
+}
+
+select {
+  border: 1px solid hsl(355, 53%, 31%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  border-radius: 0;
+  font-family: "Nu Gothic", sans-serif;
+  background: transparent;
+}
+
+select:focus {
+  box-shadow: 0 0 5px hsl(355, 53%, 31%);
+}
+
+option,
+optgroup {
+  color: hsl(57, 15%, 26%);
+  background: hsla(36, 11%, 53%, 0.3);
+  border-radius: 0;
+}
+
+.ds-1 {
+  box-shadow: 0.25rem 0.25rem 0 hsla(36, 11%, 43%, 0.5);
+}
+
+.ds-1:hover {
+  box-shadow: 0.125rem 0.125rem 0 hsla(36, 11%, 43%, 0.5);
+}
+
+fieldset p a {
+  color: hsl(355, 53%, 31%);
+}
+fieldset pre {
+  color: hsl(53, 14%, 15%);
+}
+
+.roll-fields p {
+  margin: 0px;
+}
+.roll-fields .border-bottom {
+  border-bottom: 2px dotted hsl(0, 0%, 100%);
+  -o-border-image: none;
+     border-image: none;
+}
+.roll-fields h2 {
+  margin: 0px;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  color: hsl(0, 0%, 100%);
+  font-family: "Ash", sans-serif;
+  font-size: 1.5rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  text-align: center;
+}
+.roll-fields h4 {
+  margin: 0;
+  margin-bottom: 0.2rem;
+}
+.roll-fields select {
+  border: 1px solid white;
+  border-radius: 0;
+  font-family: "Nu Gothic", sans-serif;
+  color: white;
+}
+.roll-fields select:focus {
+  box-shadow: 0 0 5px hsl(355, 53%, 31%);
+}
+.roll-fields .subheader {
+  background-color: transparent;
+}
+.roll-fields .subtotal {
+  background-color: hsla(36, 11%, 63%, 0.2);
+  color: hsl(0, 0%, 100%);
+}
+.roll-fields input[type=text] {
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid hsl(57, 15%, 26%);
+  -o-border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 stretch;
+     border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 stretch;
+  background-color: transparent;
+  color: white;
+  margin-bottom: 1rem;
+}
+.roll-fields input[type=text]:hover {
+  cursor: pointer;
+}
+.roll-fields input[type=text].box {
+  min-width: 50px;
+  border: 2px solid hsl(355, 53%, 31%);
+  -o-border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 stretch;
+     border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 stretch;
+}
+.roll-fields .group {
+  border: 2px solid white;
+  -o-border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 repeat;
+     border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 repeat;
+}
+
+.dialog .dialog-buttons button.default,
+.dialog .dialog-buttons button {
+  background: hsl(53, 10%, 68%);
+  box-shadow: 0.25rem 0.25rem 0 hsla(36, 11%, 43%, 0.5);
+  color: hsl(57, 15%, 26%);
+  border-radius: 0;
+  border: 1px solid hsl(353, 45%, 30%);
+}
+
+button,
+.dialog-buttons {
+  padding: 2px;
+  background: hsl(53, 10%, 68%);
+  box-shadow: 0.25rem 0.25rem 0 hsla(36, 11%, 43%, 0.5);
+  color: hsl(57, 15%, 26%);
+  border-radius: 0;
+  border: 1px solid hsl(353, 45%, 30%);
+}
+
+.dialog-buttons button:hover,
+.dialog-buttons button.default:hover {
+  box-shadow: 0.125rem 0.125rem 0 hsla(36, 11%, 43%, 0.5);
+  background-color: hsl(53, 14%, 75%);
+}
+
+.playlist-sounds {
+  color: hsl(53, 10%, 68%);
+}
+
+button.control-icon.active {
+  background-color: hsl(353, 45%, 30%);
+  color: hsl(353, 24%, 85%);
+}
+
+button.inline-control.sound-control.icon.fa-solid.fa-arrows-rotate.inactive {
+  background-color: hsl(53, 10%, 68%);
+  color: hsl(57, 15%, 26%);
+}
+
+button.inline-control.sound-control.icon.fa-solid.fa-arrows-rotate {
+  background-color: hsl(353, 45%, 30%);
+  color: hsl(353, 24%, 85%);
+}
+
+button,
+.sound-control,
+.inactive {
+  background-color: hsl(53, 10%, 68%);
+  color: hsl(57, 15%, 26%);
+}
+
+button.ui-control[aria-pressed=true] {
+  background-color: hsl(353, 45%, 30%);
+  color: hsl(353, 24%, 85%);
+}
+
+.profile-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto 1/1;
+  padding: 5px;
+}
+
+.sheet.journal-entry .scrollable {
+  padding-right: 0.5rem;
+  overflow: auto auto;
+}
+
+table {
+  background-color: #dddddd !important;
+}
+table th {
+  height: 2rem;
+}
+table tr {
+  align-items: flex-start;
+  min-height: -moz-max-content;
+  min-height: max-content;
+}
+table tr td {
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.grid {
+  display: grid;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon-title-4col {
+  grid-template-columns: 40px 90px repeat(4, 1fr);
+}
+
+.icon-title-5col {
+  grid-template-columns: 40px 90px repeat(5, 1fr);
+}
+
+.icon-title-6col {
+  grid-template-columns: 40px 90px repeat(6, 1fr);
+}
+
+.icon-7col {
+  grid-template-columns: 40px repeat(7, 1fr);
+}
+
+.two-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.three-col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.four-col {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.five-col {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.six-col {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.seven-col {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.eight-col {
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.col-10-90 {
+  grid-template-columns: 10% 90%;
+}
+
+.col-20-80 {
+  grid-template-columns: 20% 80%;
+}
+
+.col-30-70 {
+  grid-template-columns: 30% 70%;
+}
+
+.col-40-60 {
+  grid-template-columns: 40% 60%;
+}
+
+.col-50-50 {
+  grid-template-columns: 50% 50%;
+}
+
+.col-60-40 {
+  grid-template-columns: 60% 40%;
+}
+
+.col-70-30 {
+  grid-template-columns: 70% 30%;
+}
+
+.col-80-20 {
+  grid-template-columns: 80% 20%;
+}
+
+.col-90-10 {
+  grid-template-columns: 90% 10%;
+}
+
+.col-80-10-10 {
+  grid-template-columns: 80% 10% 10%;
+}
+
+.col-70-15-15 {
+  grid-template-columns: 70% 15% 15%;
+}
+
+.col-20-60-20 {
+  grid-template-columns: 20% 60% 20%;
+}
+
+.col-10-80-10 {
+  grid-template-columns: 10% 80% 10%;
+}
+
+.col-33-60-7 {
+  grid-template-columns: 33% 60% 7%;
+}
+
+.col-33-57-10 {
+  grid-template-columns: 33% 57% 10%;
+}
+
+.col-33-50-13 {
+  grid-template-columns: 33% 50% 13%;
+}
+
+.fr-auto-fr {
+  grid-template-columns: 1fr auto 1fr;
+}
+
+.auto-fr-fr {
+  grid-template-columns: auto 1fr 1fr;
+}
+
+.col-25p-fr-auto {
+  grid-template-columns: 30px 1fr auto;
+}
+
+.col-25p-auto-fr-auto {
+  grid-template-columns: 30px auto 1fr auto;
+}
+
+.fit-content-rows {
+  grid-auto-rows: minmax(min-content, max-content);
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.span-2 {
+  grid-column: span 2;
+}
+
+.span-3 {
+  grid-column: span 3;
+}
+
+.span-4 {
+  grid-column: span 4;
+}
+
+.span-5 {
+  grid-column: span 5;
+}
+
+.span-6 {
+  grid-column: span 6;
+}
+
+.span-7 {
+  grid-column: span 7;
+}
+
+.gap-sm {
+  gap: 0.5rem;
+}
+
+.gap-med {
+  gap: 1rem;
+}
+
+.gap-lg {
+  gap: 2rem;
+}
+
+.start {
+  align-items: start;
+  justify-content: start;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+  place-items: center;
+}
+
+.align-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.justify-self-center {
+  justify-self: center;
+}
+
+.justify-self-start {
+  justify-self: start;
+}
+
+.justify-self-end {
+  justify-self: end;
+  align-self: end;
+}
+
+.justify-self-stretch {
+  justify-self: stretch;
+}
+
+.middle {
+  align-items: center;
+  align-self: center;
+  place-items: center stretch;
+  align-self: center stretch;
+}
+
+.border {
+  border: 2px solid hsl(53, 14%, 15%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+}
+
+.border-top {
+  border-top: 3px solid hsl(53, 14%, 15%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+}
+
+.border-bottom {
+  border-bottom: 3px solid hsl(53, 14%, 15%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+}
+
+.border-left {
+  border-left: 3px solid hsl(53, 14%, 15%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+}
+
+.border-right {
+  border-right: 3px solid hsl(53, 14%, 15%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+}
+
+.border-none {
+  border: none;
+}
+
+.br-0 {
+  border-radius: 0px;
+}
+
+.br-5 {
+  border-radius: 5px;
+}
+
+.scrollable {
+  overflow-y: auto;
+}
+
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.max-w-200-hidden {
+  max-width: 200px;
+  overflow: hidden;
+}
+
+.skill-group {
+  margin-inline: -2px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.w-50p {
+  width: 50px;
+}
+
+.w-100p {
+  width: 100px;
+}
+
+.w-150p {
+  width: 150px;
+}
+
+.w-200p {
+  width: 200px;
+}
+
+.w-250p {
+  width: 250px;
+}
+
+.w-300p {
+  width: 300px;
+}
+
+.w-400p {
+  width: 400px;
+}
+
+.w-500p {
+  width: 500px;
+}
+
+.w-600p {
+  width: 600px;
+}
+
+.w-700p {
+  width: 700px;
+}
+
+.w-800p {
+  width: 800px;
+}
+
+.w-900p {
+  width: 900px;
+}
+
+.min-w-50p {
+  min-width: 50px;
+}
+
+.min-w-100p {
+  min-width: 100px;
+}
+
+.min-w-150p {
+  min-width: 150px;
+}
+
+.min-w-200p {
+  min-width: 200px;
+}
+
+.min-w-250p {
+  min-width: 250px;
+}
+
+.min-w-300p {
+  min-width: 300px;
+}
+
+.min-w-400p {
+  min-width: 400px;
+}
+
+.min-w-500p {
+  min-width: 500px;
+}
+
+.min-w-600p {
+  min-width: 600px;
+}
+
+.min-w-700p {
+  min-width: 700px;
+}
+
+.min-w-800p {
+  min-width: 800px;
+}
+
+.max-w-30p {
+  max-width: 30px;
+}
+
+.max-w-50p {
+  max-width: 50px;
+}
+
+.max-w-100p {
+  max-width: 100px;
+}
+
+.max-w-150p {
+  max-width: 150px;
+}
+
+.max-w-200p {
+  max-width: 200px;
+}
+
+.max-w-250p {
+  max-width: 250px;
+}
+
+.max-w-300p {
+  max-width: 300px;
+}
+
+.max-h-110p {
+  max-height: 110px;
+}
+
+.max-h-150p {
+  max-height: 150px;
+}
+
+.max-h-180p {
+  max-height: 180px;
+}
+
+.max-h-250p {
+  max-height: 250px;
+}
+
+.max-h-300p {
+  max-height: 300px;
+}
+
+.min-h-100p {
+  min-height: 100px;
+}
+
+.min-h-150p {
+  min-height: 150px;
+}
+
+.min-h-200p {
+  min-height: 200px;
+}
+
+.min-h-250p {
+  min-height: 250px;
+}
+
+.min-h-300p {
+  min-height: 300px;
+}
+
+.min-h-400p {
+  min-height: 400px;
+}
+
+.min-h-500p {
+  min-height: 500px;
+}
+
+.min-h-600p {
+  min-height: 600px;
+}
+
+.min-h-700p {
+  min-height: 700px;
+}
+
+.min-h-800p {
+  min-height: 800px;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.justify {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.m-1 {
+  margin: 0.25rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
+.m-3 {
+  margin: 0.75rem;
+}
+
+.m-4 {
+  margin: 1rem;
+}
+
+.m-5 {
+  margin: 1.25rem;
+}
+
+.m-6 {
+  margin: 1.5rem;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.pi-0 {
+  padding-inline: 0;
+}
+
+.pi-1 {
+  padding-inline: 0.25rem;
+}
+
+.pi-2 {
+  padding-inline: 0.5rem;
+}
+
+.pi-3 {
+  padding-inline: 0.75rem;
+}
+
+.pi-4 {
+  padding-inline: 1rem;
+}
+
+.pi-5 {
+  padding-inline: 1.25rem;
+}
+
+.pi-6 {
+  padding-inline: 1.5rem;
+}
+
+.pi-7 {
+  padding-inline: 2rem;
+}
+
+.pi-8 {
+  padding-inline: 4rem;
+}
+
+.mi-0 {
+  margin-inline: 0;
+}
+
+.mi-1 {
+  margin-inline: 0.25rem;
+}
+
+.mi-2 {
+  margin-inline: 0.5rem;
+}
+
+.mi-3 {
+  margin-inline: 0.75rem;
+}
+
+.mi-4 {
+  margin-inline: 1rem;
+}
+
+.mi-5 {
+  margin-inline: 1.25rem;
+}
+
+.mi-6 {
+  margin-inline: 1.5rem;
+}
+
+.pt-0 {
+  padding-top: 0;
+}
+
+.pt-1 {
+  padding-top: 0.25rem;
+}
+
+.pt-2 {
+  padding-top: 0.5rem;
+}
+
+.pt-3 {
+  padding-top: 0.75rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
+}
+
+.pt-5 {
+  padding-top: 1.25rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-1 {
+  margin-bottom: 0.2rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.26rem;
+}
+
+.name-count, .control {
+  color: hsl(353, 45%, 30%);
+}
+
+.app.sheet .editor {
+  min-height: 100px;
+}
+
+li .document, li .folder, .document-type .actors, li .update {
+  color: hsl(53, 14%, 15%);
+  list-style-type: none;
+}
+
+.folder {
+  color: hsl(0, 0%, 0%);
+}
+
+.editor-content {
+  padding: 0.5rem;
+  min-height: 100px;
+}
+
+.dice-roll .dice-formula,
+.dice-roll .dice-total {
+  background: hsla(36, 11%, 53%, 0.3);
+  color: hsl(53, 14%, 15%);
+  border-radius: 0;
+  border: 2px solid hsl(355, 53%, 31%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+}
+
+.dice-buttons {
+  justify-items: center;
+  margin-bottom: 10px;
+}
+
+.notes {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  flex: 1;
+}
+
+.full-size {
+  display: block;
+  padding: 0;
+}
+.full-size label {
+  display: block;
+  border-bottom: 1px solid red;
+  padding: 0.2rem 0.5rem;
+}
+.full-size .editor {
+  height: 250px;
+}
+.full-size .editor-content {
+  padding: 0 0.5rem;
+}
+
+.tox.tox-tinymce {
+  min-height: 250px;
+}
+
+.label {
+  font-family: "Nu Gothic", sans-serif;
+}
+
+a.content-link {
+  background: unset;
+  border: none;
+  color: hsl(355, 53%, 31%);
+}
+
+.dialog-form.standard-form .standard-form {
+  padding: 12px;
+}
+
+.standard-form label, .standard-form .label {
+  color: hsl(353, 24%, 85%);
+}
+
+.show-details:hover {
+  cursor: pointer;
+}
+
+.rollable:hover {
+  text-shadow: 1px 1px 2px hsl(353, 45%, 30%);
+  cursor: pointer;
+}
+
+.header {
+  font-family: "Nu Gothic", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  background-color: hsla(36, 11%, 53%, 0.3);
+}
+
+.subheader {
+  background-color: hsla(36, 11%, 63%, 0.2);
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-family: "Nu Gothic", sans-serif;
+}
+
+.subsubheader {
+  background-color: hsla(36, 11%, 73%, 0.1);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-family: "Nu Gothic", sans-serif;
+}
+
+.group {
+  border: 2px solid hsl(355, 53%, 31%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+}
+
+.group-header {
+  background: hsl(53, 14%, 15%);
+  color: hsl(53, 10%, 68%);
+  font-family: "Nu Gothic", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.skill:last-child {
+  border-bottom: none;
+}
+
+.walker {
+  height: 50px;
+  text-align: center;
+  padding: 20px;
+  font-family: "Ash", sans-serif;
+  text-transform: uppercase;
+  text-shadow: hsla(36, 11%, 63%, 0.2) 1px 0 10px;
+  font-size: 1.6rem;
+  color: transparent;
+  background-image: url(/systems/twdu/assets/images/walkers.png);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.roll-damage {
+  text-align: center;
+  font-family: "Nu Gothic", sans-serif;
+  font-size: 0.9rem;
+  margin: 10px;
+}
+
+.issue:nth-child(even),
+.critical:nth-child(even),
+.weapon:nth-child(even),
+.armor:nth-child(even),
+.gear:nth-child(even),
+.tiny:nth-child(even),
+.name:nth-child(even),
+.project:nth-child(even) {
+  background-color: hsla(36, 11%, 63%, 0.2);
+}
+
+.window-app, .window-app .window-content {
+  color: hsl(57, 15%, 26%);
+}
+
+.twdu.threat-level-display {
+  margin: -8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.threat-count {
+  font-family: "Nu Gothic", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: hsla(36, 11%, 53%, 0.3);
+  border: 2px solid hsl(355, 53%, 31%);
+  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.radio-group {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 1rem;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.radio-group input {
+  position: absolute;
+  top: 0.25rem;
+  right: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-group input:checked ~ .radio {
+  background-color: hsl(355, 53%, 31%);
+  border: 2px solid hsl(355, 53%, 31%);
+}
+
+.radio-group input:checked ~ .radio:after {
+  display: block;
+}
+
+.radio-group .radio:after {
+  top: 0.125rem;
+  left: 0.125rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.radio-group:hover input ~ .radio {
+  background-color: hsl(57, 15%, 26%);
+}
+
+.radio {
+  position: absolute;
+  top: 0.25rem;
+  right: 0;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  background-color: hsla(36, 11%, 53%, 0.3);
+  border: 2px solid hsl(355, 53%, 31%);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.radio:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.sidebar-dark {
+  background-color: transparent;
+  background-image: url("/systems/twdu/assets/images/sidebar_bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin: -8px;
+  color: white;
+}
+
+.color-h0 {
+  color: hsl(57, 15%, 6%) !important;
+}
+
+header.journal-page-header h1 {
+  color: hsl(57, 15%, 26%);
+}
+
+.sheet.journal-entry .journal-entry-content {
+  background-color: hsla(36, 11%, 95%, 0.7);
+}
+
+.sheet.journal-entry.application .journal-sidebar .toc .page-heading .page-number, .sheet.journal-entry.application .journal-sidebar .toc .page-heading .page-index {
+  color: hsl(57, 15%, 55%);
+}
+
+:root {
+  --color-shadow-primary: hsla(353, 45%, 40%, 0.7);
+  --color-shadow-highlight: hsl(353, 53%, 65%);
+  --color-border-highlight-alt: hsl(353, 53%, 40%);
+  --color-border-highlight: hsl(353, 53%, 30%);
+}/*# sourceMappingURL=twdu.css.map */

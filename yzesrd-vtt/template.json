@@ -1,143 +1,383 @@
 {
-  "Actor": {
-    "types": [
-      "character",
-      "vehicle",
-      "loot"
-    ],
-    "templates": {
-      "actorNature": { "nature": "human" },
-      "actorArchetype": { "archetype": "" },
-      "actorDescription": { "description": "" },
-      "actorBio": {
-        "bio": {
-          "keyMemory": "",
-          "keyRelationship": "",
-          "home": "",
-          "appearance": "",
-          "yearsOnTheForce": 0,
-          "cover": "",
-          "coverStatus": "",
-          "handler": "",
-          "hideout": ""
-        }
-      },
-      "actorAttributesAndSkills": {
-        "attributes": {
-          "str": { "value": 8 },
-          "agi": { "value": 8 },
-          "int": { "value": 8 },
-          "emp": { "value": 8 }
+    "Actor": {
+        "types": [
+            "character",
+            "challenge",
+            "haven",
+            "npc",
+            "animal"
+            
+        ],
+        "character":{
+            "name": "New Character",
+            "archetype": "",
+            "description": "",
+            "pcAnchor": "",
+            "npcAnchor": "",
+            "notes":{
+                "value": "Notes"
+            },
+            "drive": "",
+            "driveUsed": false,
+            "health": {
+                "value": 3,
+                "label": "HEALTH",
+                "max": 3
+            },
+            "stress": {
+                "value": 0,
+                "label": "STRESS",
+                "max": 10
+                
+            },
+            "experience": {
+                "value": 0,
+                "label": "EXPERIENCE"            
+            },
+            "encumbrance": {
+                "value": 0,
+                "label": "ENCUMBRANCE"
+            },
+            "attributes": {
+                "str": {
+                    "value": 0,
+                    "label": "STRENGTH"
+                },
+                "agl": {
+                    "value": 0,
+                    "label": "AGILITY"
+                },
+                "wit": {
+                    "value": 0,
+                    "label": "WITS"
+                },
+                "emp": {
+                    "value": 0,
+                    "label": "EMPATHY"
+                }
+            },
+            "skills": {
+                "closeCombat": {
+                    "value": 0,
+                    "label": "closeCombat",
+                    "attribute": "str"
+                },
+                "force": {
+                    "value": 0,
+                    "label": "force",
+                    "attribute": "str"
+                },
+                "endure": {
+                    "value": 0,
+                    "label": "endure",
+                    "attribute": "str"
+                },
+                "mobility": {
+                    "value": 0,
+                    "label": "mobility",
+                    "attribute": "agl"
+                },
+                "rangedCombat": {
+                    "value": 0,
+                    "label": "rangedCombat",
+                    "attribute": "agl"
+                },
+                "stealth": {
+                    "value": 0,
+                    "label": "stealth",
+                    "attribute": "agl"
+                },
+                "scout": {
+                    "value": 0,
+                    "label": "scout",
+                    "attribute": "wit"
+                },
+                "survival": {
+                    "value": 0,
+                    "label": "survival",
+                    "attribute": "wit"
+                },
+                "tech": {
+                    "value": 0,
+                    "label": "tech",
+                    "attribute": "wit"
+                },
+                "leadership": {
+                    "value": 0,
+                    "label": "leadership",
+                    "attribute": "emp"
+                },
+                "manipulation": {
+                    "value": 0,
+                    "label": "manipulation",
+                    "attribute": "emp"
+                },
+                "medicine": {
+                    "value": 0,
+                    "label": "medicine",
+                    "attribute": "emp"
+                }
+            },
+            "haven": null
         },
-        "skills": {}
-      },
-      "actorHealth": {
-        "health": { "value": 4, "max": 4, "mod": 0, "permanentLoss": 0 }
-      },
-      "actorResolve": {
-        "resolve": { "value": 4, "max": 4, "mod": 0, "permanentLoss": 0 }
-      },
-      "actorSignatureItem": {
-        "signatureItem": {
-          "name": "",
-          "used": false
+        "challenge": {
+            "rumors" : [
+                {
+                    "description": "",
+                    "clock": 0
+                }
+            ],
+           
+            "challenges": [
+                {
+                    "description": "",
+                    "notes": ""
+                }
+            ],
+            "factions": [
+                {
+                    "name": "",
+                    "description": "",
+                    "notes": "",
+                    "clock": 0
+                }
+            ],
+            "survivors": {
+                "npcs": [] 
+                
+            }
+
+        },
+        "haven": {
+            "notes":{
+                "value": "Haven Notes"
+            },
+            "description": {
+                "overall": "",
+                "structures": "",
+                "surroundings": "",
+                "food": "",
+                "storedGear": ""
+            },
+            "capacity": {
+                "value": 0,
+                "max": 6,
+                "label": "capacity"
+            },
+            "defense": {
+                "value": 0,
+                "max": 6,
+                "label": "defense"
+            },
+            "survivors": {
+                "npcs": [], 
+                "maxInhabitants": 0,
+                "population": 0
+            }
+
+        },
+        "npc":{
+            "name": "NPC",
+            "background": "",
+            "description": "",
+            "fate": "",
+            "notes":{
+                "value": "Notes"
+            },
+            "health": {
+                "value": 3,
+                "label": "HEALTH",
+                "max": 3
+            },
+            "skills": {
+                "closeCombat": {
+                    "level" : "base",
+                    "attribute": "str",
+                    "label": "closeCombat"
+                },
+                "force": {
+                    "level" : "base",
+                    "attribute": "str",
+                    "label": "force"
+                },
+                "endure": {
+                    "level" : "base",
+                    "attribute": "str",
+                    "label": "endure"
+                },
+                "mobility": {
+                    "level" : "base",
+                    "attribute": "agl",
+                    "label": "mobility"
+                },
+                "rangedCombat": {
+                    "level" : "base",
+                    "attribute": "agl",
+                    "label": "rangedCombat"
+                },
+                "stealth": {
+                    "level" : "base",
+                    "attribute": "agl",
+                    "label": "stealth"
+                },
+                "scout": {
+                    "level" : "base",
+                    "attribute": "wit",
+                    "label": "scout"
+                },
+                "survival": {
+                    "level" : "base",
+                    "attribute": "wit",
+                    "label": "survival"
+                },
+                "tech": {
+                    "level" : "base",
+                    "attribute": "wit",
+                    "label": "tech"
+                },
+                "leadership": {
+                    "level" : "base",
+                    "attribute": "emp",
+                    "label": "leadership"
+                },
+                "manipulation": {
+                    "level" : "base",
+                    "attribute": "emp",
+                    "label": "manipulation"
+                },
+                "medicine": {
+                    "level" : "base",
+                    "attribute": "emp",
+                    "label": "medicine"
+                }
+            }
+        },
+        "animal":{
+            "name": "New Animal",
+            "description": "",
+            "notes":{
+                "value": "Notes"
+            },
+            "attack": 0,
+            "damage": 0,
+            "healthMax": {
+                "value": 0,
+                "label": "HEALTH",
+                "max": 0
+            }
         }
-      },
-      "actorResources": {
-        "metaCurrencies": {
-          "promotion": 0,
-          "humanity": 0,
-          "chinyen": 0
-        }
-      }
+
     },
-    "character": {
-      "templates": [
-        "actorAttributesAndSkills",
-        "actorNature",
-        "actorArchetype",
-        "actorBio",
-        "actorHealth",
-        "actorResolve",
-        "actorSignatureItem",
-        "actorResources",
-        "actorDescription"
-      ],
-      "subtype": "pc"
-    },
-    "vehicle": {
-      "templates": ["actorDescription"],
-      "passengers": 1,
-      "maneuverability": 12,
-      "hull": { "value": 2, "max": 2 },
-      "armor": 0,
-      "availability": 2,
-      "cost": 5,
-      "altitude": 0,
-      "components": {
-        "engine": true
-      },
-      "crew": []
-    },
-    "loot": {
-      "templates": ["actorDescription"]
+    "Item": {
+        "types": [
+            "weapon",
+            "armor",
+            "gear",
+            "tinyItem",
+            "project",
+            "talent",
+            "criticalInjury",
+            "vehicle",
+            "issue",
+            "rumor",
+            "challenges",
+            "endgame",
+            "faction"
+        ],
+        "templates": {
+            "itemEquipped": {
+              "isEquipped": false
+            },
+            "itemCommonProperties" : {
+                "description": "",
+                "notes": "",
+                "weight": "",
+                "bonus": 0,
+                "skill": ""
+            }
+
+          },
+          "weapon": {
+            "templates": ["itemEquipped", "itemCommonProperties"],
+            "damage": 0,
+            "range": "none",
+            "isExplosive": false
+          },
+          "armor": {
+            "templates": ["itemEquipped", "itemCommonProperties"],
+            "protection": 0,
+            "agility": 0
+          },
+          
+          "gear": {
+            "templates": ["itemEquipped", "itemCommonProperties"],
+            "quantity": ""
+          },
+          "criticalInjury": {
+            "templates": ["itemCommonProperties"],
+            "fatal": false,
+            "timeLimit": "",
+            "complexity": "B",
+            "effect": 0,
+            "recovery": ""
+          },
+          "tinyItem": {
+            "description": ""
+          },
+          "project": {
+            "description": "",
+            "effect": {
+				"type": "capacity",
+				"value": 2
+				},
+            "workforce": "",
+            "finishDate": "",
+			"requirements": {
+				"tech": 1,
+				"items": ""
+				}
+          },
+          "vehicle": {
+            "templates": ["itemCommonProperties"],
+            "maneuverability": "",
+            "damage": "",
+            "armor": "", 
+            "hull": "",
+            "issue": ""
+          },
+          "talent": {
+            "description": "",
+            "notes": "",
+            "archetype": "",
+            "prerequisite": "",
+            "hasBonus": false,
+            "bonusType": "none",
+            "skill": "",
+            "bonus": 0
+            
+          },
+            "issue": {
+                "description": "",
+                "notes": "",
+                "source": "",
+                "isSecret": false
+            },
+            "rumor": {
+                "description": "",
+                "clock": 0
+            }
+            ,
+            "challenges": {
+                "description": ""
+            },
+            "endgame": {
+                "description": "",
+                "clock": 0
+            },
+            "faction": {
+                "description": "",
+                "notes": "",
+                "clock": 0
+            }
     }
-  },
-  "Item": {
-    "types": [
-      "generic",
-      "upgrade",
-      "armor",
-      "weapon",
-      "explosive",
-      "specialty",
-      "injury"
-    ],
-    "templates": {
-      "itemBase": {
-        "qty": 1,
-        "cost": 0,
-        "availability": 4
-      },
-      "itemDesc": {
-        "description": "",
-        "special": ""
-      },
-      "itemConsumable": {
-        "consumable": false
-      },
-      "itemAttacks": { "attacks": {}, "mounted": false },
-      "itemActions": { "actions": {} },
-      "itemModifiers": { "modifiers": {} }
-    },
-    "generic": {
-      "templates": ["itemBase", "itemActions", "itemDesc", "itemModifiers", "itemConsumable"]
-    },
-    "upgrade": {
-      "templates": ["itemBase", "itemActions", "itemDesc", "itemModifiers"]
-    },
-    "armor": {
-      "templates": ["itemBase", "itemDesc", "itemModifiers", "itemConsumable"],
-      "armor": 6
-    },
-    "weapon": {
-      "templates": ["itemBase", "itemAttacks", "itemActions", "itemDesc", "itemOffensive", "itemConsumable"]
-    },
-    "explosive": {
-      "templates": ["itemBase", "itemAttacks", "itemActions", "itemDesc", "itemOffensive", "itemConsumable"],
-      "blast": 8,
-      "consumable": true
-    },
-    "specialty": {
-      "templates": ["itemDesc", "itemActions", "itemModifiers"]
-    },
-    "injury": {
-      "templates": ["itemDesc", "itemModifiers"],
-      "category": 1,
-      "lethal": false,
-      "permanent": false,
-      "deathSave": "",
-      "healing": ""
-    }
-  }
 }
