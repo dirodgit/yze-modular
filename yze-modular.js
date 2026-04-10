@@ -59,6 +59,16 @@ Hooks.once("init", async function() {
     makeDefault: true,
     label: "YZE.SheetItem"
   });
+  // Register Handlebars Helpers
+  Handlebars.registerHelper({
+    eq: (a, b) => a === b,
+    ne: (a, b) => a !== b,
+    lt: (a, b) => a < b,
+    gt: (a, b) => a > b,
+    le: (a, b) => a <= b,
+    ge: (a, b) => a >= b,
+    capitalize: (s) => s.charAt(0).toUpperCase() + s.slice(1)
+  });
 });
 
 /* -------------------------------------------- */

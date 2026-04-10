@@ -51,10 +51,10 @@ export class YZEItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     const tabs = {};
     for (const [name, config] of Object.entries(this.constructor.TABS)) {
       tabs[name] = {
-        active: this.tabGroups[name],
+        active: this.tabGroups[name] || config.initial,
         tabs: config.tabs.map(t => ({
           ...t,
-          active: t.id === this.tabGroups[name],
+          active: t.id === (this.tabGroups[name] || config.initial),
           label: game.i18n.localize(t.label)
         }))
       };
