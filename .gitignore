@@ -1,7 +1,10 @@
 # Foundry VTT
-Sistemas de Exemplos/
+.exemplos/
 .agents/
 .claude/
+.compendium/
+skills/
+skills-lock.json
 node_modules/
 dist/
 *.log
