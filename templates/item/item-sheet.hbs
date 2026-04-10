@@ -1,0 +1,53 @@
+<header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+    <div class="header-details">
+        <h1 class="charname">
+            <input name="name" type="text" value="{{item.name}}" placeholder="Nome"/>
+        </h1>
+    </div>
+</header>
+
+<nav class="sheet-tabs tabs" data-group="primary">
+    {{#each tabs.primary.tabs as |tab|}}
+    <a class="item {{#if tab.active}}active{{/if}}" data-action="tab" data-group="primary" data-tab="{{tab.id}}">
+        {{#if tab.icon}}<i class="{{tab.icon}}"></i>{{/if}}
+        {{tab.label}}
+    </a>
+    {{/each}}
+</nav>
+
+<section class="sheet-body">
+    <div class="tab {{#if (eq tabs.primary.active 'description')}}active{{/if}}" data-group="primary" data-tab="description">
+        {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+    </div>
+    
+    <div class="tab {{#if (eq tabs.primary.active 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+        {{#if (eq item.type 'skill')}}
+        <div class="form-group">
+            <label>Atributo Chave</label>
+            <select name="system.attribute">
+                {{#each config.attributes as |label key|}}
+                <option value="{{key}}" {{#if (eq ../system.attribute key)}}selected{{/if}}>{{localize label}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Valor</label>
+            <input type="number" name="system.value" value="{{system.value}}">
+        </div>
+        {{/if}}
+
+        {{#if (eq item.type 'weapon')}}
+        <div class="form-group">
+            <label>Dano</label>
+            <input type="number" name="system.damage" value="{{system.damage}}">
+        </div>
+        <div class="form-group">
+            <label>Bônus</label>
+            <input type="number" name="system.bonus" value="{{system.bonus}}">
+        </div>
+        {{/if}}
+        
+        {{!-- Adicione outros tipos conforme necessário --}}
+    </div>
+</section>

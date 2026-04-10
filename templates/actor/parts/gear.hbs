@@ -1,0 +1,25 @@
+<div class="gear-section">
+  <div class="section-header">
+    <h3>Equipamento</h3>
+    <button type="button" data-action="createItem" data-type="gear"><i class="fas fa-plus"></i></button>
+  </div>
+  <div class="gear-list">
+    <div class="gear-header-row">
+      <span class="gear-name">Item</span>
+      <span class="gear-qty">Qtd</span>
+      <span class="gear-weight">Peso</span>
+      <span class="gear-actions">Ações</span>
+    </div>
+    {{#each gear as |item|}}
+    <div class="gear-item card" data-item-id="{{item.id}}">
+      <input type="text" name="name" value="{{item.name}}" class="gear-name" data-item-id="{{item.id}}">
+      <input type="number" name="system.quantity" value="{{item.system.quantity}}" class="gear-qty" data-item-id="{{item.id}}">
+      <input type="number" name="system.weight" value="{{item.system.weight}}" class="gear-weight" data-item-id="{{item.id}}" step="0.1">
+      <div class="gear-actions">
+        <button type="button" data-action="editItem" data-item-id="{{item.id}}"><i class="fas fa-edit"></i></button>
+        <button type="button" data-action="deleteItem" data-item-id="{{item.id}}"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>

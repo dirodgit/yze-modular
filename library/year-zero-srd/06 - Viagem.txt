@@ -1,0 +1,212 @@
+# 6. VIAGEM
+
+Em muitos jogos YZE, o mundo é um lugar perigoso e os portos seguros são poucos e distantes entre si. Para sobreviver, você precisa continuar se movendo. Viajar, seja a pé ou de veículo, pode ser uma parte fundamental do seu jogo.
+
+## MAPAS DE VIAGEM
+
+Para regular as jornadas, um mapa de viagem é usado. Um mapa de viagem é tipicamente dividido em hexágonos, que são usados para medir distâncias e governar o movimento. Um hexágono tem 10 quilômetros de diâmetro. Alguns jogos YZE usam mapas de viagem com grades quadradas em vez de hexágonos.
+
+### TIPOS DE TERRENO
+
+Um mapa de viagem é dividido em diferentes tipos de terreno. Alguns tipos de terreno típicos são resumidos na tabela abaixo, mas você pode querer inventar outros específicos para o cenário do seu jogo. Os tipos de terreno afetam a velocidade da viagem, bem como a dificuldade de dirigir, forragear e caçar.
+
+**ESTRADAS:** Várias estradas principais são marcadas no mapa de viagem. Viajar por uma estrada principal é geralmente mais rápido – mas você também aumenta o risco de encontros. Apenas estradas principais contam como estradas para fins de jogo, mesmo que o campo esteja cruzado por trilhas ou mesmo pequenas estradas de terra.
+
+**RIOS:** Rios também não são um tipo de terreno em si, mas podem ser usados para viajar. Vaus e pontes podem ser usados para atravessar um rio. Se não houver nenhum, você precisa de uma balsa ou barco para atravessar um rio, ou deve nadar através dele. Leia mais sobre jornadas em lagos e rios abaixo.
+
+| TERRENO             | ESTRADA     | ABERTO | FLORESTA | COLINAS | MONTANHAS | LAGO/RIO | PÂNTANO | RUÍNAS |
+| :------------------ | :---------- | :----- | :------- | :------ | :-------- | :------- | :------ | :----- |
+| **Velocidade***     | x1          | x1     | x1/2     | x1/2    | x1/3      | x1**     | x1/4    | x1/2   |
+| **Dirigir**         | +3          | +1     | -1       | 0       | -1        | +2       | -1      | 0      |
+| **Forragear**       | Como terreno| -1     | +1       | 0       | -2        | —        | -1      | -2     |
+| **Caçar**           | Como terreno| +1     | +1       | 0       | -1        | 0        | 0       | -1     |
+| **Dist. Encontro**  | Longo***    | Extremo| Médio    | Longo   | Longo     | Extremo  | Longo   | Médio  |
+
+*\*Aplica-se apenas à condução fora de estrada. Para marchar e dirigir em estrada, o fator de velocidade é sempre x1.*
+*\*\*Requer barco ou veículo anfíbio.*
+*\*\*\*Distância mínima, use apenas para estradas através de florestas ou ruínas.*
+
+## TAREFAS
+
+No início de cada turno, cada membro do grupo viajante deve decidir o que fará durante a maior parte desse turno. Você não pode realizar mais de uma tarefa no mesmo turno, incluindo marchar. A única exceção a isso é que um PJ pode ficar de vigia enquanto marcha. Algumas tarefas podem ser realizadas por vários dos personagens ao mesmo tempo. Para outras tarefas, um único personagem deve ser escolhido.
+
+As várias tarefas são resumidas abaixo e explicadas em detalhes ao longo das próximas páginas.
+
+*   **Marchar:** Andar a pé para progredir no mapa de viagem. Pode ser combinado com ficar de vigia, para um personagem apenas.
+*   **Dirigir:** Manobrar um veículo em terra, água ou no ar para progredir no mapa de viagem. Os passageiros podem ficar de vigia, descansar ou dormir enquanto você dirige.
+*   **Coletar:** Coletar madeira ou grãos para produzir combustível de álcool. Deve ser feito a pé.
+*   **Ficar de Vigia:** Explorar em busca de inimigos e outros encontros. Apenas um personagem pode realizar esta tarefa. Pode ser combinado com marchar.
+*   **Forragear:** Procurar por plantas e ervas comestíveis. Deve ser feito a pé.
+*   **Caçar:** Rastrear e matar animais para comida. Deve ser feito a pé.
+*   **Pescar:** Requer um rio ou um lago.
+*   **Montar Acampamento:** Apenas um personagem pode rolar para montar acampamento, mas outros podem ajudar.
+*   **Cozinhar:** Requer uma cozinha ou uma fogueira (que pode ser montada como parte de montar acampamento).
+*   **Descansar:** Pode ser feito em um veículo em movimento, desde que você não esteja dirigindo ou de vigia.
+*   **Dormir:** Você precisa dormir pelo menos um turno por dia (página 25). Pode ser feito em um veículo em movimento, desde que você não esteja dirigindo ou de vigia.
+
+### CLIMA
+
+O MJ decide o clima atual quando o jogo começa, e então rola um D6 no início de cada turno (ou com menos frequência, se preferir). Em uma perdição, o clima muda um passo em direção à chuva. Em um sucesso, o clima muda um passo em direção ao tempo bom.
+
+*   **CHUVA FORTE/NEVE:** Limita a visibilidade para Longo nos turnos da manhã e do dia, e para Curto durante os turnos da noite. Dá um modificador de -1 para todos os ataques à distância. Requer uma rolagem de **Vigor** para marchar (página 42) e dá um modificador de -2 para rolagens de perícia para dirigir. Uma chuva forte durará apenas um turno – então o clima muda automaticamente para nublado.
+*   **NUBLADO:** A cobertura de nuvens reduz a visibilidade durante os turnos da noite para Médio.
+*   **TEMPO BOM:** Visibilidade máxima nos turnos da noite é Longa.
+
+## MARCHAR
+
+Em boas circunstâncias, você pode marchar dois hexágonos por turno em uma estrada ou em terreno aberto. Fora da estrada, em qualquer tipo de terreno exceto aberto, você pode marchar um hexágono por turno.
+
+**CLIMA:** Em chuva forte, cada PJ precisa fazer uma rolagem de **Suportar** para marchar – se você falhar, seu movimento base para este turno é reduzido em um hexágono (o que pode significar que você não se move de todo). Se alguns PJs tiverem sucesso e outros falharem, vocês precisam decidir se deixam os retardatários para trás ou esperam por eles.
+
+**ESCURIDÃO:** Marchar fora da estrada à noite requer uma rolagem de **Sobreviver**. Apenas uma pessoa rola pelo grupo inteiro. Falha significa que vocês não conseguem encontrar o caminho, e nenhum progresso é feito durante este turno.
+
+**ENCONTROS:** Pausas curtas estão incluídas nas velocidades de viagem na lista, mas se você parar por mais de alguns minutos – por causa de um encontro ou outra coisa – você não será capaz de viajar a distância inteira durante o turno. O MJ tem a palavra final sobre quantos hexágonos de movimento você perde ao parar para um encontro.
+
+### MARCHA FORÇADA
+
+Você pode marchar por dois dos quatro turnos do dia sem problemas. Se precisar, pode se esforçar e marchar por um terceiro turno em um único dia. Isso requer que cada um de vocês faça uma rolagem de **Suportar** (além de qualquer rolagem por chuva forte). Falha significa que você é incapaz de marchar durante o turno – em vez disso, você deve descansar ou dormir. Se sua rolagem de **Suportar** for bem-sucedida, você pode escolher deixar quaisquer retardatários para trás e dividir o grupo, ou pode ficar e esperar por eles.
+
+Se você estiver com muita pressa, pode até tentar marchar por um quarto turno no dia. Nesse caso, você deve rolar **Suportar** novamente como descrito acima, mas a rolagem recebe um modificador de -2.
+
+## NAVEGAÇÃO
+
+Ao se mover fora da estrada através de um hexágono sem estrada, não importa se você está marchando ou dirigindo, uma pessoa em seu grupo deve fazer uma rolagem de **Sobreviver** para entrar em um novo hexágono. Se a rolagem falhar, você entra em um hexágono diferente do pretendido. Role qualquer dado – em um resultado par, você entra no hexágono à direita do hexágono alvo, e em um resultado ímpar, no hexágono à esquerda.
+
+## DIRIGIR
+
+Todos os personagens em um cenário moderno são assumidos como capazes de dirigir qualquer veículo civil em circunstâncias normais. A lista de veículos na página 26 indica as velocidades máximas de viagem, em hexágonos de 10 quilômetros por turno. Duas taxas separadas são dadas, uma para viajar fora da estrada e uma para viajar na estrada. Se a velocidade listada para viagem fora de estrada for um traço (–), o veículo não pode ser dirigido fora da estrada.
+
+Normalmente, você escolherá dirigir na estrada ou fora da estrada por um turno inteiro, mas o MJ pode permitir dividir um turno pela metade, a seu critério.
+
+**ENCONTROS:** Assim como na marcha, pausas curtas estão incluídas nas velocidades de viagem para veículos, mas se você parar por mais de alguns minutos, não será capaz de viajar a distância inteira. O MJ tem a palavra final sobre quantos hexágonos de movimento você perde ao parar para um encontro.
+
+**TERRENO:** Ao dirigir fora da estrada, terreno difícil pode reduzir sua velocidade. Um fator de velocidade de terreno de x1/2 em um hexágono significa que você precisa gastar dois hexágonos de movimento para entrar nele, um fator de velocidade de x1/3 significa que você precisa gastar três hexágonos de movimento, etc. Você às vezes precisará acumular movimento ao longo de múltiplos turnos para se mover para um hexágono. Ao dirigir na estrada, o terreno não tem efeito.
+
+**DIRIGIR À NOITE:** Dirigir fora da estrada à noite reduz pela metade a velocidade de viagem efetiva, arredondando as frações para cima.
+
+### PERCALÇOS
+
+No início de cada turno que você dirige, você deve fazer uma rolagem de perícia para dirigir, modificada pelo tipo de terreno. Se você dirigir para um novo tipo de terreno durante um turno, precisa fazer uma rolagem adicional. Em chuva forte, você recebe um modificador de -2. Se você falhar, sofre um percalço – faça uma rolagem na tabela abaixo. Tipicamente, um percalço ocorre na metade do movimento do turno – o MJ decide o hexágono exato.
+
+> #### PERCALÇOS AO DIRIGIR
+>
+> | 2D6 | PERCALÇO            | EFEITO                                                                                                                                                                                          |
+> | :-- | :------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | 2   | Eixo Quebrado       | O veículo torna-se inoperável, necessitando de um turno de reparos e uma rolagem de **Construir** bem-sucedida antes de poder continuar.                                                              |
+> | 3   | Atropelamento       | O veículo atinge um animal aleatório (role na tabela de caça). O animal é morto (e pode ser usado como comida), mas também inflige dano na frente do veículo igual à metade de sua capacidade de acerto (arredondando para cima). |
+> | 4   | Caixa de Câmbio Quebrada | O veículo não pode mais se mover. Consertar o problema requer uma rolagem de **Construir** e um turno de trabalho.                                                                               |
+> | 5   | Combustível Sujo    | O motor para devido a sujeira ou água no combustível. Todo o combustível no tanque precisa ser drenado e o veículo reabastecido antes de poder continuar.                                         |
+> | 6   | Atolado             | O veículo fica preso e não avança mais neste turno. Soltá-lo requer uma rolagem de **Forçar** ou ajuda de outro veículo. Uma tentativa por turno pode ser feita.                               |
+> | 7   | Caminho Errado      | O motorista faz uma curva errada em algum lugar e precisa dar a volta e retornar. Um hexágono de movimento é perdido neste turno.                                                                  |
+> | 8   | Bloqueio na Estrada | A estrada à frente está bloqueada por detritos, um deslizamento de terra ou árvores caídas. O motorista deve escolher um hexágono diferente para se mover, ou remover o obstáculo (rolagem de **Forçar**, levando um turno). |
+> | 9   | Motor Superaquecido | O veículo deve parar pelo resto do turno.                                                                                                                                                       |
+> | 10  | Pneu Furado         | O veículo não pode mais se mover. Consertar o problema requer uma rolagem de **Construir** com um modificador de +2. Uma tentativa por turno pode ser feita.                                           |
+> | 11  | Batida              | O veículo bate em uma árvore, rocha ou barricada, e sofre dano igual à sua classificação de velocidade de viagem.                                                                                    |
+> | 12  | Motor Estourado     | O veículo fica destruído (página 26).                                                                                                                                                           |
+
+### COMBUSTÍVEL
+
+Veículos precisam de combustível para operar. As listas no capítulo 5 indicam a capacidade de combustível de cada veículo (em litros) e o consumo de combustível (em litros por hexágono percorrido). Fora da estrada, o consumo de combustível é dobrado.
+
+### MONTARIAS
+
+Durante a viagem, você só pode cavalgar por dois turnos por dia. Para cavalgar por um terceiro turno, você precisa fazer uma rolagem de **Mover**. Se você falhar, sua montaria fica manca e se torna incapacitada. Uma montaria precisa de pelo menos um turno de descanso por dia.
+
+## FICAR DE VIGIA
+
+Durante cada turno, você pode designar um personagem em seu grupo que é responsável por procurar por ameaças e inimigos. O vigia pode ficar de vigia e marchar ao mesmo tempo. Um vigia é útil durante cada turno, mesmo depois de montar acampamento. Você não precisa ter um vigia, mas sem um, você não tem chance de avistar ameaças antes que elas estejam sobre você.
+
+Durante as jornadas, o vigia faz uma rolagem passiva de **Observar** (não pode ser forçada) quando o MJ indica que o grupo está se aproximando de um encontro. A distância entre o vigia e o encontro depende do terreno em que você está viajando. Veja a tabela na página 41.
+
+Se a rolagem for bem-sucedida, seu vigia avista o outro grupo antes que vocês sejam avistados. Vocês podem então decidir se querem se mostrar, recuar ou montar uma emboscada. Se sua rolagem de **Observar** falhar, o outro grupo avista vocês primeiro.
+
+**RECUAR:** Se você recuar de um encontro sem ser avistado, pode contorná-lo, fora da estrada. Isso custará um hexágono adicional de movimento fora da estrada (modificado pelo terreno), antes que você possa continuar em frente.
+
+**VEÍCULOS:** Se você viaja em um veículo motorizado e o grupo que encontra está a pé, você recebe um modificador de -2 na rolagem de **Observar** para avistar o encontro. Se você está a pé enquanto o grupo encontrado está motorizado, você recebe um modificador de +2 na rolagem. Se ambos os grupos estiverem em veículos, role normalmente.
+
+## FORRAGEAR
+
+Se você está ficando sem provisões, pode passar um turno procurando por plantas comestíveis ou água potável em seu hexágono atual. Para forragear, primeiro escolha se está procurando por comida ou água. Em seguida, faça uma rolagem de **Sobreviver**, modificada pelo tipo de terreno.
+
+Quando forrageando por comida, sucesso significa que você encontra um número de rações de comida crua igual ao número de sucessos que você rolou. Você pode comer plantas cruas, mas precisará fazer uma rolagem de doença contra virulência 3 (D) para resistir à intoxicação alimentar.
+
+Apenas um personagem pode forragear por comida ou água no mesmo hexágono durante o mesmo turno, mas outros podem ajudar na rolagem (página 11). Para cada turno que você forrageia novamente no mesmo hexágono, você recebe um modificador cumulativo de -1. Este modificador é zerado após uma semana, exceto no inverno.
+
+## CAÇAR
+
+Outra maneira de encontrar comida durante uma jornada é caçar em seu hexágono atual. Primeiro, role **Sobreviver**, modificado pelo tipo de terreno. Sucesso significa que você rastreou algum tipo de presa. Role em uma tabela de caça baseada no cenário do jogo para ver que tipo de animal é. Você encontrará um exemplo de tabela de caça abaixo. Se você rolar múltiplos sucessos, consegue rastrear várias presas – role uma vez para cada, e então escolha qual caçar.
+
+Para matar uma presa que você rastreou, você deve primeiro fazer uma rolagem de **Observar** para se posicionar sem alertar o animal. Segundo, você deve fazer um ataque à distância contra o animal. Se seu ataque infligir dano igual ou superior à classificação de Saúde do animal, ou se você conseguir um acerto crítico, o animal é morto. Caso contrário, ele fica apenas ferido e escapa. Você geralmente só tem uma chance.
+
+A tabela de caça indica quantas rações de comida (doméstica) sua presa rende, uma vez que a carne tenha sido cortada e cozida (página 45). Você pode comer carne crua, mas precisará fazer uma rolagem de doença contra virulência 6 (C) para resistir à intoxicação alimentar.
+
+Apenas um personagem pode rolar para caçar no mesmo hexágono durante o mesmo turno, mas outros podem ajudar na rolagem. Para cada turno que você caça novamente no mesmo hexágono, você recebe um modificador cumulativo de -1. Este modificador é zerado após uma semana.
+
+**ARMADILHAS:** Certos animais podem ser capturados usando armadilhas simples. Usando uma armadilha, você não precisa atirar no animal para pegá-lo. Em vez disso, você apenas faz outra rolagem de **Sobreviver** depois de ter rastreado o animal – se for bem-sucedida, o animal é capturado.
+
+> #### TABELA DE CAÇA DE AMOSTRA
+>
+> | D6  | ANIMAL  | SAÚDE | ARMADILHA | COMIDA  |
+> | :-- | :------ | :---- | :-------- | :------ |
+> | 1   | Galinhola | 1     | Não       | 1       |
+> | 2   | Coelho  | 1     | Sim       | 1       |
+> | 3   | Raposa  | 1     | Sim       | D3      |
+> | 4   | Cervo   | 2     | Não       | 2D6     |
+> | 5   | Javali  | 3     | Não       | 2D6x2   |
+> | 6   | Alce    | 5     | Não       | 2D6x4   |
+
+## PESCAR
+
+Se você está em um hexágono próximo a um rio, lago ou oceano, pode pescar. Você pode pescar de um barco em movimento. Para pescar, você precisa de equipamento de pesca e uma rolagem de **Sobreviver**. Sucesso significa que você ganha um número de rações de comida (doméstica) igual ao número de sucessos que você rolou, uma vez que o peixe tenha sido limpo e cozido (página 45). Você pode comer peixe cru, mas precisará fazer uma rolagem de doença contra virulência 6 (C) para resistir à intoxicação alimentar.
+
+Apenas um personagem pode rolar para pescar no mesmo hexágono durante o mesmo turno, mas outros podem ajudar na rolagem. Para cada turno que você pesca novamente no mesmo hexágono, você recebe um modificador cumulativo de -1. Este modificador é zerado após um dia.
+
+## MONTAR ACAMPAMENTO
+
+Quando a jornada do dia termina, é hora de montar acampamento. Encontrar um bom local para um acampamento, fazer uma fogueira e preparar um lugar para dormir leva um turno inteiro – geralmente a noite. Apenas um personagem rola para montar acampamento, mas outros podem ajudar com a rolagem.
+
+Faça uma rolagem de **Sobreviver**. Se sua rolagem for bem-sucedida, você encontra um local abrigado para passar a noite, onde todos podem encontrar cobertura contra fogo inimigo e descansar antes da jornada do dia seguinte. Se sua rolagem falhar, você monta acampamento para descansar e dormir de qualquer maneira, mas o MJ faz uma rolagem oculta na tabela de percalços de acampamento (abaixo). Role novamente se o percalço não for aplicável à situação. O MJ pode lançar este percalço sobre você a qualquer momento enquanto estiver no acampamento.
+
+**FOGO:** Montar uma fogueira está incluído em montar acampamento. Isso é necessário para poder cozinhar comida no acampamento e o protegerá contra o clima frio. Você pode optar por não acender uma fogueira, pois a fumaça entregará sua posição a qualquer pessoa dentro do alcance visual. Ao dormir por um turno sem fogo (ou outra fonte de calor), todos vocês devem rolar **Suportar** para resistir ao frio (página 25), exceto em clima muito quente.
+
+**FICAR DE GUARDA:** Mesmo enquanto estiver em seu acampamento, seria sábio ter uma sentinela acordada para vigiar. Você precisa escolher quem fica de guarda durante a noite, e deixar essa pessoa dormir durante algum outro turno (geralmente a noite).
+
+**CHÃO ABERTO:** É possível dormir na selva sem montar acampamento – você simplesmente encontra uma árvore adequada para dormir debaixo. Você economiza o tempo que leva para montar acampamento, mas todos no grupo devem fazer uma rolagem de **Sobreviver** para encontrar um bom local para dormir. Falha significa que você não dorme nada. Como você não tem um fogo para mantê-lo aquecido, todos vocês também sofrem os efeitos do frio (página 25).
+
+> #### PERCALÇOS DE ACAMPAMENTO
+>
+> | D10 | PERCALÇO            | EFEITO                                                                                                                                                                                          |
+> | :-- | :------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | 1   | Comida Estragada    | Sua comida apodreceu ou foi infectada por insetos. Metade das rações que você está carregando estão estragadas.                                                                                     |
+> | 2   | Inundação           | Chuva forte (página 42) começa no meio da noite. O acampamento é inundado e tudo fica encharcado. Todos os personagens devem rolar **Suportar** para resistir ao frio (página 25), e ninguém consegue dormir. |
+> | 3   | Fogo Apaga          | A lenha está úmida e sua fogueira se apaga. Exceto em clima quente, todos devem rolar **Suportar** para resistir ao frio.                                                                                |
+> | 4   | Fogo!               | As chamas da sua fogueira se espalham fora de controle. Se você tiver uma barraca, ela é destruída. Cada personagem sofre os efeitos do fogo com intensidade D, e deve fazer uma rolagem de **Mover** para salvar seu equipamento. Falha significa que uma peça de equipamento (a critério do MJ) é perdida no fogo. |
+> | 5   | Formigas            | Seu acampamento fica bem no meio de uma trilha de formigas. Cada um de vocês sofre um ponto de estresse (dano à Empatia) e ninguém consegue dormir aqui.                                              |
+> | 6   | Piolhos             | Um personagem selecionado aleatoriamente pegou piolhos. Coça horrivelmente, e eles ficam com uma erupção cutânea por todo o corpo. A vítima sofre um ponto de estresse (dano à Empatia) a cada dia e não consegue dormir neste dia. Uma rolagem de **Curar** bem-sucedida interrompe o efeito. |
+> | 7   | Enxame de Mosquitos | Um grande enxame de mosquitos ataca o acampamento, enlouquecendo a todos. Role dois D6 para cada personagem – para cada sucesso rolado, o personagem sofre um ponto de estresse (dano à Empatia). |
+> | 8   | Animal Selvagem     | Um lobo, cachorro, javali ou até mesmo um urso faminto ataca o acampamento.                                                                                                                       |
+> | 9   | Equipamento Perdido | Um personagem selecionado aleatoriamente perdeu uma peça de equipamento. O MJ decide o que foi perdido e se pode ser encontrado.                                                                      |
+> | 10  | Equipamento Quebrado| Um item pertencente a um personagem selecionado aleatoriamente está quebrado. O MJ decide qual item é. O item pode ser reparado com uma rolagem de **Construir**.                                         |
+
+## COZINHAR
+
+Cozinhar carne, peixe ou vegetais que você capturou ou forrageou na natureza requer uma fogueira ou uma cozinha de algum tipo. Em uma fogueira, você pode cozinhar até uma dúzia de rações diárias de comida em um turno. Isso inclui cortar carne, limpar peixe, etc. Você pode cozinhar no mesmo turno em que outro personagem monta acampamento.
+
+Role **Sobreviver**. Não importa se você tem sucesso ou não, suas rações de plantas, carne ou peixe crus são transformadas em comida comestível. No entanto, se você falhar, qualquer um que comer a comida deve fazer uma rolagem de doença para resistir à intoxicação alimentar (virulência 3/D para plantas, 6/C para carne ou peixe). Esta pode ser uma rolagem oculta feita pelo MJ.
+
+## DESCANSAR
+
+Descansar junto à fogueira é uma boa oportunidade para se recuperar de danos (página 21). Se seu descanso for interrompido por algo dramático, como combate ou outra atividade similar, sua atividade durante o turno não conta mais como descanso.
+
+## DORMIR
+
+Você precisa dormir pelo menos um turno por dia (geralmente durante a noite). Se seu sono for interrompido por algo dramático, como combate ou outra atividade similar, sua atividade durante o turno não conta mais como sono.
+
+## EXPLORAR
+
+Quando você para em um local para explorá-lo, sua jornada é interrompida. Explorar pode levar de um turno a vários dias ou até semanas. Às vezes, você pode ter que fazer uma pausa para descansar ou dormir enquanto explora. Você não pode descansar ou dormir se explorar por mais da metade do turno.
+
+## VIAGEM AQUÁTICA
+
+Se você tiver acesso a um barco ou balsa, pode atravessar um rio sem usar uma ponte ou vau. Você também pode viajar ao longo de um rio, através de um lago ou em um oceano. Viagens marítimas funcionam como dirigir em terra. Passageiros em um barco podem descansar ou até mesmo dormir, desde que não fiquem de vigia, pesquem ou realizem alguma outra ação.
+                                                                                                                                                                                         

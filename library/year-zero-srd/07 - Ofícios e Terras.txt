@@ -1,0 +1,173 @@
+# OFÍCIOS
+
+O sistema**Ano Zero** permite que os personagens se dediquem a uma série de ofícios, desde a extração de matérias primas a construção de veículos, moradias, fortificações, itens diversos, armas e armaduras e até mesmo itens mágicos diversos. Nesta parte explicaremos ainda outros aspectos do trabalho, como a caça, a manutenção de fazendas e até mesmo como manter uma propriedade no cenário.
+
+## OBTENDO SEUS RECURSOS
+
+Para extrair recursos, o primeiro a ser feito é ter a mão de obra, as ferramentas e os demais elementos necessários. Logo depois, basta seguir para um bom local e começar a trabalhar. Seguem algumas regras básicas:
+
+*   **MADEIRA E FIBRAS**: De posse de um machado, basta se deslocar para uma região onde existam árvores e iniciar seus trabalhos. A quantidade de madeira/fibras obtida por dia de trabalho está listada na Tabela 02.
+*   **PEDRA**: De posse de uma picareta, um martelo e uma pá, basta se deslocar para uma região onde existam montanhas ou colinas e iniciar seus trabalhos. A quantidade de pedra obtida por dia de trabalho está listada na Tabela 02.
+*   **ARGILA**: De posse de uma pá, basta se deslocar para uma região de planícies, colinas ou regiões pantanosas e iniciar seus trabalhos. A quantidade de argila obtida por dia de trabalho está listada na Tabela 02.
+*   **METAIS E JOIAS**: De posse de uma picareta, um martelo e uma pá, basta se deslocar para uma região onde exista um veio e iniciar seus trabalhos. A quantidade de metais e joias obtida por dia de trabalho está listado na Tabela 02.
+*   **PESCA**: De posse de equipamentos de pesca, basta se deslocar para uma região onde exista um ponto de pesca e iniciar seus trabalhos. A quantidade de alimento obtida por dia de trabalho está listada na Tabela 02.
+*   **RECURSOS ESPECIAIS**: Alguns recursos especiais, necessários para realização de ofícios como a preparação de poções, unguentos, venenos e outros itens, são encontrados em locais específicos na natureza.
+
+Encontrar bons veios de metais e joias, locais de pesca fartos e recursos especiais demandam um pouco de paciência, conhecimento de território e muita procura. Durante suas viagens pelo mundo, acontecerão eventos que permitirão encontrar estes locais. Assim, basta marcá-los no seu mapa e visitá-los com as ferramentas e o tempo necessário para obter os recursos que você precisa.
+
+---
+
+## EXTRAINDO OS RECURSOS
+
+De posse dos meios, é hora do trabalho: cada recurso obtido é medido pela quantidade de Moedas ou de Alimentos por dia de trabalho. Esta medida se faz por dois motivos: calcular a renda obtida na venda direta dos recursos ou calcular a quantidade do recurso necessária para realização dos ofícios.
+
+### TABELA 02 – EXTRAINDO RECURSOS
+
+| Recursos | Quantidade Obtida por Dia |
+| :--- | :--- |
+| Madeira/Fibras | 20 Moedas |
+| Pedra | 30 Moedas |
+| Argila | 20 Moedas |
+| Metais | 50 Moedas |
+| Jóias | 75 Moedas |
+| Caça/Pesca | Conforme Animal |
+| Recursos Especiais | Conforme Encontro |
+
+---
+
+## CRIANDO SEUS RECURSOS
+
+É possível obter recursos através da criação de animais em um determinado local, como uma fazenda ou um pequeno pedaço de terra. Seguem algumas regras básicas para obter estes recursos:
+
+### AGROPECUÁRIA
+Você pode criar diversos animais em uma região, obtendo deles alimento e lã constante sem a necessidade de abatê-los. Da mesma forma, você pode plantar frutas, verduras e legumes diversos, bastando ter uma área fértil para isto. A quantidade de alimentos e lã obtida por dia de trabalho dependerá do tamanho, da riqueza e das estruturas de sua propriedade (veja em **DOMÍNIO DE TERRAS** o funcionamento destas regras).
+
+### RECURSOS ESPECIAIS
+É possível criar seus próprios recursos especiais em um local disponível e apto para isto. Para tanto, será necessário ter em sua propriedade a estrutura necessária para produzir o recurso (veja em **DOMÍNIO DE TERRAS**).
+
+---
+
+## CAÇANDO E ABATENDO ANIMAIS
+
+É possível obter Alimentos, Couro, Lã, Ossos e outros Recursos Especiais por meio da caça ou abate de animais encontrados durante suas andanças, roubados em propriedades ou adquiridos de forma legal. A quantidade destes recursos irá variar de acordo com o tamanho e o tipo de animal, mas normalmente segue a seguinte regra:
+
+*   **ALIMENTOS**: 2 para animais/monstros Pequenos/Menores, 4 para Médios, 8 para Grandes/Maiores, 16 para Gigantes e 32 para Colossais.
+*   **COURO, LÃ, OSSOS E RECURSOS ESPECIAIS**: 20 Moedas para animais/monstros Pequenos/Menores, 40 para Médios, 80 para Grandes/Maiores, 160 para Gigantes e 320 para Colossais, conforme disponibilidade do animal/monstro.
+
+> **Exemplo**: Ao abater um Dragão Ancião (monstro do tamanho Colossal), os personagens obtêm 32 unidades de Alimentos, além de 320 Moedas dos recursos Couro, Ossos e Recursos Especiais. Como o Dragão não conta com Lã, esse recurso não é obtido.
+
+Para obter os recursos, é necessário abater o animal primeiro. Após a morte do animal, basta um teste bem-sucedido de **Sobreviver** para obter os recursos. Alguns Recursos Especiais, como o veneno de serpentes ou o couro de um dragão, são perigosos ou difíceis de serem extraídos, impondo uma dificuldade **Difícil** aos testes.
+
+---
+
+## CRIANDO ITENS DIVERSOS
+
+É possível criar, reparar ou melhorar qualquer arma, armadura, escudo, equipamento, item e veículo a disposição no cenário, bastando seguir os passos abaixo:
+
+### MATÉRIA PRIMA
+Você precisa dispor de uma quantidade das matérias primas que compõem o item que pretende-se construir ou melhorar igual ao valor de mercado do item ou da melhoria.
+*   *Exemplos*: Para fazer uma espada longa são necessárias 75 Moedas de metais; para um baú, 100 Moedas de madeira e metais; para um manto, 20 Moedas de lã ou couro.
+
+### FERRAMENTAS
+Você precisa ter a sua disposição as ferramentas, os kits e os locais necessários para criação do item, em conformidade com suas características.
+*   **Metais**: Ferramentas de ferreiro e uma forja.
+*   **Tecido**: Ferramentas de costura e uma fiadeira.
+*   **Poções/Venenos**: Kit de estudo e um laboratório.
+*   **Unguentos**: Kit de medicina.
+*   **Construções**: Ferramentas de pedreiro e carpinteiro.
+*   **Itens Mágicos**: Kit de estudos e um laboratório.
+
+### TEMPO E TESTES
+Criar ou melhorar um item demanda de **1 dia de trabalho para cada 100 Moedas** de seu custo, bem como um teste bem-sucedido do Atributo e Perícia correspondente:
+
+| Tipo de Item | Teste Necessário |
+| :--- | :--- |
+| Armas, Armaduras e Itens Mundanos | Construir |
+| Edificações e Fortificações | Construir |
+| Veículos | Construir |
+| Poções e Unguentos | Curar* |
+| Venenos | Curar** |
+| Itens Mágicos | Construir*** |
+
+*\*Requer Especialidade: Herbalista*
+*\*\*Requer Especialidade: Venefício*
+*\*\*\*Requer Especialidade: Artífice Arcano*
+
+Caso o teste não seja bem-sucedido, o tempo gasto não rendeu evolução, possivelmente por algum erro a ser corrigido.
+
+---
+
+# DOMÍNIO DE TERRAS
+
+Uma das maiores conquistas para os personagens é ter um lugar para chamar de seu, um local onde as feridas podem ser curadas e as Moedas conquistadas possam ser investidas. Em alguns cenários de **Ano Zero** é possível comprar terras e até tomá-las, bem como construir ali sua própria edificação.
+
+Para construir, você precisará de um local. Reis e nobres consideram como suas as áreas próximas às suas fortificações. Caso consiga autorização ou tome um território, basta reunir mão de obra e materiais.
+
+### TABELA 03 – CONSTRUINDO FORTIFICAÇÕES
+
+| Fortificação | Custo em Matéria Prima | Mão de Obra / Tempo* |
+| :--- | :--- | :--- |
+| Cabana | 500 Moedas | 2 Homens / 5 Dias |
+| Casa | 1.000 Moedas | 2 Homens / 10 Dias |
+| Mansão | 3.000 Moedas | 5 Homens / 30 Dias |
+| Aldeia | 5.000 Moedas | 20 Homens / 5 Dias |
+| Vila | 50.000 Moedas | 25 Homens / 40 Dias |
+| Torre | 5.000 Moedas | 10 Homens / 50 Dias |
+| Fortim | 20.000 Moedas | 20 Homens / 100 Dias |
+| Fortaleza | 50.000 Moedas | 50 Homens / 200 Dias |
+
+### TABELA 04 – MELHORANDO FORTIFICAÇÕES
+
+| Melhoria | Custo em Matéria Prima | Mão de Obra / Tempo* |
+| :--- | :--- | :--- |
+| Biblioteca | 1.500 Moedas | 2 Homens / 5 Dias |
+| Casa de Cura | 750 Moedas | 2 Homens / 5 Dias |
+| Coletor de Água | 500 Moedas | 2 Homens / 5 Dias |
+| Criadouro | 750 Moedas | 2 Homens / 5 Dias |
+| Dormitório | 1.000 Moedas | 2 Homens / 10 Dias |
+| Estábulos | 1.500 Moedas | 2 Homens / 10 Dias |
+| Estufa | 1.000 Moedas | 2 Homens / 10 Dias |
+| Forja | 1.500 Moedas | 2 Homens / 10 Dias |
+| Jardim | 500 Moedas | 2 Homens / 10 Dias |
+| Laboratório | 1.500 Moedas | 2 Homens / 5 Dias |
+| Muralha | 40% da Fortificação | 10 Homens / 50 Dias |
+| Paliçada | 20% da Fortificação | 10 Homens / 20 Dias |
+| Passagem Secreta | 750 Moedas | 2 Homens / 10 Dias |
+| Plantação | 500 Moedas | 2 Homens / 10 Dias |
+| Posto de Observação | 750 Moedas | 2 Homens / 10 Dias |
+| Taverna | 1.500 Moedas | 2 Homens / 10 Dias |
+| Templo Pequeno | 1.000 Moedas | 2 Homens / 10 Dias |
+| Templo Grande | 3.000 Moedas | 5 Homens / 30 Dias |
+
+*\*Com homens extras, é possível diminuir o tempo em 1 dia para cada homem extra.*
+
+---
+
+## DESCRIÇÃO DAS FORTIFICAÇÕES
+
+*   **CABANA**: Pequena construção de madeira ou pedra para até 2 pessoas.
+*   **CASA**: Construção de madeira ou pedra com 2 ou 3 cômodos para até 5 pessoas.
+*   **MANSÃO**: Grande construção de pedra com vários cômodos para até 10 pessoas.
+*   **ALDEIA**: Aglomerado de 10 Cabanas (2 pessoas cada).
+*   **VILA**: Aglomerado de 50 Casas (5 pessoas cada).
+*   **TORRE**: Construção vertical de pedra com 5 andares para até 15 pessoas.
+*   **FORTIM**: Pequena fortaleza de pedra com pátio e muro para até 50 pessoas.
+*   **FORTALEZA**: Fortaleza de pedra com 2 ou 3 andares, grande pátio e muro resistente para até 100 pessoas.
+
+---
+
+## DESCRIÇÃO DAS MELHORIAS
+
+*   **BIBLIOTECA**: Testes de Mente feitos aqui possuem **Vantagem**.
+*   **CASA DE CURA**: Personagens descansando aqui curam 2 pontos de Saúde por dia.
+*   **COLETOR DE ÁGUA**: Fornece 2 unidades de Alimento por dia.
+*   **CRIADOURO**: Espaço para até 20 animais pequenos (ex: galinhas). Fornece 1 Alimento por dia para cada 5 animais. Pode criar serpentes (20 Moedas de Veneno/dia) ou bichos da seda (20 Moedas de Seda/dia).
+*   **DORMITÓRIO**: Aumenta em 5 a capacidade de pessoas da fortificação.
+*   **ESTÁBULOS**: Espaço para 20 animais médios ou 10 grandes. Fornece 1 Alimento por dia para cada 2 médios ou 1 grande. Ovelhas fornecem 50 Moedas de Lã/mês.
+*   **ESTUFA**: Ambiente controlado para ervas. Fornece 20 Moedas de Ervas por dia.
+*   **FORJA**: Permite forjar armas, armaduras e equipamentos de metal.
+*   **JARDIM**: Criação de ervas ao ar livre. Fornece 20 Moedas de Ervas por dia (sujeito ao clima).
+*   **LABORATÓRIO**: Preparação de poções e venenos.
+*   **MURALHA/PALIÇADA**: Estruturas defensivas (regras em TROPAS E COMBATE EM MASSA).
+*   **PASSAGEM SECRETA**: Sistema de túneis para fuga segura.
+*   **PLANTAÇÃO**: Fornece 5 unidades de Alimento por dia (sujeito ao clima).

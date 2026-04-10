@@ -1,0 +1,52 @@
+{
+  "id": "yze-modular",
+  "title": "Year Zero Engine Modular",
+  "description": "Um sistema modular baseado no Year Zero Engine SRD, permitindo escolha de motor de dados e personalização de perícias.",
+  "version": "1.0.0",
+  "library": false,
+  "manifest": "https://raw.githubusercontent.com/dirodgit/yze-modular/main/system.json",
+  "download": "https://github.com/dirodgit/yze-modular/archive/refs/heads/main.zip",
+  "authors": [
+    {
+      "name": "Antigravity AI",
+      "url": ""
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "scripts": [],
+  "esmodules": [
+    "yze-modular.js"
+  ],
+  "styles": [
+    "styles/yze-modular.css"
+  ],
+  "packs": [
+    {
+      "name": "srd-regras",
+      "label": "YZE SRD - Regras",
+      "path": "packs/regras.db",
+      "type": "JournalEntry",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "languages": [
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    }
+  ],
+  "socket": true,
+  "initiative": "1d10",
+  "grid": {
+    "type": 1,
+    "distance": 2,
+    "units": "m"
+  }
+}

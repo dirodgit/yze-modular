@@ -1,0 +1,90 @@
+<div class="attribute-grid">
+  {{#each system.attributes as |attr id|}}
+  <div class="attribute-box {{#if @root.isStepDice}}step-dice{{/if}}" data-action="rollAttribute" data-attribute="{{id}}">
+    <label>{{localize (lookup @root.config.attributes id)}}</label>
+    <div class="value">
+        {{#if @root.isStepDice}}
+            <span class="step-label">{{lookup @root.stepLabel attr.value}}</span>
+            <input type="number" name="system.attributes.{{id}}.value" value="{{attr.value}}" data-dtype="Number">
+        {{else}}
+            {{#if (eq @root.vitalityMode 'attribute')}}
+                <input type="number" name="system.attributes.{{id}}.value" value="{{attr.value}}" data-dtype="Number">
+            {{else}}
+                {{attr.value}}
+            {{/if}}
+        {{/if}}
+    </div>
+    {{#if (eq @root.vitalityMode 'attribute')}}
+        <span class="max">/ {{attr.max}}</span>
+    {{/if}}
+  </div>
+  {{/each}}
+</div>
+
+<div class="resources-container">
+  {{#if (eq vitalityMode 'points')}}
+  <div class="resource-group">
+    <div class="resource-box">
+      <label>Saúde</label>
+      <div class="resource-values">
+        <input type="number" name="system.resources.health.value" value="{{system.resources.health.value}}">
+        <span>/ {{system.resources.health.max}}</span>
+      </div>
+    </div>
+    <div class="resource-box">
+      <label>Determinação</label>
+      <div class="resource-values">
+        <input type="number" name="system.resources.resolve.value" value="{{system.resources.resolve.value}}">
+        <span>/ {{system.resources.resolve.max}}</span>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+
+  {{#if (eq vitalityMode 'conditions')}}
+  <div class="conditions-grid">
+    {{#each customConditions as |cond|}}
+    <label class="condition-item">
+      {{!-- Note: Internal key logic should be consistent --}}
+      <input type="checkbox" name="system.conditions.{{cond}}" {{checked (lookup ../system.conditions cond)}}>
+      <span>{{cond}}</span>
+    </label>
+    {{/each}}
+  </div>
+  {{/if}}
+
+  <div class="section-header">
+    <h3>Trilhas & Recursos</h3>
+    <button type="button" data-action="createItem" data-type="track"><i class="fas fa-plus"></i></button>
+  </div>
+  <div class="tracks-grid">
+    {{#each tracks as |track|}}
+    <div class="track-item card" data-item-id="{{track.id}}">
+      <div class="track-header">
+        <input type="text" name="name" value="{{track.name}}" placeholder="Nome da Trilha" data-item-id="{{track.id}}">
+        <button type="button" data-action="deleteItem" data-item-id="{{track.id}}"><i class="fas fa-trash"></i></button>
+      </div>
+      <div class="track-values">
+        <input type="number" name="system.value" value="{{track.system.value}}" data-item-id="{{track.id}}">
+        / <input type="number" name="system.max" value="{{track.system.max}}" data-item-id="{{track.id}}">
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <div class="section-header">
+    <h3>Lesões Críticas & Ferimentos</h3>
+    <button type="button" data-action="createItem" data-type="criticalInjury"><i class="fas fa-plus"></i></button>
+  </div>
+  <div class="injuries-list">
+    {{#each criticalInjuries as |injury|}}
+    <div class="injury-item card" data-item-id="{{injury.id}}">
+      <div class="injury-main">
+        <input type="text" name="name" value="{{injury.name}}" placeholder="Lesão" data-item-id="{{injury.id}}">
+        <input type="text" name="system.effect" value="{{injury.system.effect}}" placeholder="Efeito" data-item-id="{{injury.id}}">
+        <button type="button" data-action="deleteItem" data-item-id="{{injury.id}}"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>

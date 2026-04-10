@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "tabletop-rpg-design": {
+      "source": "omer-metin/skills-for-antigravity",
+      "sourceType": "github",
+      "computedHash": "cbce185d031036713a6d5a5c84d6b666cdf4e2ba12afe51109310f844025538e"
+    }
+  }
+}

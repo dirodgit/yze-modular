@@ -1,0 +1,28 @@
+{
+  "YZE": {
+    "AttrStrength": "Força",
+    "AttrAgility": "Agilidade",
+    "AttrWits": "Mente",
+    "AttrEmpathy": "Empatia",
+    "SettingsDiceSystemName": "Motor de Dados",
+    "SettingsDiceSystemHint": "Escolha entre rolar Pilha de Dados (Pool) ou Dados de Estágio (Step Dice).",
+    "SettingsDicePool": "Pilha de Dados (D6)",
+    "SettingsDiceStep": "Dados de Estágio (D6-D12)",
+    "SettingsVitalityModeName": "Sistema de Vitalidade",
+    "SettingsVitalityModeHint": "Como o dano e a saúde são gerenciados.",
+    "SettingsVitalityAttribute": "Dano em Atributo",
+    "SettingsVitalityPoints": "Pontos Fixos (Saúde/Determinação)",
+    "SettingsVitalityConditions": "Condições (Estados)",
+    "SettingsCustomConditionsName": "Lista de Condições",
+    "SettingsCustomConditionsHint": "Defina os nomes das condições separados por vírgula para esta campanha.",
+    "SheetCharacter": "Ficha de Personagem YZE",
+    "SheetItem": "Ficha de Item YZE",
+    "TabMain": "Atributos & Recursos",
+    "TabSkills": "Perícias & Talentos",
+    "TabGear": "Equipamento & Carga",
+    "TabBio": "Biografia & Notas",
+    "TabDescription": "Descrição",
+    "TabDetails": "Detalhes"
+  }
+}
+
