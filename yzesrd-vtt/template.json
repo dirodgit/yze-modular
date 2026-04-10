@@ -1,66 +1,143 @@
 {
   "Actor": {
-    "types": ["character", "npc", "vehicle"],
+    "types": [
+      "character",
+      "vehicle",
+      "loot"
+    ],
     "templates": {
-      "attributes": {
-        "attributes": {
-          "str": { "value": 2, "max": 5 },
-          "agi": { "value": 2, "max": 5 },
-          "int": { "value": 2, "max": 5 },
-          "emp": { "value": 2, "max": 5 }
+      "actorNature": { "nature": "human" },
+      "actorArchetype": { "archetype": "" },
+      "actorDescription": { "description": "" },
+      "actorBio": {
+        "bio": {
+          "keyMemory": "",
+          "keyRelationship": "",
+          "home": "",
+          "appearance": "",
+          "yearsOnTheForce": 0,
+          "cover": "",
+          "coverStatus": "",
+          "handler": "",
+          "hideout": ""
         }
       },
-      "stats": {
-        "health": { "value": 0, "max": 0, "min": 0 },
-        "resolve": { "value": 0, "max": 0, "min": 0 }
+      "actorAttributesAndSkills": {
+        "attributes": {
+          "str": { "value": 8 },
+          "agi": { "value": 8 },
+          "int": { "value": 8 },
+          "emp": { "value": 8 }
+        },
+        "skills": {}
       },
-      "description": {
-        "description": "",
-        "notes": ""
+      "actorHealth": {
+        "health": { "value": 4, "max": 4, "mod": 0, "permanentLoss": 0 }
+      },
+      "actorResolve": {
+        "resolve": { "value": 4, "max": 4, "mod": 0, "permanentLoss": 0 }
+      },
+      "actorSignatureItem": {
+        "signatureItem": {
+          "name": "",
+          "used": false
+        }
+      },
+      "actorResources": {
+        "metaCurrencies": {
+          "promotion": 0,
+          "humanity": 0,
+          "chinyen": 0
+        }
       }
     },
     "character": {
-      "templates": ["attributes", "stats", "description"]
-    },
-    "npc": {
-      "templates": ["attributes", "stats", "description"]
+      "templates": [
+        "actorAttributesAndSkills",
+        "actorNature",
+        "actorArchetype",
+        "actorBio",
+        "actorHealth",
+        "actorResolve",
+        "actorSignatureItem",
+        "actorResources",
+        "actorDescription"
+      ],
+      "subtype": "pc"
     },
     "vehicle": {
-      "templates": ["description"],
-      "hull": { "value": 1, "max": 1 },
+      "templates": ["actorDescription"],
+      "passengers": 1,
+      "maneuverability": 12,
+      "hull": { "value": 2, "max": 2 },
       "armor": 0,
-      "maneuverability": 0
+      "availability": 2,
+      "cost": 5,
+      "altitude": 0,
+      "components": {
+        "engine": true
+      },
+      "crew": []
+    },
+    "loot": {
+      "templates": ["actorDescription"]
     }
   },
   "Item": {
-    "types": ["weapon", "armor", "gear", "talent", "criticalInjury"],
+    "types": [
+      "generic",
+      "upgrade",
+      "armor",
+      "weapon",
+      "explosive",
+      "specialty",
+      "injury"
+    ],
     "templates": {
-      "base": {
+      "itemBase": {
+        "qty": 1,
+        "cost": 0,
+        "availability": 4
+      },
+      "itemDesc": {
         "description": "",
-        "weight": 0,
-        "cost": 0
-      }
+        "special": ""
+      },
+      "itemConsumable": {
+        "consumable": false
+      },
+      "itemAttacks": { "attacks": {}, "mounted": false },
+      "itemActions": { "actions": {} },
+      "itemModifiers": { "modifiers": {} }
     },
-    "weapon": {
-      "templates": ["base"],
-      "damage": 1,
-      "bonus": 0,
-      "range": "short"
+    "generic": {
+      "templates": ["itemBase", "itemActions", "itemDesc", "itemModifiers", "itemConsumable"]
+    },
+    "upgrade": {
+      "templates": ["itemBase", "itemActions", "itemDesc", "itemModifiers"]
     },
     "armor": {
-      "templates": ["base"],
-      "rating": 1
+      "templates": ["itemBase", "itemDesc", "itemModifiers", "itemConsumable"],
+      "armor": 6
     },
-    "gear": {
-      "templates": ["base"]
+    "weapon": {
+      "templates": ["itemBase", "itemAttacks", "itemActions", "itemDesc", "itemOffensive", "itemConsumable"]
     },
-    "talent": {
-      "templates": ["base"]
+    "explosive": {
+      "templates": ["itemBase", "itemAttacks", "itemActions", "itemDesc", "itemOffensive", "itemConsumable"],
+      "blast": 8,
+      "consumable": true
     },
-    "criticalInjury": {
-      "templates": ["base"],
+    "specialty": {
+      "templates": ["itemDesc", "itemActions", "itemModifiers"]
+    },
+    "injury": {
+      "templates": ["itemDesc", "itemModifiers"],
+      "category": 1,
       "lethal": false,
-      "healingTime": 0
+      "permanent": false,
+      "deathSave": "",
+      "healing": ""
     }
   }
 }

@@ -3,7 +3,7 @@
  * BLADE RUNNER RPG
  * Official website: https://frialigan.se/en/games/yzesrd-vtt/
  * ============================================================================
- * Contributing: https://github.com/fvtt-fria-ligan/yzesrd-vtt-foundry-vtt
+ * Contributing: https://github.com/fvtt-fria-ligan/yzesrd-vtt
  * ============================================================================
  * Creator: Stefouch
  * Patreon: https://www.patreon.com/Stefouch
@@ -16,26 +16,26 @@
  * ============================================================================
  */
 
-import { YZE } from './module/system/config.js';
-import { ACTOR_TYPES, CAPACITIES, SETTINGS_KEYS, SYSTEM_ID } from './module/system/constants.js';
-import { ActionCollection } from './module/components/actor-action.js';
-import * as YZUR from './module/utils/yzur.js';
-import * as Chat from './module/system/chat.js';
-import * as BRMacro from './module/system/macros.js';
-import BRRollHandler from './module/components/roll/roller.js';
-import { registerSheets } from './module/system/sheets.js';
-import { initializeHandlebars, registerCustomItemTypesTemplates } from './module/system/handlebars.js';
-import { changeEditorFont, registerSystemSettings } from './module/system/settings.js';
-import { enrichTextEditors } from './module/system/enricher.js';
-import { registerDiceSoNice } from './plugins/dice-so-nice.js';
-import itemPilesConfig from './plugins/item-piles.js';
-import { registerFontEditor } from './plugins/font-editor.js';
-// ! import { overrideInlineRollListener } from './module/components/roll/inline-roll.js';
-import { getManual } from './module/utils/get-manual.js';
-import BladeRunnerActor from './module/actor/actor-document.js';
-import BladeRunnerItem from './module/item/item-document.js';
-import BladeRunnerDialog from './module/components/dialog/dialog.js';
-import displayMessages from './module/components/messaging-system.js';
+import { YZSRD } from './system/config';
+import { ACTOR_TYPES, CAPACITIES, SETTINGS_KEYS, SYSTEM_ID } from './system/constants';
+import { ActionCollection } from './components/actor-action';
+import * as YZUR from 'yzur';
+import * as Chat from './system/chat';
+import * as BRMacro from './system/macros';
+import BRRollHandler from './components/roll/roller';
+import { registerSheets } from './system/sheets';
+import { initializeHandlebars, registerCustomItemTypesTemplates } from './system/handlebars';
+import { changeEditorFont, registerSystemSettings } from './system/settings';
+import { enrichTextEditors } from './system/enricher';
+import { registerDiceSoNice } from './plugins/dice-so-nice';
+import itemPilesConfig from './plugins/item-piles';
+import { registerFontEditor } from './plugins/font-editor';
+// ! import { overrideInlineRollListener } from './components/roll/inline-roll';
+import { getManual } from './utils/get-manual';
+import YzeSRDActor from './actor/actor-document';
+import YzeSRDItem from './item/item-document';
+import YzeSRDDialog from './components/dialog/dialog';
+import displayMessages from './components/messaging-system';
 
 /* ------------------------------------------ */
 /*  Foundry VTT Initialization                */
@@ -67,11 +67,11 @@ Hooks.once('init', async () => {
 
   // Creates a namespace within the game global.
   // Places our classes in their own namespace for later reference.
-  game.yzmodular = {
-    config: YZE,
+  game.bladerunner = {
+    config: YZSRD,
     roll: YZUR.YearZeroRoll,
     roller: BRRollHandler,
-    dialog: BladeRunnerDialog,
+    dialog: YzeSRDDialog,
     macros: {
       rollAction: BRMacro.rollAction,
       rollDice: BRMacro.showRollDialog,
@@ -79,13 +79,13 @@ Hooks.once('init', async () => {
       rollStat: BRMacro.rollStat,
       displayManual: async () => (await getManual()).sheet.render(true),
     },
-    actions: new ActionCollection(YZE.Actions.map(a => [a.id, a])),
+    actions: new ActionCollection(YZSRD.Actions.map(a => [a.id, a])),
   };
 
   // Records configuration values.
-  CONFIG.YZE_MODULAR = YZE;
-  CONFIG.Actor.documentClass = BladeRunnerActor;
-  CONFIG.Item.documentClass = BladeRunnerItem;
+  CONFIG.BLADE_RUNNER = YZSRD;
+  CONFIG.Actor.documentClass = YzeSRDActor;
+  CONFIG.Item.documentClass = YzeSRDItem;
 
   // Patches Core functions.
   CONFIG.Combat.initiative = {
@@ -116,7 +116,7 @@ Hooks.once('init', async () => {
 Hooks.once('ready', () => {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to.
   BRMacro.setupMacroFolder();
-  Hooks.on('hotbarDrop', (_bar, data, slot) => BRMacro.createBladeRunnerMacro(data, slot));
+  Hooks.on('hotbarDrop', (_bar, data, slot) => BRMacro.createYzeSRDMacro(data, slot));
 
   // TODO Determines whether a system migration is required and feasible.
   // checkMigration();
@@ -130,7 +130,7 @@ Hooks.once('ready', () => {
   registerCustomItemTypesTemplates();
 
   console.log('Year Zero Engine SRD RPG | Ready!');
-  Hooks.callAll('bladeRunnerReady', game.yzmodular, CONFIG.YZE_MODULAR);
+  Hooks.callAll('bladeRunnerReady', game.bladerunner, CONFIG.BLADE_RUNNER);
 
   // Change default font for editable text in character sheets.
   if (game.settings.get(SYSTEM_ID, SETTINGS_KEYS.DO_NOT_USE_HANDWRITTEN_FONT)) {
@@ -172,10 +172,10 @@ Hooks.on('updateActor', (actor, updateData, _options, _userId) => {
     // Notifies if the actor is broken.
     if (actor.isBroken) {
       const statusCondition = game.i18n.localize(
-        `YZE.${actor.isVehicle ? 'Wrecked' : 'Broken'}`,
+        `YZSRD.${actor.isVehicle ? 'Wrecked' : 'Broken'}`,
       );
       ui.notifications.error(
-        game.i18n.format('YZE.SomeoneIsSomething', {
+        game.i18n.format('YZSRD.SomeoneIsSomething', {
           name: `<b>${actor.name}</b>`,
           status: statusCondition.toLowerCase(),
         }),

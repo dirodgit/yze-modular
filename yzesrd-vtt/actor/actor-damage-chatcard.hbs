@@ -1,0 +1,38 @@
+<div class="yzesrd-vtt chat-card actor-damage">
+	<div class="card-content">
+		{{#if (gt damage 0)}}
+			<p>
+				{{localize "YZSRD.CHAT.DamageDealt" name=name amount=damage}}
+				{{#if broken}}
+					<br/>
+					<span class="broken">
+						{{#if vroom}}
+							{{{config.Icons.buttons.pierce}}} {{toUpperCase (localize "YZSRD.Wrecked")}}
+						{{else}}
+							{{{config.Icons.buttons.lethal}}} {{toUpperCase (localize "YZSRD.Broken")}}
+						{{/if}}
+					</span>
+				{{/if}}
+			</p>
+		{{else}}
+			<p>{{localize "YZSRD.CHAT.NoDamageDealt" name=name}}</p>
+		{{/if}}
+		{{#if armored}}
+			<hr/>
+			<p class="hint">
+				<small>
+					{{localize "YZSRD.CHAT.InitialDamageDealt" damage=initialDamage}} 
+					{{#if (gt damage 0)}}
+						{{#if (eq damage initialDamage)}}
+							{{localize "YZSRD.CHAT.ArmorNoEffect"}}
+						{{else}}
+							{{localize "YZSRD.CHAT.ArmorDeflectedDamage" damage=deflectedDamage}}
+						{{/if}}
+					{{else}}
+						{{localize "YZSRD.CHAT.ArmorDeflectedAllDamage"}}
+					{{/if}}
+				</small>
+			</p>
+		{{/if}}
+	</div>
+</div>

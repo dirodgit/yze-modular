@@ -1,0 +1,322 @@
+@use "../utils";
+$gap: 4px;
+
+/* ------------------------------------------ */
+/*  All Apps                                  */
+/* ------------------------------------------ */
+
+h1, h2, h3, h4, h5, h6 {
+  text-decoration: none;
+  border: none;
+  margin: 0;
+}
+
+// h1 { font-size: var(--font-size--extra-large); }
+h2 { font-size: var(--font-size--large); }
+h3 { font-size: var(--font-size--default); }
+h4 { font-size: var(--font-size--small); }
+h5 { font-size: var(--font-size--very-small); }
+h6 { font-size: var(--font-size--extra-small); }
+
+/* ------------------------------------------ */
+
+a.entity-link,
+a.content-link,
+a.inline-roll,
+a.inline-table {
+  border: none;
+  background: transparent;
+  border-bottom: 1px dotted gray;
+  padding: 0;
+  text-indent: 0;
+  border-radius: 2px;
+  color: unset;
+
+  i {
+    color: var(--color-text-dark-inactive);
+    margin-right: 0.25em;
+  }
+
+  img {
+    display: inline;
+  }
+
+  &.broken {
+    color: var(--color-red);
+    background: rgba(255, 0, 0, 0.05);
+    border: 1px dashed var(--color-red);
+  }
+}
+
+a.content-link {
+  white-space: initial;
+  word-break: keep-all;
+}
+
+a.entity-link {
+  cursor: help;
+  user-select: text;
+}
+
+code, code.block {
+  color: unset;
+}
+
+/* ------------------------------------------ */
+/*  Year Zero Engine SRD Apps                         */
+/* ------------------------------------------ */
+
+.yzesrd-vtt {
+  .capacity-boxes {
+    display: block;
+    color: var(--color-green);
+    white-space: nowrap;
+    line-height: 0;
+  }
+  .boxed-value {
+    @include utils.boxed-property;
+    @include utils.input-background;
+    border-radius: $gap;
+    color: var(--color-black);
+    font-family: var(--font-table);
+    font-weight: bold;
+    text-align: center;
+  }
+  .boxed-property {
+    @include utils.boxed-property;
+    p { color: var(--color-blue-lighter); }
+  }
+}
+
+/* ------------------------------------------ */
+
+.yzesrd-vtt,
+// .chat-message,
+// .window-app.dialog,
+.app:not(.form)
+.application:not(.form) {
+  button:not(.tox-tbtn),
+  .button,
+  .dialog-button {
+    @include utils.boxed-property;
+    border-radius: 4px;
+    font-family: var(--font-table);
+    font-weight: bold;
+    color: var(--color-green);
+    letter-spacing: -1px;
+    cursor: pointer;
+    transition: color 250ms linear, background-color 250ms ease;
+
+    &:hover {
+      background: #333;
+      border-color: var(--color-yellow);
+      color: var(--color-red);
+      i { color: var(--color-yellow); }
+    }
+    &:disabled,
+    &.disabled {
+      border-color: var(--color-disabled);
+      color: var(--color-disabled);
+    }
+  }
+  button.default {
+    background: var(--color-background);
+  }
+}
+
+/* ------------------------------------------ */
+/*  Windowed Apps                             */
+/* ------------------------------------------ */
+
+.app.window-app.dialog,
+.app.window-app.yzesrd-vtt,
+.application.window-app.dialog,
+.application.window-app.yzesrd-vtt {
+  color: var(--color-foreground);
+  border: 1px solid var(--color-blue-darker);
+  border-radius: $gap;
+  background-image: url("./assets/textures/character-sheet-background.webp");
+  background-position: top center;
+  background-size: cover; // 100% 100%
+  background-repeat: no-repeat;
+  background-color: var(--color-background);
+
+  /* ------------------------------------------ */
+
+  .editor {
+    @include utils.border-sheet(2px);
+    @include utils.input-background;
+    color: var(--color-black);
+    font-family: var(--font-editor);
+    margin-top: $gap;
+    padding: $gap;
+    p, li {
+      color: var(--color-black);
+      font-size: var(--font-size--default);
+    }
+  }
+
+  input:not([type="range"]),
+  select {
+    @include utils.input-background;
+    color: var(--color-black);
+    font-family: var(--font-table);
+    font-weight: bold;
+    text-align: center;
+    &:disabled,
+    &.disabled {
+      color: var(--color-disabled);
+    }
+  }
+
+  select, img {
+    border: none;
+  }
+
+  img {
+    max-height: 100%;
+  }
+
+  label {
+    color: var(--color-blue-lighter);
+  }
+
+  form .notes, form .hint {
+    color: var(--color-green);
+  }
+
+  .dialog-button {
+    @include utils.boxed-property;
+    border-radius: 4px;
+    font-family: var(--font-table);
+    font-weight: bold;
+    color: var(--color-green);
+    letter-spacing: -1px;
+    cursor: pointer;
+    transition: color 250ms linear, background-color 250ms ease;
+
+    &:hover {
+      background: #333;
+      border-color: var(--color-yellow);
+      color: var(--color-red);
+      i { color: var(--color-yellow); }
+    }
+    &:disabled,
+    &.disabled {
+      border-color: var(--color-disabled);
+      color: var(--color-disabled);
+    }
+  }
+  button.default {
+    background: var(--color-background);
+  }
+
+  /* ------------------------------------------ */
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-blue);
+    font-family: var(--font-header);
+    letter-spacing: 1px;
+  }
+
+  h1, h2, h3, h4 {
+    text-transform: uppercase;
+  }
+  
+  /* ------------------------------------------ */
+
+  .rollable {
+    cursor: pointer;
+    &:hover {
+      text-shadow: 0 0 8px var(--color-shadow-primary);
+      box-shadow: 0 0 8px var(--color-shadow-primary);
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Customizing the app-window content        */
+  /* ------------------------------------------ */
+
+  .window-header {
+    border: none;
+
+    a.header-button {
+      @include utils.header-button;
+    }
+  }
+
+  /* ------------------------------------------ */
+
+  .window-content {
+    color: var(--color-foreground);
+    padding: $gap;
+    background: none;
+    overflow: auto;
+
+    // .sheet-body {
+    //   overflow-x: auto;
+    // }
+
+    .sheet-tabs {
+      display: flex;
+      justify-content: space-around;
+      font-family: var(--font-header);
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: $gap;
+      margin-top: $gap;
+    }
+    .sheet-tab {
+      color: var(--color-blue);
+    }
+    .sheet-tab.active {
+      color: var(--color-red);
+      border-bottom: 2px solid var(--color-red);
+    }
+  }
+}
+
+/* ------------------------------------------ */
+/*  Update Dialog (for modules)               */
+/* ------------------------------------------ */
+
+.yzesrd-vtt.dialog.update-log {
+  .boxed-property {
+    margin: 4px 0;
+
+    h1, h2, h3 {
+      color: var(--color-gold);
+    }
+    
+    h4 {
+      color: var(--color-green);
+    }
+  }
+
+  .update-document-type {
+    color: var(--color-blue-lighter);
+  }
+  .update-document-description {
+    color: #ccc;
+  }
+
+  .notification {
+    display: block;
+  }
+}
+
+/* ------------------------------------------ */
+/*  Custom Scrollbar                          */
+/* ------------------------------------------ */
+
+.yzesrd-vtt {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    border: 1px solid var(--color-black);
+    background-color: var(--color-blue-lighter);
+  }
+}

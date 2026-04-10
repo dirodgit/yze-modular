@@ -24,7 +24,7 @@
 				{{#if isOffensive}}
 					{{#if (eq type "explosive")}}
 						<div class="item-detail explosive">
-							{{localize "FLBR.Blast"}}&nbsp;{{localize "FLBR.D"}}{{system.blast}}
+							{{localize "YZSRD.Blast"}}&nbsp;{{localize "YZSRD.D"}}{{system.blast}}
 						</div>
 					{{else if hasAttack}}
 						<div class="item-detail damage">
@@ -42,7 +42,7 @@
 							</div>
 							<div>
 								{{#unless (eq crit 0)}}
-									{{{@root.config.Icons.buttons.crit}}}{{localize "FLBR.D"}}{{crit}}
+									{{{@root.config.Icons.buttons.crit}}}{{localize "YZSRD.D"}}{{crit}}
 								{{/unless}}
 							</div>
 							<div>
@@ -56,7 +56,7 @@
 				{{!-- Armors --}}
 				{{else if system.armor includeZero=true}}
 					<div class="item-detail armor">
-						{{localize "TYPES.Item.armor"}}&nbsp;{{localize "FLBR.D"}}{{system.armor}}
+						{{localize "TYPES.Item.armor"}}&nbsp;{{localize "YZSRD.D"}}{{system.armor}}
 					</div>
 				{{/if}}
 
@@ -75,42 +75,42 @@
 
 			<div class="item-controls">
 				{{#if system.blast}}
-					<a class="btn item-control" data-action="blast" data-tooltip="{{localize "FLBR.SHEET_HEADER.BlastPowerRoll"}}">
+					<a class="btn item-control" data-action="blast" data-tooltip="{{localize "YZSRD.SHEET_HEADER.BlastPowerRoll"}}">
 						{{{@root.config.Icons.buttons.bomb}}}
 					</a>
 				{{/if}}
 				{{#if (eq type "armor")}}
-					<a class="btn item-control" data-action="roll" data-tooltip="{{localize "FLBR.SHEET_HEADER.ArmorRoll"}}">
+					<a class="btn item-control" data-action="roll" data-tooltip="{{localize "YZSRD.SHEET_HEADER.ArmorRoll"}}">
 						{{{@root.config.Icons.buttons.armor}}}
 					</a>
 				{{/if}}
 				{{#if hasAction}}
-					<a class="btn item-control" data-action="roll" data-tooltip="{{localize "FLBR.BUTTON.Roll"}}">
+					<a class="btn item-control" data-action="roll" data-tooltip="{{localize "YZSRD.BUTTON.Roll"}}">
 						{{{@root.config.Icons.buttons.roll}}}
 					</a>
 				{{/if}}
-				<a class="btn item-control" data-action="edit" data-tooltip="{{localize "FLBR.BUTTON.Edit"}}">
+				<a class="btn item-control" data-action="edit" data-tooltip="{{localize "YZSRD.BUTTON.Edit"}}">
 					{{{@root.config.Icons.buttons.edit}}}
 				</a>
-				<a class="btn item-control" data-action="chat" data-tooltip="{{localize "FLBR.BUTTON.ToChat"}}">
+				<a class="btn item-control" data-action="chat" data-tooltip="{{localize "YZSRD.BUTTON.ToChat"}}">
 					{{{@root.config.Icons.buttons.chat}}}
 				</a>
 				{{#if (and hasAttack (eq @root.actor.type "vehicle"))}}
 					{{#if system.mounted}}
-						<a class="btn item-control" data-action="unmount" data-tooltip="{{localize "FLBR.BUTTON.Unmount"}}">
+						<a class="btn item-control" data-action="unmount" data-tooltip="{{localize "YZSRD.BUTTON.Unmount"}}">
 							{{{@root.config.Icons.buttons.unmount}}}
 						</a>
 					{{else}}
-						<a class="btn item-control" data-action="mount" data-tooltip="{{localize "FLBR.BUTTON.Mount"}}">
+						<a class="btn item-control" data-action="mount" data-tooltip="{{localize "YZSRD.BUTTON.Mount"}}">
 							{{{@root.config.Icons.buttons.mount}}}
 						</a>
 					{{/if}}
 				{{/if}}
 				{{#unless system.mounted}}
-					<a class="btn item-delete" data-tooltip="{{localize "FLBR.BUTTON.Delete"}}">
+					<a class="btn item-delete" data-tooltip="{{localize "YZSRD.BUTTON.Delete"}}">
 						{{{@root.config.Icons.buttons.remove}}}
 					</a>
-					<a class="btn item-delete-confirmed" style="display: none;" data-tooltip="{{localize "FLBR.BUTTON.Delete"}}">
+					<a class="btn item-delete-confirmed" style="display: none;" data-tooltip="{{localize "YZSRD.BUTTON.Delete"}}">
 						{{{@root.config.Icons.buttons.delete}}}
 					</a>
 				{{/unless}}
@@ -119,7 +119,7 @@
 		</div>
 	{{else}}
 		<div class="empty-inventory">
-			{{localize "FLBR.InventoryNoItem"}}
+			{{localize "YZSRD.InventoryNoItem"}}
 		</div>
 	{{/each}}
 </div>

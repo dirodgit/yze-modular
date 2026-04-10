@@ -1,0 +1,56 @@
+@use "sass:math";
+
+/* ------------------------------------------ */
+/*  Foundry Overrides                         */
+/* ------------------------------------------ */
+
+#sidebar-tabs .fa-comments::before {
+  content: "\f8ef"; // Replaced by a talkie-walkie
+}
+#sidebar-tabs .fa-swords::before {
+  content: "\e19b"; // Replaced by a gun
+}
+
+/* ------------------------------------------ */
+
+#context-menu li.context-item {
+  padding: 5px;
+  line-height: 1.1;
+}
+
+// Fix for Minimal UI module
+#players h3 {
+  font-size: unset;
+}
+
+/* -------------------------------------------- */
+/*  Logo & Pause Spinner Styles                 */
+/* -------------------------------------------- */
+
+#logo {
+  content: url("./assets/icons/yzesrd-vtt-failure.svg");
+  width: 100px; // 100px
+  height: 100px; // 50px
+}
+
+// #ui-top.offset {
+//   margin-left: -10px; // -90px
+// }
+
+$pause-h: 200px;
+$pause-w: math.div(341px * $pause-h, 500px);
+
+#pause>img {
+  // 341x500
+  content: url("./assets/logos/lapd_br_badge.webp");
+  width: $pause-w;
+  height: $pause-h;
+  top: -50px;
+  left: calc(50% - ($pause-w * .5));
+  opacity: .7;
+  --fa-animation-duration: 42s;
+}
+
+#pause figcaption {
+  font-family: var(--font-header);
+}

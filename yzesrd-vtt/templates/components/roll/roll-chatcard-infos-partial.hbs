@@ -11,10 +11,10 @@
 				</div>
 			{{/if}}
 			{{#if (and roll.options.crit (gte roll.successCount 2))}}
-				<div>{{localize "FLBR.CRIT.Crit"}}</div>
+				<div>{{localize "YZSRD.CRIT.Crit"}}</div>
 				<div>
-					<a class="inline-table crit-roll" data-tooltip="{{localize "FLBR.CRIT.CritButtonTooltip"}}">
-						{{substract roll.successCount 1}}{{localize "FLBR.D"}}{{roll.options.crit}}
+					<a class="inline-table crit-roll" data-tooltip="{{localize "YZSRD.CRIT.CritButtonTooltip"}}">
+						{{substract roll.successCount 1}}{{localize "YZSRD.D"}}{{roll.options.crit}}
 					</a>
 				</div>
 			{{/if}}
