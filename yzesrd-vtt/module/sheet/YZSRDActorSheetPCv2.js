@@ -1,16 +1,19 @@
-import ChatMessageTWDU, { buildChatCard } from "../util/chat.js";
+import { buildChatCard } from "../util/chat.js";
 import { prepareRollDialog, rollClockTest } from "../util/roll.js";
 import { twdu } from "../config.js";
 
-export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
+export default class YZSRDActorSheetPCv2 extends ActorSheetv2 {
+
   // constructor(object, options={}) {
-  //   console.log("TWDU | TWDUActorSheet: ", object);
+  //   console.log("YZSRD | YZSRDActorSheet: ", object);
   //   super(object, options);
   // }
-
+  
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["twdu", "sheet", "actor"],
+      classes: ["yzesrd-vtt", "sheet", "actor"],
+      width: "auto" || "max-content",
+      height: 800 - "max-content",
       resizable: true,
       tabs: [
         {
@@ -23,7 +26,7 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   get template() {
-    return `systems/twdu/templates/sheets/${this.actor.type}-sheet.hbs`;
+    return `systems/yzesrd-vtt/templates/sheets/${this.actor.type}-sheet.hbs`;
   }
 
   async getData() {
@@ -51,115 +54,106 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
       maxEncumbrance: 0,
       maxpop: 0,
       portrait: true,
-      user: game.user,
     };
-    // console.log("TWDU | context: ", context);
-    context.config = CONFIG.twdu;
-    //console.log("TWDU | context.config: ", context.config);
+    //console.log("YZSRD | context: ", context);
+    context.config = CONFIG.yzesrd-vtt;
+    //console.log("YZSRD | context.config: ", context.config);
 
-    // console.log("TWDU | context: ", context);
+    
+
+    console.log("YZSRD | context: ", context);
 
     this.computeItems(context);
 
     if (context.isPlayer) {
       context.maxEncumbrance = context.system.attributes.str.value + 2;
-      //console.log("TWDU | Enriching HTML");
-      context.notesHTML =
-        await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-          this.actor.system.notes.value,
-          {
-            secrets: this.actor.isOwner,
-            rollData: context.rollData,
-            async: true,
-            relativeTo: this.actor,
-          }
-        );
-      // console.log("TWDU | context: ", context.notesHTML);
+      //console.log("YZSRD | Enriching HTML");
+      context.notesHTML = await TextEditor.enrichHTML(
+        this.actor.system.notes.value,
+        {
+          secrets: this.actor.isOwner,
+          rollData: context.rollData,
+          async: true,
+          relativeTo: this.actor
+        }
+      );
+      console.log("YZSRD | context: ", context.notesHTML);
       this.computeSkills(context);
       context.encumbrance = this.computeEncumbrance(context);
       // update context with the data we just got
       context.actor = this.actor;
       context.system = this.actor.system;
-      //console.log("TWDU | context: ", context);
+      //console.log("YZSRD | context: ", context);
     }
 
     if (context.isHaven) {
       //check all survivors and remove any that are not in the world
 
       const survivors = this.actor.system.survivors;
-      // console.log("TWDU | haven survivors: ", survivors);
+      // console.log("YZSRD | haven survivors: ", survivors);
 
       for (let survivor of survivors.npcs) {
         let actor = game.actors.get(survivor.id);
         if (!actor) {
-          // console.log("TWDU | haven survivor not found: ", survivor);
+          // console.log("YZSRD | haven survivor not found: ", survivor);
 
           const msg = game.i18n.localize(
-            "twdu.ui.survivorNotFound" + ": " + survivor.id
+            "yzesrdvtt.ui.survivorNotFound" + ": " + survivor.id
           );
           this.removeSurvivor(survivor.id);
           ui.notifications.warn(msg);
         }
       }
-      //console.log("TWDU | haven survivors: ", survivors);
+      //console.log("YZSRD | haven survivors: ", survivors);
       context.system.survivors = survivors;
 
       context.maxpop = this.calculatePopulation(context);
-      context.havenNotes =
-        await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-          this.actor.system.notes.value,
-          {
-            secrets: this.actor.isOwner,
-            rollData: context.rollData,
-            async: true,
-            relativeTo: this.actor,
-          }
-        );
-      //console.log("TWDU | haven context: ", context);
+      context.havenNotes = await TextEditor.enrichHTML(
+        this.actor.system.notes.value,
+        {  secrets: this.actor.isOwner,
+          rollData: context.rollData,
+          async: true,
+          relativeTo: this.actor}
+      );
+      //console.log("YZSRD | haven context: ", context);
     }
 
     if (context.isNPC) {
-      context.npcSkill = twdu.npcSkill;
-      context.npcSkillStore = twdu.npcSkillStore;
       this.computeSkills(context);
       this.equipItems(context);
-      context.notesHTML =
-        await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-          context.system.notes.value,
-          {
-            secrets: this.actor.isOwner,
-            rollData: context.rollData,
-            async: true,
-            relativeTo: this.actor,
-          }
-        );
+      context.notesHTML = await TextEditor.enrichHTML(
+        context.system.notes.value,
+        {
+          secrets: this.actor.isOwner,
+          rollData: context.rollData,
+          async: true,
+          relativeTo: this.actor
+        }
+      );
     }
 
     if (context.isAnimal) {
-      //console.log("TWDU | isAnimal: ", context.isAnimal);
-      context.animalHTML =
-        await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-          context.system.notes.value,
-          {
-            secrets: this.actor.isOwner,
-            rollData: context.rollData,
-            async: true,
-            relativeTo: this.actor,
-          }
-        );
+      //console.log("YZSRD | isAnimal: ", context.isAnimal);
+      context.animalHTML = await TextEditor.enrichHTML(
+        context.system.notes.value,
+        {  secrets: this.actor.isOwner,
+          rollData: context.rollData,
+          async: true,
+          relativeTo: this.actor }
+      );
     }
 
     if (context.isChallenge) {
-      //console.log("TWDU | isChallenge: ", this.actor);
+      //console.log("YZSRD | isChallenge: ", this.actor);
       //check all survivors and remove any that are not in the world
       const survivors = this.actor.system.survivors;
-      //console.log("TWDU | challenge survivors: ", survivors);
+      //console.log("YZSRD | challenge survivors: ", survivors);
       for (let survivor of survivors.npcs) {
         let actor = game.actors.get(survivor.id);
         if (!actor) {
-          // console.log("TWDU | challenge survivor not found: ", survivor);
+          // console.log("YZSRD | challenge survivor not found: ", survivor);
           const msg = game.i18n.localize(
-            "twdu.ui.survivorNotFound" + ": " + survivor.id
+            "yzesrdvtt.ui.survivorNotFound" + ": " + survivor.id
           );
           this.removeSurvivor(survivor.id);
           ui.notifications.warn(
@@ -167,16 +161,16 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
           );
         }
       }
-      //console.log("TWDU | challenge survivors: ", survivors);
+      //console.log("YZSRD | challenge survivors: ", survivors);
       context.system.survivors = survivors;
 
       //context.survivors = this.actor.system.survivors;
     }
     // const drag = this.prepDragDrop();
-    // console.log("TWDU | drag: ", drag);
-    // console.log("TWDU | data: ", this);
+    // console.log("YZSRD | drag: ", drag);
+    // console.log("YZSRD | data: ", this);
 
-    if (this.actor.type === "haven") {
+    if(this.actor.type === "haven") {
       this.setPortrait(context);
       // this.setPosition({width: 800, height: 800});
     }
@@ -257,7 +251,7 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
   equipItems(data) {
     // this will equip all owned items for an NPC, this is primarily so that armor penalties on mobility can be calculated
     let items = data.items;
-    //console.log("TWDU | equipItems: ", items);
+    //console.log("YZSRD | equipItems: ", items);
     items.forEach((item) => {
       this.actor.items.get(item._id).update({ "system.isEquipped": true });
       // item.update({ "system.isEquipped":  true});
@@ -265,8 +259,8 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   setPortrait(context) {
-    context.portrait = game.settings.get("twdu", "havenSurvivorDisplaySetting");
-    // console.log("TWDU | setPortrait: ", context.portrait);
+    context.portrait = game.settings.get("yzesrd-vtt", "havenSurvivorDisplaySetting");
+    console.log("YZSRD | setPortrait: ", context.portrait);
   }
 
   activateListeners(html) {
@@ -300,7 +294,7 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   _onSetSource(event) {
-    //console.log("TWDU | _onSetSource: ", event);
+    //console.log("YZSRD | _onSetSource: ", event);
     let currentTarget = event.currentTarget;
     let item = this.actor.items.get(currentTarget.dataset.itemId);
     let newSource = currentTarget.value;
@@ -314,22 +308,22 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
     let item = this.actor.items.get(currentTarget.dataset.itemId);
 
     this.actor.system.survivors.npcs[survivorIndex].fate = newFate;
-    // console.log("TWDU | _onSetFate: ", this.actor.system.survivors.npcs[survivorIndex]);
-    // console.log("TWDU | _onSetFate: ", item);
+    // console.log("YZSRD | _onSetFate: ", this.actor.system.survivors.npcs[survivorIndex]);
+    // console.log("YZSRD | _onSetFate: ", item);
     this.actor.update({
       "system.survivors.npcs": this.actor.system.survivors.npcs,
     });
   }
 
   _onTestClock(event) {
-    // console.log("TWDU | _onTestClock: ", event);
+    // console.log("YZSRD | _onTestClock: ", event);
     let div = $(event.currentTarget).parents(".item"),
       item = this.actor.items.get(div.data("itemId"));
 
     // if the clock is less than 6 roll a d6 and if the result is greater than the clock value increase the clock by 1
     if (item.system.clock < 6) {
       let roll = rollClockTest(this.actor, this, item);
-      roll.then((result) => console.log("TWDU | result: ", result));
+      roll.then((result) => console.log("YZSRD | result: ", result));
       roll.then((result) => {
         // console.log(result.total, item.system.clock);
         if (result.total > item.system.clock) {
@@ -340,11 +334,11 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   _onIncreaseClock(event) {
-    // console.log("TWDU | _onIncreaseClock: ", event);
+    // console.log("YZSRD | _onIncreaseClock: ", event);
     let div = $(event.currentTarget).parents(".item"),
       item = this.actor.items.get(div.data("itemId"));
-    // console.log("TWDU | _onIncreaseClock: ", div);
-    // console.log("TWDU | _onIncreaseClock: ", item);
+    // console.log("YZSRD | _onIncreaseClock: ", div);
+    // console.log("YZSRD | _onIncreaseClock: ", item);
     let clockCount = item.system.clock;
     if (item.system.clock < 6) {
       clockCount++;
@@ -353,7 +347,7 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   _onDecreaseClock(event) {
-    // console.log("TWDU | _onDecreaseClock: ", event);
+    // console.log("YZSRD | _onDecreaseClock: ", event);
     let div = $(event.currentTarget).parents(".item"),
       item = this.actor.items.get(div.data("itemId"));
     let clockCount = item.system.clock;
@@ -364,95 +358,109 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   _onDragStart(event) {
-    // console.log(
-    //   "start drag",
-    //   event.srcElement.firstElementChild.dataset.rolled
-    // );
-    // console.log(
-    //   "start drag skill?",
-    //   event.currentTarget.classList.contains("skill")
-    // );
-    // console.log(
-    //   "start drag attribute?",
-    //   event.currentTarget.classList.contains("attribute")
-    // );
+    console.log(
+      "start drag",
+      event.srcElement.firstElementChild.dataset.rolled
+    );
+    console.log(
+      "start drag skill?",
+      event.currentTarget.classList.contains("skill")
+    );
+    console.log(
+      "start drag attribute?",
+      event.currentTarget.classList.contains("attribute")
+    );
 
     if (
       event.currentTarget.classList.contains("skill") ||
       event.currentTarget.classList.contains("attribute")
     ) {
-      // console.log("a skill or attribute");
+      console.log("a skill or attribute");
       const rollItemDragged = event.srcElement.firstElementChild.dataset.rolled;
-      // console.log("rollItemDragged", rollItemDragged);
+      console.log("rollItemDragged", rollItemDragged);
 
       return;
     } else {
-      // console.log("not a skill or attribute");
+      console.log("not a skill or attribute");
       super._onDragStart(event);
       return;
     }
   }
 
   _onItemDrag(event) {
-    // console.log("TWDU | _onItemDrag: ", event);
+    // console.log("YZSRD | _onItemDrag: ", event);
     event.preventDefault();
-    // console.log("TWDU | _onItemDrag: ", event);
+    //console.log("YZSRD | _onItemDrag: ", event);
     game.data.item = this.actor.getEmbeddedDocument(
       "Item",
       event.currentTarget.closest(".item").dataset.itemId
     );
 
-    // console.log("TWDU | _onItemDrag: ", game.data.item);
+    // console.log("YZSRD | _onItemDrag: ", game.data.item);
   }
 
   //prevent sidebar triggering this code?
   _onItemDrop(event) {
     event.preventDefault();
-    //  console.log("TWDU | _onItemDrop: ", event);
+    //  console.log("YZSRD | _onItemDrop: ", event);
+
     let actor = this.actor;
     let item = game.data.item;
-    //  console.log("TWDU | _onItemDrop item: ", item);
+
+    //  console.log("YZSRD | _onItemDrop item: ", item);
+
     if (item === undefined || item === null) {
       return;
     }
+
     actor.createEmbeddedDocuments("Item", [item]);
-    //  console.log("TWDU | _onItemDrop actor: ", actor.id);
+    //  console.log("YZSRD | _onItemDrop actor: ", actor.id);
+
     let storedItem = game.data.item;
     if (storedItem === null) {
       return;
     }
+
     // remove the item from the original actor
     let originalActor = storedItem.actor;
-    //  console.log("TWDU | originalActor: ", originalActor.id);
-    // if (originalActor.id === actor.id) {
-    //    console.log("TWDU |  id match on drop action - returning ");
-    //   storedItem = null;
-    //   item = null;
-    //   return;
-    // }
+    //  console.log("YZSRD | originalActor: ", originalActor.id);
+
+    if (originalActor.id === actor.id) {
+      //  console.log("id match on drop action - returning ");
+      storedItem = null;
+      item = null;
+      return;
+    }
 
     originalActor.deleteEmbeddedDocuments("Item", [storedItem.id]);
-    //  console.log("TWDU | storedItem: ", storedItem);
-    //  console.log("TWDU | item: ", item);
+    //  console.log("YZSRD | storedItem: ", storedItem);
+    //  console.log("YZSRD | item: ", item);
 
     game.data.item = null;
     storedItem = null;
     item = null;
-    //  console.log("TWDU | storedItem: ", storedItem);
-    //  console.log("TWDU | item: ", item);
-    //  console.log("TWDU | game.data.item: ", game.data.item);
+    //  console.log("YZSRD | storedItem: ", storedItem);
+    //  console.log("YZSRD | item: ", item);
+    //  console.log("YZSRD | game.data.item: ", game.data.item);
+
+    //TODO check to see if survivor has been added to the sheet
     return;
   }
 
   async _onShowDetails(event) {
     event.preventDefault();
-    // console.log("TWDU | _onShowDetails: ", event);
+    // console.log("YZSRD | _onShowDetails: ", event);
     let div = $(event.currentTarget).parents(".item"),
       item = this.actor.items.get(div.data("itemId")),
       chatData = null,
       sum = "",
       actorType = this.actor.type;
 
+    // console.log("YZSRD | item: ", item);
+
+    // console.log("YZSRD | _onShowDetails: ", actorType);
+
+    //check for item type if to use a the correct template
     switch (item.type) {
       case "weapon":
       case "armor":
@@ -461,42 +469,55 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
       case "issue":
       case "rumor":
       case "challenges":
-        chatData = await foundry.applications.handlebars.renderTemplate(
-          "systems/twdu/templates/ui/description.hbs",
+        await renderTemplate(
+          "systems/yzesrd-vtt/templates/ui/description.hbs",
           item
-        );
-        // console.log("TWDU | chatData: ", chatData);
+        ).then((html) => {
+          chatData = html;
+        });
+        // console.log("YZSRD | chatData: ", chatData);
         sum = $(
           `<div class="item-summary span-7 justify-self-start">${chatData}</div>`
         );
         break;
       case "talent":
-        chatData = await foundry.applications.handlebars.renderTemplate(
-          "systems/twdu/templates/ui/talentRollDown.hbs",
+        await renderTemplate(
+          "systems/yzesrd-vtt/templates/ui/talentRollDown.hbs",
           item
-        );
+        ).then((html) => {
+          chatData = html;
+        });
+        // console.log("YZSRD | chatData: ", chatData);
         sum = $(
           `<div class="item-summary span-7 justify-self-start">${chatData}</div>`
         );
         break;
       case "criticalInjury":
-        chatData = await foundry.applications.handlebars.renderTemplate(
-          "systems/twdu/templates/ui/criticalRollDown.hbs",
+        // console.log("YZSRD | criticalInjury: ", item);
+        await renderTemplate(
+          "systems/yzesrd-vtt/templates/ui/criticalRollDown.hbs",
           item
-        );
+        ).then((html) => {
+          chatData = html;
+        });
+        // console.log("YZSRD | chatData: ", chatData);
         sum = $(
           `<div class="item-summary span-7 justify-self-start">${chatData}</div>`
         );
         break;
-      case "project":
-        chatData = await foundry.applications.handlebars.renderTemplate(
-          "systems/twdu/templates/ui/projectRollDown.hbs",
-          item
-        );
-        sum = $(
-          `<div class="item-summary span-7 justify-self-start">${chatData}</div>`
-        );
-        break;
+        case "project":
+          // console.log("YZSRD | project: ", item);
+          await renderTemplate(
+            "systems/yzesrd-vtt/templates/ui/projectRollDown.hbs",
+            item
+          ).then((html) => {
+            chatData = html;
+          });
+          // console.log("YZSRD | chatData: ", chatData);
+          sum = $(
+            `<div class="item-summary span-7 justify-self-start">${chatData}</div>`
+          );
+          break;
     }
 
     if (chatData === null) {
@@ -512,25 +533,19 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   _onRoll(event) {
-    console.log("TWDU | _onRoll: ", event);
+    // console.log("YZSRD | _onRoll: ", event);
     event.preventDefault();
     let actor = this.actor;
-    console.log("TWDU | rolling actor: ", actor);
-    let health;
-    if (actor.type === "animal") {
-      health = actor.system.healthMax.value;
-    } else {
-      health = actor.system.health.value;
-    }
+    let health = actor.system.health.value;
     if (health < 1) {
-      ui.notifications.warn(game.i18n.localize("twdu.ui.cantRollWhenBroken"));
+      ui.notifications.warn(game.i18n.localize("yzesrdvtt.ui.cantRollWhenBroken"));
       return;
     }
     let target = event.currentTarget;
-    console.log("TWDU | target: ", target);
+    // console.log("YZSRD | target: ", target);
     let key = target.dataset.key;
     if (key === undefined) {
-      console.log("TWDU | key is undefined");
+      // console.log("YZSRD | key is undefined");
       key = target.dataset.itemType;
       //return;
     }
@@ -554,7 +569,7 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
       case "attribute":
         {
           options.attName =
-            "twdu." +
+            "yzesrdvtt." +
             this.actor.system.attributes[target.dataset.attribute].label;
           options.attributeDefault =
             this.actor.system.attributes[target.dataset.attribute].value;
@@ -563,9 +578,7 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
       case "skill":
         {
           if (options.actorType === "npc") {
-            console.log("TWDU | npc skill: ", target.dataset.skill);
-            options.skillKey = target.dataset.skill;
-            options.skillName = game.i18n.localize(target.dataset.test);
+            options.skillName = target.dataset.skill;
             let skillLevel =
               this.actor.system.skills[target.dataset.skill].level;
             if (skillLevel == "base") {
@@ -581,16 +594,14 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
               options.skillDefault = 10;
             }
           } else {
-            console.log("TWDU | character skill: ", target.dataset.skill);
             options.testName = game.i18n.localize(target.dataset.test);
-            options.skillKey = target.dataset.skill;
             options.skillName = game.i18n.localize(target.dataset.test);
             options.skillDefault =
               this.actor.system.skills[target.dataset.skill].value;
             // get the attribute for the skill and set the default and name
 
             let abv = this.actor.system.skills[target.dataset.skill].attribute;
-            options.attName = "twdu." + this.actor.system.attributes[abv].label;
+            options.attName = "yzesrdvtt." + this.actor.system.attributes[abv].label;
             options.attributeDefault = this.actor.system.attributes[abv].value;
           }
         }
@@ -598,24 +609,16 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
       case "weapon":
         {
           const item = this.actor.items.get(target.dataset.itemId);
-          // console.log("TWDU | actorType: ", options.actorType);
+          // console.log("YZSRD | actorType: ", options.actorType);
           options.testName = target.dataset.test;
-          options.skillKey = item.system.skill;
           options.skillName = game.i18n.localize(item.system.skill);
-          if (options.skillName === "" || options.skillName === undefined) {
-            ui.notifications.warn(game.i18n.localize("twdu.ui.noSkill"));
-            return;
-          }
-          console.log("TWDU | skillName: ", options.skillName);
-          // let skill = item.system.skill.split(".")[1];
-          // console.log("TWDU | skill: ", skill);
+          let skill = item.system.skill.split(".")[1];
           if (options.actorType === "character") {
-            options.skillDefault =
-              this.actor.system.skills[options.skillName].value;
-            // console.log("TWDU | skillDefault: ", options.skillDefault);
+            options.skillDefault = this.actor.system.skills[skill].value;
+            // console.log("YZSRD | skillDefault: ", options.skillDefault);
           } else {
-            let skillLevel = this.actor.system.skills[options.skillName].level;
-            // console.log("TWDU | skillLevel: ", skillLevel);
+            let skillLevel = this.actor.system.skills[skill].level;
+            // console.log("YZSRD | skillLevel: ", skillLevel);
             if (skillLevel == "base") {
               options.skillDefault = 4;
             }
@@ -630,8 +633,8 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
             }
           }
           if (options.actorType === "character") {
-            let abv = this.actor.system.skills[options.skillName].attribute;
-            options.attName = "twdu." + this.actor.system.attributes[abv].label;
+            let abv = this.actor.system.skills[skill].attribute;
+            options.attName = "yzesrdvtt." + this.actor.system.attributes[abv].label;
             options.attributeDefault = this.actor.system.attributes[abv].value;
           }
 
@@ -640,7 +643,7 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
             let damage = 0;
             for (let i = 0; i < item.system.damage; i++) {
               damage += Math.floor(Math.random() * 6) + 1;
-              //console.log("TWDU | damage: ", damage);
+              //console.log("YZSRD | damage: ", damage);
             }
             options.damageDefault = damage;
           } else {
@@ -648,7 +651,7 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
           }
           options.weaponName = item.name;
           options.weaponBonusDefault = item.system.bonus;
-          //console.log("TWDU | damageDefault: ", options.damageDefault);
+          //console.log("YZSRD | damageDefault: ", options.damageDefault);
         }
         break;
       case "armor":
@@ -662,41 +665,24 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
           options.armorDefault = options.armorItem.system.protection;
         }
         break;
-      case "vehicle":
-        {
-          let vehicle = this.actor.items.get(target.dataset.itemId);
-          console.log("TWDU | vehicle: ", vehicle);
-          options.testName = vehicle.name;
-          options.vehicleName = vehicle.name;
-          options.skillKey = "twdu.mobility";
-          options.skillName = game.i18n.localize("twdu.mobility");
-          options.actorName = this.actor.name;
-          options.actorID = this.actor.id;
-          options.vehicleDefault = vehicle.system.maneuverability || 0;
-          console.log("TWDU | options: ", options);
-        }
-        break;
     }
 
-    // console.log("TWDU | options", options);
+    // console.log("YZSRD | options", options);
 
     prepareRollDialog(options);
   }
 
-  async _onItemToChat(event) {
+  _onItemToChat(event) {
     event.preventDefault();
     const div = $(event.currentTarget).parents(".item");
     const item = this.actor.items.get(div.data("itemId"));
     let type = item.type;
-    //TODO remove the render step from the build chat card function
-    // console.log(ChatMessageTWDU.buildChatCard(type, item));
-    let chatData = await buildChatCard(type, item, {});
-    await ChatMessageTWDU.create(chatData, {});
+    buildChatCard(type, item);
   }
 
   _onItemEdit(event) {
     event.preventDefault();
-    // console.log("TWDU | _onItemEdit: ", event);
+    // console.log("YZSRD | _onItemEdit: ", event);
     const div = $(event.currentTarget).parents(".item");
     const item = this.actor.items.get(div.data("itemId"));
     item.sheet.render(true);
@@ -704,23 +690,23 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
 
   _onShowActor(event) {
     event.preventDefault();
-    // console.log("TWDU | _onShowActor: ", event);
+    // console.log("YZSRD | _onShowActor: ", event);
     const actorID = event.currentTarget.dataset.actorId;
     const actor = game.actors.get(actorID);
     actor.sheet.render(true);
   }
 
   _onActorDelete(event) {
-    // console.log("TWDU | _onActorDelete event: ", event);
+    // console.log("YZSRD | _onActorDelete event: ", event);
     event.preventDefault();
     const target = game.actors.get(this.object.id);
-    // console.log("TWDU | _onActorDelete: ", target);
+    // console.log("YZSRD | _onActorDelete: ", target);
 
     if (target.type === "character") {
-      // console.log("TWDU | _onActorDelete: ", "character");
+      // console.log("YZSRD | _onActorDelete: ", "character");
       let haven = game.actors.get(target.system.haven);
       let pcActor = game.actors.get(target._id);
-      // console.log("TWDU | _onActorDelete: ", haven);
+      // console.log("YZSRD | _onActorDelete: ", haven);
 
       haven.update({
         "system.survivors.npcs": haven.system.survivors.npcs.filter(
@@ -729,8 +715,8 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
       });
       pcActor.update({ "system.haven": "" });
       //this.actor.update({ "data.system.haven": "" });
-      // console.log("TWDU | _onActorDelete: haven ", pcActor.system.haven);
-      // console.log("TWDU | _onActorDelete: ", pcActor);
+      // console.log("YZSRD | _onActorDelete: haven ", pcActor.system.haven);
+      // console.log("YZSRD | _onActorDelete: ", pcActor);
       return;
     }
 
@@ -770,13 +756,6 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
         {
           const value = this.actor.system.driveUsed;
           this.actor.update({ "system.driveUsed": !value });
-        }
-        break;
-      case "isSecret":
-        {
-          const item = this.actor.items.get(element.dataset.itemId);
-          const value = item.system.isSecret;
-          item.update({ "system.isSecret": !value });
         }
         break;
     }
@@ -827,9 +806,9 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
     // TODO remove the PC from the current haven and add it to the new haven if the user confirms also update the haven on the PC
 
     const survivor = game.actors.get(actorId);
-    // console.log("TWDU | _dropSurvivor: ", survivor);
+    // console.log("YZSRD | _dropSurvivor: ", survivor);
     const actorData = this.actor;
-    const msg = game.i18n.localize("twdu.ui.havenOnHavenDrop");
+    const msg = game.i18n.localize("yzesrdvtt.ui.havenOnHavenDrop");
     if (!survivor) return;
     if (survivor.type === "haven" || survivor.type === "challenge")
       return ui.notifications.info(msg);
@@ -840,12 +819,12 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   addSurvivor(ID) {
-    // console.log("TWDU | addSurvivor: ", ID);
+    // console.log("YZSRD | addSurvivor: ", ID);
     const target = game.actors.get(this.object.id);
-    // console.log("TWDU | addSurvivor: ", target.type);
+    // console.log("YZSRD | addSurvivor: ", target.type);
     if (target.type !== "haven" && target.type !== "challenge") return;
     const data = target.system;
-    // console.log("TWDU | addSurvivor data: ", data);
+    // console.log("YZSRD | addSurvivor data: ", data);
     const actor = game.actors.get(ID);
     const survivorType = actor.type;
     const fate = "";
@@ -863,7 +842,7 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
     // put this haven on the character
     if (actor.type === "character" && target.type === "haven") {
       actor.update({ "system.haven": target._id });
-      // console.log("TWDU | addSurvivor actor: ", actor);
+      // console.log("YZSRD | addSurvivor actor: ", actor);
       // Updates the population on a Haven not a Challenge.
     }
     if (target.type === "haven") {
@@ -873,26 +852,26 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
     }
 
     //target.update({ "data.survivors.npcs": data.survivors.npcs });
-    // console.log("TWDU | data.survivors.npcs: ", data.survivors.npcs);
-    // console.log("TWDU | target: ", target);
+    // console.log("YZSRD | data.survivors.npcs: ", data.survivors.npcs);
+    // console.log("YZSRD | target: ", target);
     return survivor;
   }
 
   removeSurvivor(Id) {
-    // console.log("TWDU | removeSurvivor: ", Id);
+    // console.log("YZSRD | removeSurvivor: ", Id);
     const target = game.actors.get(this.object.id);
     const survivors = target.system.survivors;
-    // console.log("TWDU | removeSurvivor target: ", target);
-    // console.log("TWDU | removeSurvivor survivors: ", survivors);
+    // console.log("YZSRD | removeSurvivor target: ", target);
+    // console.log("YZSRD | removeSurvivor survivors: ", survivors);
 
-    // console.log("TWDU | removeSurvivor target: ", target.type);
-    // console.log("TWDU | removeSurvivor target: ", target);
+    // console.log("YZSRD | removeSurvivor target: ", target.type);
+    // console.log("YZSRD | removeSurvivor target: ", target);
 
     let actor = game.actors.get(Id);
-    // console.log("TWDU | removeSurvivor actor: ", actor);
+    // console.log("YZSRD | removeSurvivor actor: ", actor);
 
     if (!actor) {
-      // console.log("TWDU | removeSurvivor actor not found: ", actor);
+      // console.log("YZSRD | removeSurvivor actor not found: ", actor);
       survivors.npcs = survivors.npcs.filter((o) => o.id !== Id);
     }
 
@@ -904,16 +883,15 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
 
     survivors.npcs = survivors.npcs.filter((o) => o.id !== Id);
     target.update({ "system.survivors.npcs": survivors.npcs });
-    //console.log("TWDU | removeSurvivor survivors updated: ", target.system.survivors);
+    //console.log("YZSRD | removeSurvivor survivors updated: ", target.system.survivors);
     return survivors.npcs;
   }
 
   /** @override */
   async _onDropItemCreate(itemData) {
-    console.log("TWDU | _onDropItemCreate: ", itemData);
     const type = itemData.type;
-    console.log("TWDU | drag and drop items", this);
-    const alwaysAllowedItems = twdu.physicalItems;
+    // console.log("YZSRD | drag and drop items", this);
+    const alwaysAllowedItems = yzesrdvtt.physicalItems;
     const allowedItems = {
       haven: ["weapon", "armor", "gear", "project", "vehicle", "issue"],
       character: [
@@ -937,15 +915,14 @@ export default class TWDUActorSheet extends foundry.appv1.sheets.ActorSheet {
     }
 
     if (!allowed) {
-      const msg = game.i18n.format("twdu.ui.wrongItemType", {
+      const msg = game.i18n.format("yzesrdvtt.ui.wrongItemType", {
         type: type,
         actor: this.actor.type,
       });
-      console.warn(`TWDU| ${msg}`);
+      console.warn(`YZSRD| ${msg}`);
       ui.notifications.warn(msg);
       return false;
     }
-    console.log("TWDU | _onDropItemCreate: ", itemData);
     return super._onDropItemCreate(itemData);
   }
 }

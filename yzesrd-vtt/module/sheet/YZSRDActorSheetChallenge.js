@@ -1,13 +1,13 @@
-import TWDUActorSheet from "./TWDUActorSheet.js";
+import YZSRDActorSheet from "./YZSRDActorSheet.js";
 
-export default class TWDUActorSheetHaven extends TWDUActorSheet {
+export default class YZSRDActorSheetChallenge extends YZSRDActorSheet {
 
     /** @override */
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
-        classes: ["twdu", "sheet", "actor", "haven"],
-        template: "systems/twdu/templates/sheets/haven-sheet.hbs",
-        width: 800,
+        classes: ["yzesrd-vtt", "sheet", "actor", "challenge"],
+        template: "systems/yzesrd-vtt/templates/sheets/challenge-sheet.hbs",
+        width: 850,
         height: "min-content",
        tabs: [
         {

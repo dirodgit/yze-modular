@@ -35,7 +35,7 @@ export function prepareRollDialog(options) {
   let talents = actor.items.filter(
     (item) => item.type === "talent" && item.system.hasBonus
   );
-  // console.log("TWDU | talents: ", talents);
+  // console.log("YZSRD | talents: ", talents);
 
   let stressDice = 0;
   if (actor.type === "character") {
@@ -62,7 +62,7 @@ export function prepareRollDialog(options) {
       "weaponBonus"
     );
     // dialogHtml += buildHTMLDialog(
-    //   game.i18n.localize("twdu.ROLL.DAMAGE"),
+    //   game.i18n.localize("yzesrdvtt.ROLL.DAMAGE"),
     //   options.damageDefault,
     //   "damage"
     // );
@@ -74,14 +74,14 @@ export function prepareRollDialog(options) {
      // add a field to show the critical penalty if there is one
      if (criticals > 0) {
       dialogHtml += buildHTMLDialog(
-        game.i18n.localize("twdu.ROLL.CRITICAL"),
+        game.i18n.localize("yzesrdvtt.ROLL.CRITICAL"),
         options.criticalPenalty,
         "critical"
       );
     }
     if (actor.type === "character" && stressDice > 0) {
       dialogHtml += buildHTMLDialog(
-        game.i18n.localize("twdu.ROLL.STRESS"),
+        game.i18n.localize("yzesrdvtt.ROLL.STRESS"),
         stressDice,
         "stress"
       );
@@ -99,7 +99,7 @@ export function prepareRollDialog(options) {
      // add a field to show the critical penalty if there is one
      if (criticals > 0) {
       dialogHtml += buildHTMLDialog(
-        game.i18n.localize("twdu.ROLL.CRITICAL"),
+        game.i18n.localize("yzesrdvtt.ROLL.CRITICAL"),
         options.criticalPenalty,
         "critical"
       );
@@ -107,7 +107,7 @@ export function prepareRollDialog(options) {
 
     if (actor.type === "character" && stressDice > 0) {
       dialogHtml += buildHTMLDialog(
-        game.i18n.localize("twdu.ROLL.STRESS"),
+        game.i18n.localize("yzesrdvtt.ROLL.STRESS"),
         stressDice,
         "stress"
       );
@@ -138,7 +138,7 @@ export function prepareRollDialog(options) {
         options.armorPenalty = armor[0].system.agility;
 
         dialogHtml += buildHTMLDialog(
-          game.i18n.localize("twdu.armor") + " " + game.i18n.localize("twdu.penalty"),         
+          game.i18n.localize("yzesrdvtt.armor") + " " + game.i18n.localize("yzesrdvtt.penalty"),         
           options.armorPenalty,
           "armorPenalty"
         );
@@ -148,7 +148,7 @@ export function prepareRollDialog(options) {
     // add a field to show the critical penalty if there is one
     if (criticals > 0) {
       dialogHtml += buildHTMLDialog(
-        game.i18n.localize("twdu.ROLL.CRITICAL"),
+        game.i18n.localize("yzesrdvtt.ROLL.CRITICAL"),
         options.criticalPenalty,
         "critical"
       );
@@ -156,7 +156,7 @@ export function prepareRollDialog(options) {
 
     if (stressDice > 0) {
       dialogHtml += buildHTMLDialog(
-        game.i18n.localize("twdu.ROLL.STRESS"),
+        game.i18n.localize("yzesrdvtt.ROLL.STRESS"),
         stressDice,
         "stress"
       );
@@ -173,8 +173,8 @@ export function prepareRollDialog(options) {
  
 
   if (options.type === "vehicle") {
-    // console.log("TWDU | vehicle options: ", options);
-    options.skillName = game.i18n.localize("twdu.mobility");
+    // console.log("YZSRD | vehicle options: ", options);
+    options.skillName = game.i18n.localize("yzesrdvtt.mobility");
     options.skillDefault = actor.system.skills.mobility.value;
     options.attName = "AGILITY";
     options.attributeDefault = actor.system.attributes.agl.value;
@@ -208,36 +208,36 @@ export function prepareRollDialog(options) {
     (Math.abs(options.vehicleDefault) || 0) -
     (Math.abs(options.armorPenalty) || 0) +
     (options.criticalPenalty || 0);
-  //   console.log("TWDU | options: ", options);
-  // console.log("TWDU | subtotal: ", subtotal);
+  //   console.log("YZSRD | options: ", options);
+  // console.log("YZSRD | subtotal: ", subtotal);
   dialogHtml += buildSubTotalDialog(subtotal, stressDice);
   }
 
   if (options.type === "weapon") {
-    // console.log("TWDU | skillName: ", options.skillName);
-    // console.log("TWDU | skillKey: ", options.skillKey);
-    // console.log("TWDU | talents: ", talents);
+    // console.log("YZSRD | skillName: ", options.skillName);
+    // console.log("YZSRD | skillKey: ", options.skillKey);
+    // console.log("YZSRD | talents: ", talents);
     let damageTalents = talents.filter(
-      (item) => item.system.bonusType === "twdu.damage"
+      (item) => item.system.bonusType === "yzesrdvtt.damage"
     );
 
     if (damageTalents.length > 0) {
       // build a select dialog for the talents that we found
       dialogHtml += buildSelectDialog(
-        game.i18n.localize("twdu.ROLL.TALENT_DAMAGE"),
+        game.i18n.localize("yzesrdvtt.ROLL.TALENT_DAMAGE"),
         damageTalents,
         "damageTalent"
       );
     }
-    // console.log("TWDU | Talents: ", talents);
+    // console.log("YZSRD | Talents: ", talents);
     let skillTalents = talents.filter(
       (item) => item.system.skill ===  options.skillName.toLowerCase().toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
     );
-    // console.log("TWDU | skillTalents: ", skillTalents);
+    // console.log("YZSRD | skillTalents: ", skillTalents);
     if (skillTalents.length > 0) {
-      // console.log("TWDU | skillTalents: ", skillTalents);
+      // console.log("YZSRD | skillTalents: ", skillTalents);
       dialogHtml += buildSelectDialog(
-        game.i18n.localize("twdu.ROLL.TALENTSKILL"),
+        game.i18n.localize("yzesrdvtt.ROLL.TALENTSKILL"),
         skillTalents,
         "talent"
       );
@@ -245,8 +245,8 @@ export function prepareRollDialog(options) {
   }
 
   if (options.type === "skill") {
-    // console.log("TWDU | skillName: ", options.skillName);
-    console.log("TWDU | skillKey: ", options.skillKey);
+    // console.log("YZSRD | skillName: ", options.skillName);
+    console.log("YZSRD | skillKey: ", options.skillKey);
     let gear = actor.items.filter(
       (item) => item.type === "gear" && item.system.isEquipped
     );
@@ -267,7 +267,7 @@ export function prepareRollDialog(options) {
 
     if (skillGear.length > 0) {
       dialogHtml += buildSelectDialog(
-        game.i18n.localize("twdu.ROLL.GEAR"),
+        game.i18n.localize("yzesrdvtt.ROLL.GEAR"),
         skillGear,
         "gear"
       );
@@ -276,17 +276,17 @@ export function prepareRollDialog(options) {
    
    
     
-    // console.log("TWDU | Talents: ", talents);
-    // console.log("TWDU | options.skillName: ", options);
+    // console.log("YZSRD | Talents: ", talents);
+    // console.log("YZSRD | options.skillName: ", options);
     let skillTalents = talents.filter(
       (item) => item.system.skill === options.skillKey.toLowerCase().toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase())
     
     );
-    // console.log("TWDU | skillTalents: ", skillTalents);
+    // console.log("YZSRD | skillTalents: ", skillTalents);
     if (skillTalents.length > 0) {
-      // console.log("TWDU | skillTalents: ", skillTalents);
+      // console.log("YZSRD | skillTalents: ", skillTalents);
       dialogHtml += buildSelectDialog(
-        game.i18n.localize("twdu.ROLL.TALENTSKILL"),
+        game.i18n.localize("yzesrdvtt.ROLL.TALENTSKILL"),
         skillTalents,
         "talent"
       );
@@ -294,19 +294,19 @@ export function prepareRollDialog(options) {
   }
 
   let bonusHtml = buildInputDialog(
-    game.i18n.localize("twdu.ROLL.BONUS"),
+    game.i18n.localize("yzesrdvtt.ROLL.BONUS"),
     options.bonusDefault,
     "bonus"
   );
 
   let d = new Dialog(
     {
-      title: game.i18n.localize("twdu.ROLL.TEST") + ": " + options.testName,
+      title: game.i18n.localize("yzesrdvtt.ROLL.TEST") + ": " + options.testName,
       content: buildDivHtmlDialog(
         `
             <div class="roll-fields pi-8 mb-1">
             <h2>` +
-          game.i18n.localize("twdu.ROLL.TEST") +
+          game.i18n.localize("yzesrdvtt.ROLL.TEST") +
           ": " +
           ` ${options.testName}</h2>
             ${dialogHtml}
@@ -318,9 +318,9 @@ export function prepareRollDialog(options) {
       buttons: {
         roll: {
           icon: '<i class="fas fa-check"></i>',
-          label: game.i18n.localize("twdu.ROLL.ROLL"),
+          label: game.i18n.localize("yzesrdvtt.ROLL.ROLL"),
           callback: (html) => {
-            // console.log("TWDU | rolled", options);
+            // console.log("YZSRD | rolled", options);
             let attribute = options.attributeDefault;
             let skill = options.skillDefault;
             let bonus = html.find("#bonus")[0].value;
@@ -330,7 +330,7 @@ export function prepareRollDialog(options) {
             let critPenalty = options.criticalPenalty;
             let armorPenalty = options.armorPenalty;
 
-            // console.log("TWDU | Armor Penalty: ", armorPenalty);
+            // console.log("YZSRD | Armor Penalty: ", armorPenalty);
 
             // get the gear bonus
             let gearBonus = 0;
@@ -380,7 +380,7 @@ export function prepareRollDialog(options) {
         },
         cancel: {
           icon: '<i class="fas fa-times"></i>',
-          label: game.i18n.localize("twdu.ROLL.CANCEL"),
+          label: game.i18n.localize("yzesrdvtt.ROLL.CANCEL"),
           callback: () => {},
         },
       },
@@ -566,15 +566,15 @@ export async function rollClockTest(actor, sheet, item){
   };
 
   let r = new YearZeroRoll(formula, data, options);
-  // console.log("TWDU | rollClockTest: ", r);
+  // console.log("YZSRD | rollClockTest: ", r);
   await r.evaluate();
   let totalResult =  r._total;
-  // console.log("TWDU | rollClockTest total: ", r._total);
-  // console.log("TWDU | rollClockTest evaluated: ", r._evaluated);
+  // console.log("YZSRD | rollClockTest total: ", r._total);
+  // console.log("YZSRD | rollClockTest evaluated: ", r._evaluated);
   let chatMessage = `
   <div class="card-holder flex-row w-100" style="position: relative;">
     <div class="roll-token m-0 p-1 header group">
-      <img src="systems/twdu/assets/images/twdu-challenge.png" width="45" class="roll-token">
+      <img src="systems/yzesrd-vtt/assets/images/twdu-challenge.png" width="45" class="roll-token">
     </div>
     <div class="chat-card grow m-0 pi-1" data-owner-id="${actor.id}">
       <div class="card-content group">
@@ -598,12 +598,12 @@ export async function rollClockTest(actor, sheet, item){
     </div>
   </div>
   `;
-  // console.log("TWDU | clock: ", clock);
+  // console.log("YZSRD | clock: ", clock);
   if (clock > r._total) {
 
     chatMessage += `
     <div class="flex-col group pi-1 subtotal" style="flex-basis: 35%; justify-content: space-between; margin-block: 5px;"> ` +
-      game.i18n.localize("twdu.clockNotAdvance") 
+      game.i18n.localize("yzesrdvtt.clockNotAdvance") 
       +`
     </div>
     `;
@@ -611,7 +611,7 @@ export async function rollClockTest(actor, sheet, item){
  
     chatMessage += `
     <div class="flex-col group pi-1 subtotal" style="flex-basis: 35%; justify-content: space-between; margin-block: 5px;">` +
-      game.i18n.localize("twdu.clockAdvance") 
+      game.i18n.localize("yzesrdvtt.clockAdvance") 
       +`
     </div>
     `;
@@ -629,14 +629,14 @@ function buildSubTotalDialog(basevalue, stressvalue) {
   return (
     ` <div class="flex-col group pi-1 subtotal" style="flex-basis: 35%; justify-content: space-between; margin-block: 5px;">
        <h4 >` +
-    game.i18n.localize("twdu.ui.subtotal") +
+    game.i18n.localize("yzesrdvtt.ui.subtotal") +
     `: </h4>
       <div id="subtotal" style="text-align: center" class="flex-row space-between middle w-100 pi-2"><div>` +
-    game.i18n.localize("twdu.ui.skillDice") + `</div><div class="grow text-right pi-4 border-bottom">` +
+    game.i18n.localize("yzesrdvtt.ui.skillDice") + `</div><div class="grow text-right pi-4 border-bottom">` +
     basevalue +
     `</div></div>
     <div id="subtotal" style="text-align: center" class="flex-row space-between middle w-100 pi-2"><div>` +
-    game.i18n.localize("twdu.ui.stressDice") + `</div><div class="grow text-right pi-4 border-bottom">` +
+    game.i18n.localize("yzesrdvtt.ui.stressDice") + `</div><div class="grow text-right pi-4 border-bottom">` +
     stressvalue +
     `</div></div>
     </div>`
@@ -659,13 +659,13 @@ function buildInputDialog(name, value, type) {
 }
 
 function buildSelectDialog(name, value, type) {
-  // console.log("TWDU | buildSelectDialog: ", name, value, type);
+  // console.log("YZSRD | buildSelectDialog: ", name, value, type);
 
   // parse out the value to get the <option> tags for the select
   let options = "";
   for (let i = 0; i < value.length; i++) {
     let item = value[i];
-    // console.log("TWDU | item: ", item);
+    // console.log("YZSRD | item: ", item);
     if(item.type !== "vehicle"){
     options +=
       "<option id='" +
@@ -691,7 +691,7 @@ function buildSelectDialog(name, value, type) {
    <select id="` +
     type +
     `" style="width: 100%; margin-bottom: 10px;"> 
-   <option id="none" value="0">` + game.i18n.localize("twdu.none") + `</option>
+   <option id="none" value="0">` + game.i18n.localize("yzesrdvtt.none") + `</option>
    ` +
     options +
     `   
@@ -716,5 +716,5 @@ function buildHTMLDialog(diceName, diceValue, type) {
 }
 
 function buildDivHtmlDialog(divContent) {
-  return "<div class='twdu roll-dialog sidebar-dark'>" + divContent + "</div>";
+  return "<div class='yzesrd-vtt roll-dialog sidebar-dark'>" + divContent + "</div>";
 }

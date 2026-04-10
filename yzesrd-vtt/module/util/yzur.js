@@ -698,9 +698,9 @@ const YZUR = {
     diceSorting: ["base", "skill", "neg", "gear", "arto", "loc", "ammo"],
   },
   Roll: {
-    chatTemplate: "systems/twdu/templates/dice/roll.hbs",
-    tooltipTemplate: "systems/twdu/templates/dice/tooltip.hbs",
-    infosTemplate: "systems/twdu/templates/dice/infos.hbs",
+    chatTemplate: "systems/yzesrd-vtt/templates/dice/roll.hbs",
+    tooltipTemplate: "systems/yzesrd-vtt/templates/dice/tooltip.hbs",
+    infosTemplate: "systems/yzesrd-vtt/templates/dice/infos.hbs",
   },
   Dice: {
     localizeDieTerms: true,
@@ -1809,13 +1809,13 @@ class YearZeroRoll extends Roll {
     }
     // MUTANT YEAR ZERO & FORBIDDEN LANDS
     // --------------------------------------------
-    else if (["myz", "fbl", "alien", "twdu"].includes(this.game)) {
+    else if (["myz", "fbl", "alien", "yzesrd-vtt"].includes(this.game)) {
       // Modifies skill & neg dice.
       const skill = this.count("skill");
       const neg = Math.min(skill + mod, 0);
       await this.addDice(mod, "skill");
       if (neg < 0) {
-        if (this.game === "alien" || this.game === "twdu") {
+        if (this.game === "alien" || this.game === "yzesrd-vtt") {
           await this.addDice(neg, "stress");
         } else {
           await this.addDice(neg, "neg");
@@ -2368,7 +2368,7 @@ YearZeroRollManager.DIE_TERMS_MAP = {
   t2k: ["a", "b", "c", "d", "ammo", "loc"],
   // Blade Runner
   br: ["brD12", "brD10", "brD8", "brD6"],
-  // TWDU The Walking Dead
+  // YZSRD The Walking Dead
   twdu: ["skill", "stress"],
 };
 

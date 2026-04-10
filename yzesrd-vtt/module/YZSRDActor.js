@@ -1,4 +1,4 @@
-export default class TWDUActor extends Actor {
+export default class YZSRDActor extends Actor {
   prepareData() {
     super.prepareData();
     const actorData = this._source;
@@ -20,7 +20,7 @@ export default class TWDUActor extends Actor {
       "prototypeToken.sight.enabled": "false",
       "prototypeToken.sight.range": "100",
     };
-    if (game.settings.get("twdu", "defaultTokenSettings")) {
+    if (game.settings.get("yzesrd-vtt", "defaultTokenSettings")) {
       switch (data.type) {
         case "character":
           tokenProto["prototypeToken.bar2"] = { attribute: "stress" };
@@ -36,7 +36,7 @@ export default class TWDUActor extends Actor {
   }
 
   _prepareTokenImg() {
-    if (game.settings.get("twdu", "defaultTokenSettings")) {
+    if (game.settings.get("yzesrd-vtt", "defaultTokenSettings")) {
       if (
         this.token.img == "icons/svg/mystery-man.svg" &&
         this.token.img != this.img
@@ -55,13 +55,13 @@ export default class TWDUActor extends Actor {
     if (!data.img) {
       switch (data.type) {
         case "haven":
-          data.img = "systems/twdu/assets/icons/triple-gate.svg";
+          data.img = "systems/yzesrd-vtt/assets/icons/triple-gate.svg";
           break;
         case "npc":
-          data.img = "systems/twdu/assets/images/twdu-npc.webp";
+          data.img = "systems/yzesrd-vtt/assets/images/twdu-npc.webp";
           break;
         default:
-          data.img = `systems/twdu/assets/images/twdu-${data.type}.png`;
+          data.img = `systems/yzesrd-vtt/assets/images/twdu-${data.type}.png`;
           break;
       }
     }

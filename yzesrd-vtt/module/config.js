@@ -1,60 +1,60 @@
-export const twdu = {};
+export const yzesrdvtt = {};
 
-twdu.combatSkills = {
-    none: "twdu.none",
-    force: "twdu.force",
-    rangedCombat: "twdu.rangedCombat",
-    closeCombat: "twdu.closeCombat",
+yzesrdvtt.combatSkills = {
+    none: "yzesrdvtt.none",
+    force: "yzesrdvtt.force",
+    rangedCombat: "yzesrdvtt.rangedCombat",
+    closeCombat: "yzesrdvtt.closeCombat",
 }
 
-twdu.skills = {
-    none: "twdu.none",
-    force: "twdu.force",
-    closeCombat: "twdu.closeCombat",
-    endure: "twdu.endure",
-    rangedCombat: "twdu.rangedCombat",
-    mobility: "twdu.mobility",
-    stealth: "twdu.stealth",
-    scout: "twdu.scout",
-    survival: "twdu.survival",
-    tech: "twdu.tech",
-    leadership: "twdu.leadership",
-    manipulation: "twdu.manipulation",
-    medicine: "twdu.medicine",
+yzesrdvtt.skills = {
+    none: "yzesrdvtt.none",
+    force: "yzesrdvtt.force",
+    closeCombat: "yzesrdvtt.closeCombat",
+    endure: "yzesrdvtt.endure",
+    rangedCombat: "yzesrdvtt.rangedCombat",
+    mobility: "yzesrdvtt.mobility",
+    stealth: "yzesrdvtt.stealth",
+    scout: "yzesrdvtt.scout",
+    survival: "yzesrdvtt.survival",
+    tech: "yzesrdvtt.tech",
+    leadership: "yzesrdvtt.leadership",
+    manipulation: "yzesrdvtt.manipulation",
+    medicine: "yzesrdvtt.medicine",
 }
 
-twdu.ranges = {
-    none: "twdu.none",
-    short: "twdu.short",
-    long: "twdu.long",
-    extreme: "twdu.extreme",
+yzesrdvtt.ranges = {
+    none: "yzesrdvtt.none",
+    short: "yzesrdvtt.short",
+    long: "yzesrdvtt.long",
+    extreme: "yzesrdvtt.extreme",
 }
 
-twdu.healthStates = {
-    0: "twdu.broken",
-    1: "twdu.battered",
-    2: "twdu.bruised",
-    3: "twdu.unharmed"
+yzesrdvtt.healthStates = {
+    0: "yzesrdvtt.broken",
+    1: "yzesrdvtt.battered",
+    2: "yzesrdvtt.bruised",
+    3: "yzesrdvtt.unharmed"
 }
 
-twdu.yesNo = {
-    true: "twdu.yes",
-    false: "twdu.no",
+yzesrdvtt.yesNo = {
+    true: "yzesrdvtt.yes",
+    false: "yzesrdvtt.no",
 }
 
-twdu.projectEffects = {
-    capacity: "twdu.capacity",
-    defense: "twdu.defense"
+yzesrdvtt.projectEffects = {
+    capacity: "yzesrdvtt.capacity",
+    defense: "yzesrdvtt.defense"
 }
 
-twdu.npcSkill = {
-    base: "twdu.base",
-    trained: "twdu.trained",
-    expert: "twdu.expert",
-    master: "twdu.master"
+yzesrdvtt.npcSkill = {
+    base: "yzesrdvtt.base",
+    trained: "yzesrdvtt.trained",
+    expert: "yzesrdvtt.expert",
+    master: "yzesrdvtt.master"
 }
 
-twdu.npcSkillStore ={
+yzesrdvtt.npcSkillStore ={
     closeCombat: "system.skills.closeCombat.level",
     force: "system.skills.force.level",
     endure: "system.skills.endure.level",
@@ -70,7 +70,7 @@ twdu.npcSkillStore ={
 }
 
 
-twdu.encumbranceIncrements = {
+yzesrdvtt.encumbranceIncrements = {
     none: 0,
     half: 0.5,
     one: 1,
@@ -78,8 +78,8 @@ twdu.encumbranceIncrements = {
     three: 3,
 }
 
-twdu.weights = {
-    0: "twdu.none",
+yzesrdvtt.weights = {
+    0: "yzesrdvtt.none",
     0.5: "0.5",
     1: "1",
     2: "2",
@@ -88,27 +88,27 @@ twdu.weights = {
 }
 
 
-twdu.physicalItems = [];
+yzesrdvtt.physicalItems = [];
 
 
-twdu.recoveryTime = {
-    none: "twdu.none",
-    minutes: "twdu.minutes",
-    hours: "twdu.hours",
-    days: "twdu.days",
-    weeks: "twdu.weeks",
-    months: "twdu.months"
+yzesrdvtt.recoveryTime = {
+    none: "yzesrdvtt.none",
+    minutes: "yzesrdvtt.minutes",
+    hours: "yzesrdvtt.hours",
+    days: "yzesrdvtt.days",
+    weeks: "yzesrdvtt.weeks",
+    months: "yzesrdvtt.months"
 }
 
-twdu.talentBonusTypes = {
-    none: "twdu.none",
-    skill: "twdu.skill",
-    damage: "twdu.damage"
+yzesrdvtt.talentBonusTypes = {
+    none: "yzesrdvtt.none",
+    skill: "yzesrdvtt.skill",
+    damage: "yzesrdvtt.damage"
 }
 
-twdu.clockTypes ={
-    none: "twdu.none",
-    rumors: "twdu.rumor",
-    endgame: "twdu.endgame",
-    faction: "twdu.faction"
+yzesrdvtt.clockTypes ={
+    none: "yzesrdvtt.none",
+    rumors: "yzesrdvtt.rumor",
+    endgame: "yzesrdvtt.endgame",
+    faction: "yzesrdvtt.faction"
 }

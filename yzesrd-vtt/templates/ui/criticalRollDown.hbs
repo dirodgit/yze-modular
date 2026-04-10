@@ -1,18 +1,18 @@
 <p class='item-desc'>
-    <b>{{localize "twdu.lethal"}}: </b>{{#if (eq system.fatal 'true')}}
-    {{localize "twdu.yes"}}
+    <b>{{localize "yzesrdvtt.lethal"}}: </b>{{#if (eq system.fatal 'true')}}
+    {{localize "yzesrdvtt.yes"}}
     {{/if}}
     {{#unless (eq system.fatal 'true')}}
-    {{localize "twdu.no"}}
+    {{localize "yzesrdvtt.no"}}
     {{/unless}}
     </br>
     {{log actor}}
-    <b>{{localize "twdu.timeLimit"}}:</b> {{localize (concat "twdu." system.timeLimit)}} ( {{localize (concat "twdu." (lowercase system.complexity) )}} )</br>
+    <b>{{localize "yzesrdvtt.timeLimit"}}:</b> {{localize (concat "yzesrdvtt." system.timeLimit)}} ( {{localize (concat "yzesrdvtt." (lowercase system.complexity) )}} )</br>
 
-    <b>{{localize "twdu.recoveryTime"}}:</b> {{localize (concat "twdu." system.recovery)}} </br>
-    <b>{{localize "twdu.penalty"}}: </b>{{system.effect}} </br>
+    <b>{{localize "yzesrdvtt.recoveryTime"}}:</b> {{localize (concat "yzesrdvtt." system.recovery)}} </br>
+    <b>{{localize "yzesrdvtt.penalty"}}: </b>{{system.effect}} </br>
 
 <div class='chat-item-info grid two-col'>
-    <b>{{localize "twdu.description"}}: </b>{{system.description}}</br>
+    <b>{{localize "yzesrdvtt.description"}}: </b>{{system.description}}</br>
 </div>
 </p>

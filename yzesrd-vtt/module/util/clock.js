@@ -2,19 +2,19 @@
 
 async function increaseClock(amount) {
     // increase completion of clocks on a sheet
-    console.log("TWDU | increaseClock: ", amount);
+    console.log("YZSRD | increaseClock: ", amount);
 }
 
 async function decreaseClock(amount) {
     // decrease completion of clocks on a sheet
-    console.log("TWDU | decreaseClock: ", amount);
+    console.log("YZSRD | decreaseClock: ", amount);
 }
 
 export default class Clock {
     constructor(segments) {
         this._value = 0;
         this._segments = segments;
-        console.log("TWDU | Clock: ", segments);
+        console.log("YZSRD | Clock: ", segments);
     }
 
     get value() {

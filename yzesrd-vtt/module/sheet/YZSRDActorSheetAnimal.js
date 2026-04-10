@@ -1,14 +1,14 @@
-import TWDUActorSheet from "./TWDUActorSheet.js";
+import YZSRDActorSheet from "./YZSRDActorSheet.js";
 
-export default class TWDUActorSheetPC extends TWDUActorSheet {
+export default class YZSRDActorSheetAnimal extends YZSRDActorSheet {
 
     /** @override */
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
-        classes: ["twdu", "sheet", "actor", "pc"],
-        template: "systems/twdu/templates/sheets/character-sheet.hbs",
+        classes: ["yzesrd-vtt", "sheet", "actor", "animal"],
+        template: "systems/yzesrd-vtt/templates/sheets/animal-sheet.hbs",
         width: 800,
-        height: 800,
+        height: 460,
        tabs: [
         {
           navSelector: ".sheet-tabs",

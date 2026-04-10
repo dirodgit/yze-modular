@@ -1,4 +1,4 @@
-export default class ChatMessageTWDU extends foundry.documents.ChatMessage {
+export default class ChatMessageYZSRD extends foundry.documents.ChatMessage {
   prepareData() {
     super.prepareData();
   }
@@ -17,7 +17,7 @@ export default class ChatMessageTWDU extends foundry.documents.ChatMessage {
 
 
   static hideChatActionButtons = function (message, html, data) {
-  const card = html.querySelectorAll(".twdu.chat-card");
+  const card = html.querySelectorAll(".yzesrdvtt.chat-card");
 
   if (card.length > 0) {
     let user = game.actors.get(card.attr("data-owner-id"));
@@ -38,17 +38,17 @@ export async function buildChatCard(type, item, chatOptions = {}) {
   if (actor) {
     token = actor.img;
   } else {
-    token = "systems/twdu/assets/images/info.png";
+    token = "systems/yzesrd-vtt/assets/images/info.png";
   }
 
   let skill = "";
   if (type === "weapon") {
     if (item.system.skill == "closeCombat") {
-      skill = game.i18n.localize("twdu.closeCombat");
+      skill = game.i18n.localize("yzesrdvtt.closeCombat");
     } else if (item.system.skill == "rangedCombat") {
-      skill = game.i18n.localize("twdu.rangedCombat");
+      skill = game.i18n.localize("yzesrdvtt.rangedCombat");
     } else {
-      skill = game.i18n.localize("twdu.force");
+      skill = game.i18n.localize("yzesrdvtt.force");
     }
   }
 
@@ -130,7 +130,7 @@ export async function buildChatCard(type, item, chatOptions = {}) {
       );
       break;
     default:
-      console.error("TWDU | buildChatCard: we should not be here", data);
+      console.error("YZSRD | buildChatCard: we should not be here", data);
       break;
   }
 
@@ -165,13 +165,13 @@ async function _onPush(event) {
 
 const twduChat = {
   template: {
-    weapon: "systems/twdu/templates/chat/chatWeapon.hbs",
-    armor: "systems/twdu/templates/chat/chatArmor.hbs",
-    gear: "systems/twdu/templates/chat/chatGear.hbs",
-    simpleItem: "systems/twdu/templates/chat/chatSimpleItem.hbs",
-    talent: "systems/twdu/templates/chat/chatTalent.hbs",
-    injury: "systems/twdu/templates/chat/chatInjury.hbs",
-    project: "systems/twdu/templates/chat/chatProject.hbs",
-    vehicle: "systems/twdu/templates/chat/chatVehicle.hbs",
+    weapon: "systems/yzesrd-vtt/templates/chat/chatWeapon.hbs",
+    armor: "systems/yzesrd-vtt/templates/chat/chatArmor.hbs",
+    gear: "systems/yzesrd-vtt/templates/chat/chatGear.hbs",
+    simpleItem: "systems/yzesrd-vtt/templates/chat/chatSimpleItem.hbs",
+    talent: "systems/yzesrd-vtt/templates/chat/chatTalent.hbs",
+    injury: "systems/yzesrd-vtt/templates/chat/chatInjury.hbs",
+    project: "systems/yzesrd-vtt/templates/chat/chatProject.hbs",
+    vehicle: "systems/yzesrd-vtt/templates/chat/chatVehicle.hbs",
   },
 };

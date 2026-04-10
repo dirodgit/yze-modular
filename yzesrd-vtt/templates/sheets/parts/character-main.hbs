@@ -2,23 +2,23 @@
   <div class="item-group">
     <div class="subheader flex-row w-100 justify m-0 p-1 center border-bottom">
       <h2 class="m-0 subheader" style="background: transparent;">
-        {{localize "twdu.equipedGear"}}
+        {{localize "yzesrdvtt.equipedGear"}}
       </h2>
-      <div>{{localize "twdu.encumbrance"}}
+      <div>{{localize "yzesrdvtt.encumbrance"}}
         <span class="value">{{encumbrance}} of {{maxEncumbrance}}</span>
       </div>
     </div>
     <div class="weapons p-1 border-bottom">
-      <h4 class="border-bottom m-0 pi-2 subsubheader">{{localize 'twdu.weapons'}}</h4>
+      <h4 class="border-bottom m-0 pi-2 subsubheader">{{localize 'yzesrdvtt.weapons'}}</h4>
       <div class="flex-col">
         <div class="group-header grid icon-title-6col justify pi-1">
-          <span class="icon justify-self-start">{{localize "twdu.ui.icon"}}</span>
-          <span class="group-name">{{localize 'twdu.name'}}</span>
-          <span class="bonus justify-self-center">{{localize 'twdu.bonus'}}</span>
-          <span class="damage justify-self-center">{{localize 'twdu.damage'}}</span>
-          <span class="group-weight justify-self-center">{{localize 'twdu.weight'}}</span>
-          <span class="group-skill justify-self-center">{{localize 'twdu.skill'}}</span>
-          <span class="eq-store justify-self-center">{{localize 'twdu.store'}}</span>
+          <span class="icon justify-self-start">{{localize "yzesrdvtt.ui.icon"}}</span>
+          <span class="group-name">{{localize 'yzesrdvtt.name'}}</span>
+          <span class="bonus justify-self-center">{{localize 'yzesrdvtt.bonus'}}</span>
+          <span class="damage justify-self-center">{{localize 'yzesrdvtt.damage'}}</span>
+          <span class="group-weight justify-self-center">{{localize 'yzesrdvtt.weight'}}</span>
+          <span class="group-skill justify-self-center">{{localize 'yzesrdvtt.skill'}}</span>
+          <span class="eq-store justify-self-center">{{localize 'yzesrdvtt.store'}}</span>
           <span class="buttons justify-self-end">&nbsp;</span>
         </div>
       </div>
@@ -36,13 +36,13 @@
           <div class="bonus justify-self-center show-details">{{item.system.bonus}}</div>
           <div class="damage justify-self-center">{{item.system.damage}}</div>
           <div class="weight justify-self-center">{{item.system.weight}}</div>
-          <div class="skill justify-self-center text-center">{{localize (concat "twdu." item.system.skill)}}</div>
-          <a class="item-control equip-toggle equip justify-self-center" title='{{localize  "twdu.ui.store"}}'>
+          <div class="skill justify-self-center text-center">{{localize (concat "yzesrdvtt." item.system.skill)}}</div>
+          <a class="item-control equip-toggle equip justify-self-center" title='{{localize  "yzesrdvtt.ui.store"}}'>
             <i class="fa-solid fa-box-open"></i>
           </a>
           <div class="buttons justify-self-end middle">
-            <a class="item-control to-chat" title='{{localize "twdu.ui.chat"}}'><i class="fas fa-comment"></i></a>
-            <a class="item-control item-edit" title='{{localize "twdu.ui.edit"}}'><i class="fas fa-edit"></i></a>
+            <a class="item-control to-chat" title='{{localize "yzesrdvtt.ui.chat"}}'><i class="fas fa-comment"></i></a>
+            <a class="item-control item-edit" title='{{localize "yzesrdvtt.ui.edit"}}'><i class="fas fa-edit"></i></a>
           </div>
 
         </div>
@@ -53,15 +53,15 @@
     </div>
 
     <div class="armor p-1 border-bottom">
-      <h4 class="border-bottom m-0 pi-2 subsubheader">{{localize 'twdu.armor'}}</h4>
+      <h4 class="border-bottom m-0 pi-2 subsubheader">{{localize 'yzesrdvtt.armor'}}</h4>
       <div class="flex-col">
         <div class="group-header grid icon-title-4col justify pi-1 pt-1 center">
-          <span class="icon justify-self-start">{{localize "twdu.ui.icon"}}</span>
-          <span class="group-name">{{localize 'twdu.name'}}</span>
-          <span class="bonus nowrap">{{localize 'twdu.protection'}}</span>
-          <span class="group-weight">{{localize 'twdu.penalty'}}</span>
+          <span class="icon justify-self-start">{{localize "yzesrdvtt.ui.icon"}}</span>
+          <span class="group-name">{{localize 'yzesrdvtt.name'}}</span>
+          <span class="bonus nowrap">{{localize 'yzesrdvtt.protection'}}</span>
+          <span class="group-weight">{{localize 'yzesrdvtt.penalty'}}</span>
 
-          <span class="eq-store">{{localize 'twdu.store'}}</span>
+          <span class="eq-store">{{localize 'yzesrdvtt.store'}}</span>
           <span class="buttons">&nbsp;</span>
         </div>
       </div>
@@ -75,13 +75,13 @@
           <div class="name show-details">{{item.name}}</div>
           <div class="protection">{{item.system.protection}}</div>
           <div class="mobility">{{item.system.agility}}</div>
-          <a class="item-control equip-toggle equip" title='{{localize  "twdu.ui.store"}}'><i
+          <a class="item-control equip-toggle equip" title='{{localize  "yzesrdvtt.ui.store"}}'><i
               class="fa-solid fa-box-open"></i></a>
 
 
           <div class="button justify-self-end middle" >
-            <a class="item-control to-chat" title='{{localize "twdu.ui.chat"}}'><i class="fas fa-comment"></i></a>
-            <a class="item-control item-edit" title='{{localize "twdu.ui.edit"}}'><i class="fas fa-edit"></i></a>
+            <a class="item-control to-chat" title='{{localize "yzesrdvtt.ui.chat"}}'><i class="fas fa-comment"></i></a>
+            <a class="item-control item-edit" title='{{localize "yzesrdvtt.ui.edit"}}'><i class="fas fa-edit"></i></a>
           </div>
         </div>
         {{/if}}
@@ -91,15 +91,15 @@
     </div>
 
     <div class="gear p-1 border-bottom">
-      <h4 class="border-bottom m-0 pi-2 subsubheader">{{localize "twdu.gear"}}</h4>
+      <h4 class="border-bottom m-0 pi-2 subsubheader">{{localize "yzesrdvtt.gear"}}</h4>
       <div class="flex-col">
         <div class="group-header grid icon-title-5col center pi-1">
-          <span class="icon justify-self-start">{{localize "twdu.ui.icon"}}</span>
-          <span class="group-name">{{localize 'twdu.name'}}</span>
-          <span class="group-weight">{{localize 'twdu.weight'}}</span>
-          <span class="bonus">{{localize 'twdu.bonus'}}</span>
-          <span class="group-skill justify-self-center">{{localize 'twdu.skill'}}</span>
-          <span class="eq-store">{{localize 'twdu.store'}}</span>
+          <span class="icon justify-self-start">{{localize "yzesrdvtt.ui.icon"}}</span>
+          <span class="group-name">{{localize 'yzesrdvtt.name'}}</span>
+          <span class="group-weight">{{localize 'yzesrdvtt.weight'}}</span>
+          <span class="bonus">{{localize 'yzesrdvtt.bonus'}}</span>
+          <span class="group-skill justify-self-center">{{localize 'yzesrdvtt.skill'}}</span>
+          <span class="eq-store">{{localize 'yzesrdvtt.store'}}</span>
           <span class="buttons justiify-self-end">&nbsp;</span>
         </div>
       </div>
@@ -112,13 +112,13 @@
           <div class="name show-details">{{item.name}}</div>
           <div class="protection">{{item.system.weight}}</div>
           <div class="bonus">{{item.system.bonus}}</div>
-          <div class="skill justify-self-center">{{localize (concat "twdu." item.system.skill)}}</div>
-          <a class="item-control equip-toggle equip " title='{{localize  "twdu.ui.store"}}'><i
+          <div class="skill justify-self-center">{{localize (concat "yzesrdvtt." item.system.skill)}}</div>
+          <a class="item-control equip-toggle equip " title='{{localize  "yzesrdvtt.ui.store"}}'><i
                 class="fa-solid fa-box-open"></i></a>
           <div class="button justify-self-end middle">
-            <a class="item-control to-chat" title='{{localize "twdu.ui.chat"}}'><i class="fas fa-comment"></i></a>
+            <a class="item-control to-chat" title='{{localize "yzesrdvtt.ui.chat"}}'><i class="fas fa-comment"></i></a>
             
-            <a class="item-control item-edit" title='{{localize "twdu.ui.edit"}}'><i class="fas fa-edit"></i></a>
+            <a class="item-control item-edit" title='{{localize "yzesrdvtt.ui.edit"}}'><i class="fas fa-edit"></i></a>
           </div>
         </div>
         {{/if}}
@@ -133,7 +133,7 @@
     {{! Health and Stress }}
     <div class="health-stress-block flex-row">
       <div class="health border-bottom border-right">
-        <h2 class="subheader m-0 p-1 border-bottom">{{localize "twdu.health"}}</h2>
+        <h2 class="subheader m-0 p-1 border-bottom">{{localize "yzesrdvtt.health"}}</h2>
         <div class="health-select p-2">
           <select name="system.health.value" id="health">
             {{selectOptions config.healthStates selected=system.health.value localize=true}}
@@ -143,7 +143,7 @@
       </div>
       <div class="stress border-bottom">
         <h2 for="actor.system.header.stress.value" class="subheader m-0 p-1 border-bottom"
-           data-label="{{localize 'twdu.STRESS'}}">{{localize "twdu.STRESS"}}
+           data-label="{{localize 'yzesrdvtt.STRESS'}}">{{localize "yzesrdvtt.STRESS"}}
         </h2>
         <div class="flex-row center pt-1">
           <a class="stress-down mi-2 p-2 center" data-pmbut="minusStress"><i class="fas fa-minus" title="Minus"></i></a>
@@ -155,7 +155,7 @@
       </div>
     </div>
     <div class="crit-block flex-col">
-      <h2 class="subheader m-0 p-1 text-justify">{{localize "twdu.criticalInjuries"}}
+      <h2 class="subheader m-0 p-1 text-justify">{{localize "yzesrdvtt.criticalInjuries"}}
         <a class="add-item" data-type="criticalInjury"><i class="fas fa-plus" title="Plus"></i></a>
       </h2>
       <div class="scrollable max-h-150p border-top">
@@ -165,11 +165,11 @@
           <span class="icon justify-self-start p-1 show-details"><img src="{{item.img}}" alt="{{item.name}}" title="{{item.name}}" width="25" /></span>
           <span class="name justify-self-start p-1 align-self-center show-details">{{item.name}}</span>
           <div class="button text-right ">
-                    <a class="item-control to-chat" title='{{localize "twdu.ui.chat"}}'><i
+                    <a class="item-control to-chat" title='{{localize "yzesrdvtt.ui.chat"}}'><i
                         class="fas fa-comment"></i></a>
-                    <a class="item-control item-edit" title='{{localize "twdu.ui.edit"}}'><i
+                    <a class="item-control item-edit" title='{{localize "yzesrdvtt.ui.edit"}}'><i
                         class="fas fa-edit"></i></a>
-                    <a class="item-control item-delete" title='{{localize  "twdu.ui.delete"}}' data-key="{{key}}"
+                    <a class="item-control item-delete" title='{{localize  "yzesrdvtt.ui.delete"}}' data-key="{{key}}"
                       data-type="item"><i class="fas fa-trash"></i></a>
                   </div>
         </div>
@@ -181,18 +181,18 @@
 
     <div class="experience-block flex-col">
       <h2 class="subheader m-0 p-1 experience border-bottom">
-        {{localize "twdu.experience"}}
+        {{localize "yzesrdvtt.experience"}}
       </h2>
 
-      <div class="exp-boxes flex-row p-3 border-bottom" title='{{localize "twdu.ui.addexp"}}'>
+      <div class="exp-boxes flex-row p-3 border-bottom" title='{{localize "yzesrdvtt.ui.addexp"}}'>
         {{#times 15}}
         <div class="exp-box">
           <div class="img-container">
             {{#if (gte ../actor.system.experience.value @index)}}
-            <img src="systems/twdu/assets/images/box_checked.png" height="18px" width="18px">
+            <img src="systems/yzesrd-vtt/assets/images/box_checked.png" height="18px" width="18px">
             {{/if}}
             {{#unless (gte ../actor.system.experience.value @index)}}
-            <img src="systems/twdu/assets/images/box_not_checked.png" height="18px" width="18px">
+            <img src="systems/yzesrd-vtt/assets/images/box_not_checked.png" height="18px" width="18px">
             {{/unless}}
           </div>
         </div>

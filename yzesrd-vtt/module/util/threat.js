@@ -36,12 +36,12 @@ export async function decreaseThreatLevel(amount) {
 }
 
 export async function setThreatLevel(threatLevel) {
-  await game.settings.set("twdu", "threatLevel", threatLevel);
+  await game.settings.set("yzesrd-vtt", "threatLevel", threatLevel);
   ThreatLevelDisplay.update();
 }
 
 export function getThreatLevel() {
-  return game.settings.get("twdu", "threatLevel");
+  return game.settings.get("yzesrd-vtt", "threatLevel");
 }
 
 // display the treat level in the chat
@@ -55,7 +55,7 @@ export async function displayThreatLevel() {
 
 
   if (gm === undefined) {
-    console.error("TWDU | displayThreatLevel: no GM found");
+    console.error("YZSRD | displayThreatLevel: no GM found");
     return;
   }
 
@@ -70,7 +70,7 @@ export async function displayThreatLevel() {
   
 
   messageData.content = await renderTemplate(
-    "systems/twdu/templates/ui/threat-level.html",
+    "systems/yzesrd-vtt/templates/ui/threat-level.html",
     { threatLevel: threatLevel }
   );
 
@@ -100,7 +100,7 @@ export class ThreatLevelDisplay extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "threat-level-display",
-      template: "/systems/twdu/templates/ui/threat-level-display.html",
+      template: "/systems/yzesrd-vtt/templates/ui/threat-level-display.html",
       top: 100,
       left: 120,
       height: 200,

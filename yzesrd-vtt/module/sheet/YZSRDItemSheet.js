@@ -1,10 +1,10 @@
 import Clock from "../util/clock.js";
 
 
-export default class TWDUItemSheet extends foundry.appv1.sheets.ItemSheet {
+export default class YZSRDItemSheet extends foundry.appv1.sheets.ItemSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["twdu", "sheet", "item", "item-sheet"],
+      classes: ["yzesrd-vtt", "sheet", "item", "item-sheet"],
       width: 550,
       // height: 489 + 'max-content',
       // height: 566 - 'max-content',
@@ -22,23 +22,23 @@ export default class TWDUItemSheet extends foundry.appv1.sheets.ItemSheet {
 
 
   get template() {
-    return `systems/twdu/templates/sheets/${this.item.type}-sheet.hbs`;
+    return `systems/yzesrd-vtt/templates/sheets/${this.item.type}-sheet.hbs`;
   }
 
   async itemClock() {
     // Only item types that have a clock should return a clock
     const newClock = new Clock(6);
     const clockTypes = ["rumor", "endgame", "faction"];
-    console.log("TWDU | clock: ", newClock );
-    console.log("TWDU | clockTypes: ", clockTypes);
-    console.log("TWDU | item: ", this.item.type);
+    console.log("YZSRD | clock: ", newClock );
+    console.log("YZSRD | clockTypes: ", clockTypes);
+    console.log("YZSRD | item: ", this.item.type);
     if (!clockTypes.includes(this.item.type)) {
       return newClock;
     }
     
 
-      console.log("TWDU | item: ", this.item.type);
-      console.log("TWDU | clock: ", this.clock);
+      console.log("YZSRD | item: ", this.item.type);
+      console.log("YZSRD | clock: ", this.clock);
 
    return;
     //return new Clock();
@@ -47,18 +47,18 @@ export default class TWDUItemSheet extends foundry.appv1.sheets.ItemSheet {
   async getData() {
     const data = super.getData();
     const source = this.item.toObject();
-    data.config = CONFIG.twdu;
+    data.config = CONFIG.yzesrd-vtt;
     data.source = source;
     data.user = game.user;
     console.log(data.user);
     
     this.itemClock().then((clock) => {
-      console.log("TWDU | clock: ", clock);
+      console.log("YZSRD | clock: ", clock);
       data.clock = clock;
-      console.log("TWDU | data: ", data);
+      console.log("YZSRD | data: ", data);
 
     });
-    console.log("TWDU | data: ", data);
+    console.log("YZSRD | data: ", data);
     return data;
   }
 
@@ -74,7 +74,7 @@ export default class TWDUItemSheet extends foundry.appv1.sheets.ItemSheet {
   }
 
   _onToggleClick(event) {
-    console.log("TWDU | _onToggleClick: ", event);
+    console.log("YZSRD | _onToggleClick: ", event);
     event.preventDefault();
     const element = event.currentTarget;
     const path = element.dataset.path;

@@ -2,9 +2,9 @@ import { displayThreatLevel, getThreatLevel } from "./threat.js";
 
 
 export const registerGameSettings = function () {
-  game.settings.register("twdu", "threatLevel", {
-    name: game.i18n.localize("twdu.threatLevel"),
-    hint: game.i18n.localize("twdu.threatLevel"),
+  game.settings.register("yzesrd-vtt", "threatLevel", {
+    name: game.i18n.localize("yzesrdvtt.threatLevel"),
+    hint: game.i18n.localize("yzesrdvtt.threatLevel"),
     scope: "world",
     config: false,
     type: Number,
@@ -16,9 +16,9 @@ export const registerGameSettings = function () {
 
 
 
-  game.settings.register("twdu", "threatLevelVisibility", {
-    name: game.i18n.localize("twdu.threatDisplay"),
-    hint: game.i18n.localize("twdu.threatDisplayHint"),
+  game.settings.register("yzesrd-vtt", "threatLevelVisibility", {
+    name: game.i18n.localize("yzesrdvtt.threatDisplay"),
+    hint: game.i18n.localize("yzesrdvtt.threatDisplayHint"),
     scope: "world",
     config: true,
     type: Boolean,
@@ -26,9 +26,9 @@ export const registerGameSettings = function () {
     onChange: foundry.utils.debouncedReload,
   });
 
-  game.settings.register("twdu", "defaultTokenSettings", {
-    name: "twdu.prototypeTokenSettings",
-    hint: "twdu.prototypeTokenSettingsHint",
+  game.settings.register("yzesrd-vtt", "defaultTokenSettings", {
+    name: "yzesrdvtt.prototypeTokenSettings",
+    hint: "yzesrdvtt.prototypeTokenSettingsHint",
     scope: "world",
     config: true,
     default: true,
@@ -36,9 +36,9 @@ export const registerGameSettings = function () {
     onChange: foundry.utils.debouncedReload,
   });
 
-  game.settings.register("twdu", "havenSurvivorDisplaySetting", {
-    name: "twdu.havenSurvivorDisplay",
-    hint: "twdu.havenSurvivorDisplayHint",
+  game.settings.register("yzesrd-vtt", "havenSurvivorDisplaySetting", {
+    name: "yzesrdvtt.havenSurvivorDisplay",
+    hint: "yzesrdvtt.havenSurvivorDisplayHint",
     scope: "client",
     config: true,
     restricted: false,
@@ -47,7 +47,7 @@ export const registerGameSettings = function () {
     onChange: foundry.utils.debouncedReload,
   });
 
-  game.settings.register("twdu", "systemMigrationVersion", {
+  game.settings.register("yzesrd-vtt", "systemMigrationVersion", {
     config: false,
     scope: "world",
     type: String,

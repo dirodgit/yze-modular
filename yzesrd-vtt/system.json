@@ -1,69 +1,70 @@
 {
   "id": "yzesrd-vtt",
   "title": "Year Zero Engine SRD",
-  "description": "Official Year Zero Engine SRD System for Foundry VTT",
-  "authors": [{ "name": "DrOgres" }],
-  "url": "https://github.com/drogres/yzesrd-vtt",
-  "flags": {},
-  "relationships": {
-    "systems": [{ "id": "yzesrd-vtt" }]
-  },
-  "version": "4.0.3",
-  "compatibility": {
-    "minimum": "13",
-    "verified": "13.350",
-    "maximum": "13"
-  },
-  "media": [
+  "description": "Year Zero Engine SRD Modular System (Base: YZSRD)",
+  "version": "1.0.0",
+  "library": "false",
+  "manifest": "",
+  "download": "",
+  "url": "",
+  "author": "YZE Community",
+  "minimumCoreVersion": "11",
+  "compatibleCoreVersion": "13",
+  "authors": [
     {
-      "type": "cover",
-      "url": "https://raw.githubusercontent.com/DrOgres/yzesrd-vtt/main/assets/images/cover.webp"
+      "name": "Stefano 'the_stef' Guerriero",
+      "url": "https://github.com/stefanoguerriero",
+      "discord": "the_stef"
     }
   ],
   "background": "systems/yzesrd-vtt/assets/images/worldbg.webp",
   "scripts": [],
-  "esmodules": ["module/twdu.js"],
-  "styles": ["styles/twdu.css"],
-    "languages": [
-      {
-        "lang": "en",
-        "name": "English",
-        "path": "lang/en.json"
-      },
-      
-      {
-        "lang": "fr",
-        "name": "Français",
-        "path": "lang/fr.json",
-        "flags": {}
-      },
-      {
-        "lang": "de",
-        "name": "Deutsch",
-        "path": "lang/de.json",
-        "flags": {}
-      },
-      {
-        "lang": "pt-BR",
-        "name": "Português (Brasil)",
-        "path": "lang/pt-br.json",
-        "flags": {}
-      },
-      {
-        "lang": "es",
-        "name": "Español",
-        "path": "lang/es.json",
-        "flags": {}
-      }
-    ],
-    "packs": [],
-    "socket": true,
-    "protected": false,
-    "initiative": "1d10",
-    "gridDistance": 1,
-    "gridUnits": "m",
-    "primaryTokenAttribute": "health",
-    "secondaryTokenAttribute": "stress",
-    "manifest": "https://github.com/drogres/twdu/releases/latest/download/module.json",
-    "download": "https://github.com/drogres/twdu/releases/download/4.0.3/system.zip"
+  "esmodules": ["module/yzesrdvtt.js"],
+  "styles": ["styles/yzesrdvtt.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-br.json"
+    }
+  ],
+  "packs": [
+    {
+      "name": "yze-srd-items",
+      "label": "YZE SRD Items",
+      "path": "packs/items.db",
+      "type": "Item",
+      "system": "yzesrd-vtt"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": "yzesrdvtt.ActorTypeCharacter",
+      "npc": "yzesrdvtt.ActorTypeNPC",
+      "animal": "yzesrdvtt.ActorTypeAnimal",
+      "haven": "yzesrdvtt.ActorTypeHaven",
+      "challenge": "yzesrdvtt.ActorTypeChallenge"
+    },
+    "Item": {
+      "origin": "yzesrdvtt.ItemTypeOrigin",
+      "archetype": "yzesrdvtt.ItemTypeArchetype",
+      "weapon": "yzesrdvtt.ItemTypeWeapon",
+      "armor": "yzesrdvtt.ItemTypeArmor",
+      "inventory": "yzesrdvtt.ItemTypeInventory",
+      "gear": "yzesrdvtt.ItemTypeGear",
+      "vehicle": "yzesrdvtt.ItemTypeVehicle",
+      "endgame": "yzesrdvtt.ItemTypeEndgame",
+      "faction": "yzesrdvtt.ItemTypeFaction",
+      "ability": "yzesrdvtt.ItemTypeAbility",
+      "specialty": "yzesrdvtt.ItemTypeSpecialty",
+      "injury": "yzesrdvtt.ItemTypeInjury",
+      "skill": "yzesrdvtt.ItemTypeSkill",
+      "trait": "yzesrdvtt.ItemTypeTrait"
+    }
   }
+}

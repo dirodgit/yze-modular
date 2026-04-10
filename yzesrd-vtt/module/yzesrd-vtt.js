@@ -1,37 +1,37 @@
-import TWDUItemSheet from "./sheet/TWDUItemSheet.js";
-// import TWDUActorSheet from "./sheet/TWDUActorSheet.js";
-import TWDUActor from "./TWDUActor.js";
+import YZSRDItemSheet from "./sheet/YZSRDItemSheet.js";
+// import YZSRDActorSheet from "./sheet/YZSRDActorSheet.js";
+import YZSRDActor from "./YZSRDActor.js";
 import { preloadHandlebarsTemplates } from "./util/templates.js";
-import { twdu } from "../module/config.js";
+import { yzesrdvtt } from "../module/config.js";
 import FoundryOverrides from "./util/overrides.js";
 import { increaseThreatLevel, decreaseThreatLevel } from "./util/threat.js";
 import { YearZeroRollManager } from "./util/yzur.js";
 import { ThreatLevelDisplay } from "./util/threat.js";
 import { registerGameSettings } from "./util/settings.js";
 import { migrate } from "./util/migration.js";
-import TWDUActorSheetPC from "./sheet/TWDUActorSheetPC.js";
-import TWDUActorSheetNPC from "./sheet/TWDUActorSheetNPC.js";
-import TWDUActorSheetAnimal from "./sheet/TWDUActorSheetAnimal.js";
-import TWDUActorSheetHaven from "./sheet/TWDUActorSheetHaven.js";
-import TWDUActorSheetChallenge from "./sheet/TWDUActorSheetChallenge.js";
-import ChatMessageTWDU from "./util/chat.js";
-// import TWDUActorSheetPCv2 from "./sheet/TWDUActorSheetPCv2.js";
+import YZSRDActorSheetPC from "./sheet/YZSRDActorSheetPC.js";
+import YZSRDActorSheetNPC from "./sheet/YZSRDActorSheetNPC.js";
+import YZSRDActorSheetAnimal from "./sheet/YZSRDActorSheetAnimal.js";
+import YZSRDActorSheetHaven from "./sheet/YZSRDActorSheetHaven.js";
+import YZSRDActorSheetChallenge from "./sheet/YZSRDActorSheetChallenge.js";
+import ChatMessageYZSRD from "./util/chat.js";
+// import YZSRDActorSheetPCv2 from "./sheet/YZSRDActorSheetPCv2.js";
 
 Hooks.once("init", async function () {
-  console.log("TWDU | Initializing TWDU");
-  CONFIG.twdu = twdu;
-  console.log("TWDU | CONFIG.twdu: ", CONFIG.twdu);
+  console.log("YZSRD | Initializing YZSRD");
+  CONFIG.yzesrdvtt = twdu;
+  console.log("YZSRD | CONFIG.yzesrdvtt: ", CONFIG.yzesrdvtt);
 
-  CONFIG.Actor.documentClass = TWDUActor;
-  CONFIG.ChatMessage.documentClass = ChatMessageTWDU;
+  CONFIG.Actor.documentClass = YZSRDActor;
+  CONFIG.ChatMessage.documentClass = ChatMessageYZSRD;
 
   
 
   //yzur init
-  YearZeroRollManager.register("twdu", {
-    "ROLL.chatTemplate": "systems/twdu/templates/dice/roll.hbs",
-    "ROLL.tooltipTemplate": "systems/twdu/templates/dice/tooltip.hbs",
-    "ROLL.infosTemplate": "systems/twdu/templates/dice/infos.hbs",
+  YearZeroRollManager.register("yzesrd-vtt", {
+    "ROLL.chatTemplate": "systems/yzesrd-vtt/templates/dice/roll.hbs",
+    "ROLL.tooltipTemplate": "systems/yzesrd-vtt/templates/dice/tooltip.hbs",
+    "ROLL.infosTemplate": "systems/yzesrd-vtt/templates/dice/infos.hbs",
   });
 
   // Register custom system settings
@@ -47,7 +47,7 @@ Hooks.once("init", async function () {
         });
         const doc = document.createElement("span");
         doc.innerHTML = myData;
-        console.log("TWDU | enricher: ", doc);
+        console.log("YZSRD | enricher: ", doc);
         return doc;
       },
     },
@@ -55,17 +55,17 @@ Hooks.once("init", async function () {
 
   foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
 
-  foundry.documents.collections.Items.registerSheet("twdu", TWDUItemSheet, { makeDefault: true });
+  foundry.documents.collections.Items.registerSheet("yzesrd-vtt", YZSRDItemSheet, { makeDefault: true });
 
   foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
   //TODO set up sheets for each actor type to be able to set default options correctly for each type
-  // Actors.registerSheet("twdu", TWDUActorSheet, { makeDefault: true });
+  // Actors.registerSheet("yzesrd-vtt", YZSRDActorSheet, { makeDefault: true });
 
-  foundry.documents.collections.Actors.registerSheet("twdu", TWDUActorSheetPC, { types: ["character"], makeDefault: true, label: "TWDU.SheetClassCharacter" });
-  foundry.documents.collections.Actors.registerSheet("twdu", TWDUActorSheetNPC, { types: ["npc"], makeDefault: true, label: "TWDU.SheetClassNPC" });
-  foundry.documents.collections.Actors.registerSheet("twdu", TWDUActorSheetAnimal, { types: ["animal"], makeDefault: true, label: "TWDU.SheetClassAnimal" });
-  foundry.documents.collections.Actors.registerSheet("twdu", TWDUActorSheetHaven, { types: ["haven"], makeDefault: true, label: "TWDU.SheetClassHaven" });
-  foundry.documents.collections.Actors.registerSheet("twdu", TWDUActorSheetChallenge, { types: ["challenge"], makeDefault: true, label: "TWDU.SheetClassChallenge" });
+  foundry.documents.collections.Actors.registerSheet("yzesrd-vtt", YZSRDActorSheetPC, { types: ["character"], makeDefault: true, label: "yzesrd-vtt.SheetClassCharacter" });
+  foundry.documents.collections.Actors.registerSheet("yzesrd-vtt", YZSRDActorSheetNPC, { types: ["npc"], makeDefault: true, label: "yzesrd-vtt.SheetClassNPC" });
+  foundry.documents.collections.Actors.registerSheet("yzesrd-vtt", YZSRDActorSheetAnimal, { types: ["animal"], makeDefault: true, label: "yzesrd-vtt.SheetClassAnimal" });
+  foundry.documents.collections.Actors.registerSheet("yzesrd-vtt", YZSRDActorSheetHaven, { types: ["haven"], makeDefault: true, label: "yzesrd-vtt.SheetClassHaven" });
+  foundry.documents.collections.Actors.registerSheet("yzesrd-vtt", YZSRDActorSheetChallenge, { types: ["challenge"], makeDefault: true, label: "yzesrd-vtt.SheetClassChallenge" });
 
 
 
@@ -90,8 +90,8 @@ Hooks.once("init", async function () {
   //   ],
 
   Hooks.on("renderChatMessageHTML", (app, html, data) => {
-    ChatMessageTWDU.activateListeners(html);
-    ChatMessageTWDU.hideChatActionButtons(app, html, data);
+    ChatMessageyzesrdvtt.activateListeners(html);
+    ChatMessageyzesrdvtt.hideChatActionButtons(app, html, data);
   });
   
 
@@ -114,7 +114,7 @@ Hooks.once("init", async function () {
 
 
 
-  Handlebars.registerHelper("TWDUconcat", function () {
+  Handlebars.registerHelper("YZSRDconcat", function () {
     let outStr = "";
     for (let arg in arguments) {
       if (typeof arguments[arg] != "object") {
@@ -133,7 +133,7 @@ Hooks.once("init", async function () {
     return result;
   });
 
-  Handlebars.registerHelper("TWDUinvert", function () {
+  Handlebars.registerHelper("YZSRDinvert", function () {
     let keys = Object.keys(arguments[0]);
     keys.sort(function (a, b) {
       return b - a;
@@ -152,7 +152,7 @@ Hooks.once("init", async function () {
 
   // returns a count of the number of items in an array that match specified parameters
   // the arguments are [0] = array, up to length-1 = parameters to match
-  Handlebars.registerHelper("TWDUEquippedCount", function () {
+  Handlebars.registerHelper("YZSRDEquippedCount", function () {
     let array = arguments[0];
     let count = 0;
     let parameter = arguments[1];
@@ -170,7 +170,7 @@ Hooks.once("init", async function () {
     return count;
   });
 
-  Handlebars.registerHelper("TWDUunEquippedCount", function () {
+  Handlebars.registerHelper("YZSRDunEquippedCount", function () {
     let array = arguments[0];
     let count = 0;
     let parameter = arguments[1];
@@ -187,8 +187,8 @@ Hooks.once("init", async function () {
     return count;
   });
 
-  Handlebars.registerHelper("TWDU_checked", function (value, test) {
-    // console.log("TWDU | TWDU_checked: ", value, test);
+  Handlebars.registerHelper("YZSRD_checked", function (value, test) {
+    // console.log("YZSRD | YZSRD_checked: ", value, test);
     if(value == undefined) return "";
     return value == test ? "checked" : "";
   });
@@ -205,7 +205,7 @@ Handlebars.registerHelper('lookupOrDefault', function (object, propertyName, def
 Hooks.on("renderPause", (_app, html) => {
   html
     .find("img")
-    .attr("src", "systems/twdu/assets/images/misc/hand.png");
+    .attr("src", "systems/yzesrd-vtt/assets/images/misc/hand.png");
 });
 
 Handlebars.registerHelper('lowercase', function (string){
@@ -249,7 +249,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
       name: "threatLevelVisibility",
       order: 92,
       title: "CONTROL.displayThreatLevel",
-      visible: game.settings.get("twdu", "threatLevelVisibility")
+      visible: game.settings.get("yzesrd-vtt", "threatLevelVisibility")
         ? true
         : game.user.isGM,
       onClick: () => {
@@ -261,7 +261,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
 });
 
 Hooks.once("diceSoNiceReady", (dice3d) => {
-  dice3d.addSystem({ id: "twdu", name: "The Walking Dead Universe" }, "true");
+  dice3d.addSystem({ id: "yzesrd-vtt", name: "The Walking Dead Universe" }, "true");
   dice3d.addColorset({
     name: "twduz",
     description: "The Walking Dead Stress Dice",
@@ -273,7 +273,7 @@ Hooks.once("diceSoNiceReady", (dice3d) => {
     default: true,
   });
   dice3d.addColorset({
-    name: "twdu",
+    name: "yzesrd-vtt",
     description: "The Walking Dead Base Dice",
     category: "The Walking Dead Universe",
     foreground: "#fff",
@@ -285,29 +285,29 @@ Hooks.once("diceSoNiceReady", (dice3d) => {
   dice3d.addDicePreset({
     type: "d6",
     labels: [
-      "systems/twdu/assets/images/dsn/dsn-ds-1.png",
-      "systems/twdu/assets/images/dsn/dsn-ds-2.png",
-      "systems/twdu/assets/images/dsn/dsn-ds-3.png",
-      "systems/twdu/assets/images/dsn/dsn-ds-4.png",
-      "systems/twdu/assets/images/dsn/dsn-ds-5.png",
-      "systems/twdu/assets/images/dsn/dsn-ds-6.png",
+      "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-1.png",
+      "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-2.png",
+      "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-3.png",
+      "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-4.png",
+      "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-5.png",
+      "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-6.png",
     ],
-    colorset: "twdu",
-    system: "twdu",
+    colorset: "yzesrd-vtt",
+    system: "yzesrd-vtt",
   });
   dice3d.addDicePreset(
     {
       type: "ds",
       labels: [
-        "systems/twdu/assets/images/dsn/dsn-ds-1.png",
-        "systems/twdu/assets/images/dsn/dsn-ds-2.png",
-        "systems/twdu/assets/images/dsn/dsn-ds-3.png",
-        "systems/twdu/assets/images/dsn/dsn-ds-4.png",
-        "systems/twdu/assets/images/dsn/dsn-ds-5.png",
-        "systems/twdu/assets/images/dsn/dsn-ds-6.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-1.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-2.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-3.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-4.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-5.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-ds-6.png",
       ],
-      colorset: "twdu",
-      system: "twdu",
+      colorset: "yzesrd-vtt",
+      system: "yzesrd-vtt",
     },
     "d6"
   );
@@ -315,15 +315,15 @@ Hooks.once("diceSoNiceReady", (dice3d) => {
     {
       type: "dz",
       labels: [
-        "systems/twdu/assets/images/dsn/dsn-dz-1.png",
-        "systems/twdu/assets/images/dsn/dsn-dz-2.png",
-        "systems/twdu/assets/images/dsn/dsn-dz-3.png",
-        "systems/twdu/assets/images/dsn/dsn-dz-4.png",
-        "systems/twdu/assets/images/dsn/dsn-dz-5.png",
-        "systems/twdu/assets/images/dsn/dsn-dz-6.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-dz-1.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-dz-2.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-dz-3.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-dz-4.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-dz-5.png",
+        "systems/yzesrd-vtt/assets/images/dsn/dsn-dz-6.png",
       ],
       colorset: "twduz",
-      system: "twdu",
+      system: "yzesrd-vtt",
     },
     "d6"
   );

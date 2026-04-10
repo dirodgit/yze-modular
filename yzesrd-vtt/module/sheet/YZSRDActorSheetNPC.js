@@ -1,12 +1,12 @@
-import TWDUActorSheet from "./TWDUActorSheet.js";
+import YZSRDActorSheet from "./YZSRDActorSheet.js";
 
-export default class TWDUActorSheetNPC extends TWDUActorSheet {
+export default class YZSRDActorSheetNPC extends YZSRDActorSheet {
 
     /** @override */
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
-        classes: ["twdu", "sheet", "actor", "npc"],
-        template: "systems/twdu/templates/sheets/npc-sheet.hbs",
+        classes: ["yzesrd-vtt", "sheet", "actor", "npc"],
+        template: "systems/yzesrd-vtt/templates/sheets/npc-sheet.hbs",
         width: 800,
         height: 800,
        tabs: [

@@ -5,11 +5,11 @@
         </div>
         <div class="animal-data">
             <h1 class="input name w-100 pi-1"><input name="name" type="text" value="{{actor.name}}"
-                    placeholder="{{localize 'twdu.name'}}" /></h1>
+                    placeholder="{{localize 'yzesrdvtt.name'}}" /></h1>
 
 
             <div class="description p-1 flex-col">
-                <b>{{localize 'twdu.description'}}:</b>
+                <b>{{localize 'yzesrdvtt.description'}}:</b>
                 <textarea name="system.description" style="resize: none;">{{actor.system.description}}</textarea>
             </div>
 
@@ -18,10 +18,10 @@
 
                 <div class="attack-group grid three-col center middle group  pi-1 h-100 ">
                     <div class="label nowrap subheader h-100 w-100 p-1 text-center"><label for="attack">{{localize
-                            'twdu.attack'}}</label></div>
+                            'yzesrdvtt.attack'}}</label></div>
                     <div class="rollable " data-key="animal-attack" data-weapon="{{actor.name}}"
                         data-item-id="animal-attack" data-test="attack">
-                        <img src="/systems/twdu/assets/icons/wolverine-claws.svg" alt="attack" title="attack"
+                        <img src="/systems/yzesrd-vtt/assets/icons/wolverine-claws.svg" alt="attack" title="attack"
                             width="30" />
                     </div>
                     <div class="input attack w-100 group pi-1"><input name="system.attack" id="attack" type="text"
@@ -29,14 +29,14 @@
                 </div>
                 <div class="damage-group grid two-col center middle group  pi-1 h-100 ">
                     <div class="label subheader h-100 text-center"><label for="damage">{{localize
-                            'twdu.damage'}}</label></div>
+                            'yzesrdvtt.damage'}}</label></div>
 
                     <div class="input damage w-100 group pi-1"><input name="system.damage" id="damage" type="text"
                             value="{{actor.system.damage}}" placeholder="0" /></div>
                 </div>
                 <div class="health-group grid two-col center middle group  pi-1 h-100 ">
                     <div class="label subheader h-100 text-center"><label for="health">{{localize
-                            'twdu.health'}}</label></div>
+                            'yzesrdvtt.health'}}</label></div>
 
                     <div class="input health w-100 group pi-1 flexrow"><input name="system.healthMax.value" id="health" type="number"
                             value="{{actor.system.healthMax.value}}" placeholder="0" /> / <input name="system.healthMax.max" id="maxHealth" type="number" value="{{actor.system.healthMax.max}}" placeholder="0" />

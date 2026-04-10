@@ -4,7 +4,7 @@
     <img src="{{roll.options.token}}" width="45" class="roll-token" />
     {{/if}}
     {{#unless roll.options.token}}
-    <img src="systems/twdu/assets/images/unkown_roller.svg" width="45" class="roll-token" />
+    <img src="systems/yzesrd-vtt/assets/images/unkown_roller.svg" width="45" class="roll-token" />
     {{/unless}}
   </div>
   {{#unless (eq roll.options.formula undefined)}}
@@ -15,7 +15,7 @@
 
       
       {{#if (gt roll.panic 0)}}
-      <div class="walker center walker header p-1">{{localize 'twdu.ui.messedUp'}}!</div>
+      <div class="walker center walker header p-1">{{localize 'yzesrdvtt.ui.messedUp'}}!</div>
       {{/if}}
       <div class="dice-roll">
         {{#if flavor}}
@@ -26,10 +26,10 @@
           {{{tooltip}}}
 
           {{#if (gt success 0)}}
-          <h4 class="dice-total success">{{localize "twdu.CHAT.SUCCESS"}} : {{success}}</h4>
+          <h4 class="dice-total success">{{localize "yzesrdvtt.CHAT.SUCCESS"}} : {{success}}</h4>
           {{/if}}
           {{#if (eq success 0)}}
-          <h4 class="dice-total failure"> {{localize "twdu.CHAT.SUCCESS"}} : {{success}}</h4>
+          <h4 class="dice-total failure"> {{localize "yzesrdvtt.CHAT.SUCCESS"}} : {{success}}</h4>
           {{/if}}
 
         </div>
@@ -45,7 +45,7 @@
       {{#if pushable}}
       <div class="dice-buttons" data-owner-id="{{roll.options.owner}}">
         <button class="dice-button push" data-action="push" data-owner-id="{{roll.options.owner}}">{{localize
-          "twdu.push"}}</button>
+          "yzesrdvtt.push"}}</button>
       </div>
       {{/if}}
       {{/unless}}

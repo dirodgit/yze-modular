@@ -8,7 +8,7 @@
       <div class="flex-col group">
         <h1 class="center">
           <span>
-            {{localize "twdu.criticalInjury"}}
+            {{localize "yzesrdvtt.criticalInjury"}}
           </span>
           <input class="light" name="name" type="text" value="{{item.name}}" />
         </h1>
@@ -16,7 +16,7 @@
 
       <div class="grid two-col justify group">
         <div class="lethal grid col-60-40 group middle justify h-100">
-          <div class="subsubheader">{{localize "twdu.lethal"}}</div>
+          <div class="subsubheader">{{localize "yzesrdvtt.lethal"}}</div>
 
           <div class="-lethal-select">
             <select name="system.fatal" id="weight" data-dtype="boolean">
@@ -25,30 +25,30 @@
           </div>
         </div>
         <div class="timelimit grid col-60-40 group middle justify">
-          <div class="subsubheader">{{localize "twdu.timeLimit"}}</div>
+          <div class="subsubheader">{{localize "yzesrdvtt.timeLimit"}}</div>
           <select name="system.timeLimit">
             {{selectOptions config.recoveryTime selected=item.system.timeLimit localize=true}}
           </select>
 
           <div class="radio-area grid two-col span-2">
             <label class="flex-row pi-1 justify middle radio-group" for="complexity.A">
-              <input id="complexity.A" type="radio" name="system.complexity" value="A" {{TWDU_checked
-                data.system.complexity 'A' }} /> {{localize 'twdu.advanced'}} <span class="radio"></span></label>
+              <input id="complexity.A" type="radio" name="system.complexity" value="A" {{YZSRD_checked
+                data.system.complexity 'A' }} /> {{localize 'yzesrdvtt.advanced'}} <span class="radio"></span></label>
 
             <label class="flex-row pi-5 justify-self-end middle radio-group" for="complexity.B">
-              <input id="complexity.B" type="radio" name="system.complexity" value="B" {{TWDU_checked
-                data.system.complexity 'B' }} /> {{localize 'twdu.basic'}}<span class="radio"></span></label>
+              <input id="complexity.B" type="radio" name="system.complexity" value="B" {{YZSRD_checked
+                data.system.complexity 'B' }} /> {{localize 'yzesrdvtt.basic'}}<span class="radio"></span></label>
           </div>
 
         </div>
 
         <div class="grid col-60-40 border-right group middle justify">
-          <b>{{localize "twdu.penalty"}}</b>
+          <b>{{localize "yzesrdvtt.penalty"}}</b>
           <input class="light" name="system.effect" type="text" value="{{data.system.effect}}" />
         </div>
 
         <div class="recovery grid col-60-40 group middle justify">
-          <b>{{localize "twdu.recoveryTime"}}</b>
+          <b>{{localize "yzesrdvtt.recoveryTime"}}</b>
           <select name="system.recovery">
             {{selectOptions config.recoveryTime selected=item.system.recovery localize=true}}
             
@@ -58,7 +58,7 @@
         </div>
 
         <div class="description group span-2">
-          <div class="subsubheader pi-1">{{localize "twdu.description"}}</div>
+          <div class="subsubheader pi-1">{{localize "yzesrdvtt.description"}}</div>
           <textarea class="pi-2" name="system.description">{{data.system.description}}</textarea>
         </div>
       </div>

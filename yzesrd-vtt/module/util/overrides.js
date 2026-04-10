@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars, no-shadow */
 export default async function FoundryOverrides() {
 
-    console.log("TWDU | activateEditor override");
+    console.log("YZSRD | activateEditor override");
 	FormApplication.prototype._activateEditor = async function (name, options = {}, initialContent = "") {
         
 		const editor = this.editors[name];

@@ -131,15 +131,15 @@ input[type=search] {
 }
 
 .app {
-  background: url(/systems/twdu/assets/images/denim075.png) repeat;
+  background: url(/systems/yzesrd-vtt/assets/images/denim075.png) repeat;
 }
 
-.twdu .sheet .actor {
+.yzesrd-vtt .sheet .actor {
   width: min(100%, 900px);
 }
 
 .window-app .window-content {
-  background: url(/systems/twdu/assets/images/background.webp) no-repeat;
+  background: url(/systems/yzesrd-vtt/assets/images/background.webp) no-repeat;
   background-size: cover;
 }
 
@@ -158,7 +158,7 @@ input[type=search] {
 .entry-name {
   color: hsl(53, 14%, 75%);
   padding-inline: 15px;
-  background: url(/systems/twdu/assets/images/misc/scene-bg.webp);
+  background: url(/systems/yzesrd-vtt/assets/images/misc/scene-bg.webp);
   font-size: 1.1em;
   -webkit-background-clip: text;
   background-clip: text;
@@ -172,17 +172,17 @@ input[type=search] {
     z-index: 9999;
   }
   .chat-message {
-    background: url(/systems/twdu/assets/images/background.webp) no-repeat;
+    background: url(/systems/yzesrd-vtt/assets/images/background.webp) no-repeat;
     background-size: cover;
   }
   .chat-message .flavor-text {
     color: hsl(355, 53%, 31%) !important;
   }
   .chat-message.whisper {
-    background: url(/systems/twdu/assets/images/background_whisper.webp) no-repeat;
+    background: url(/systems/yzesrd-vtt/assets/images/background_whisper.webp) no-repeat;
   }
   .chat-message.blind {
-    background: url(/systems/twdu/assets/images/background_blind.webp) no-repeat;
+    background: url(/systems/yzesrd-vtt/assets/images/background_blind.webp) no-repeat;
   }
   .chat-message.blind .message-content {
     filter: saturate(20%) grayscale(0.95) brightness(120%);
@@ -219,8 +219,8 @@ a:hover {
   margin: 0px;
   border-top: 1px solid hsl(353, 45%, 30%);
   border-bottom: 1px solid hsl(353, 45%, 30%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
 }
 
 .tabs {
@@ -236,8 +236,8 @@ a:hover {
   background-color: hsla(36, 11%, 43%, 0.5);
   border-right: 1px solid hsl(353, 45%, 30%);
   border-left: 1px solid hsl(353, 45%, 30%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
 }
 
 nav.tabs [data-tab] {
@@ -282,8 +282,8 @@ input[type=text] {
   border-radius: 0;
   border: none;
   border-bottom: 2px solid hsl(57, 15%, 26%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
   background-color: transparent;
 }
 input[type=text]:hover {
@@ -292,15 +292,15 @@ input[type=text]:hover {
 input[type=text].box {
   min-width: 50px;
   border: 2px solid hsl(355, 53%, 31%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
 }
 
 textarea {
   border-radius: 0;
   border: 2px solid hsl(355, 53%, 31%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
   background-color: transparent;
   color: hsl(57, 15%, 26%);
   font-family: "Nu Gothic", sans-serif;
@@ -308,8 +308,8 @@ textarea {
 
 select {
   border: 1px solid hsl(355, 53%, 31%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
   border-radius: 0;
   font-family: "Nu Gothic", sans-serif;
   background: transparent;
@@ -384,8 +384,8 @@ fieldset pre {
   border-radius: 0;
   border: none;
   border-bottom: 2px solid hsl(57, 15%, 26%);
-  -o-border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 stretch;
-     border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 stretch;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/white_box_not_checked.png") 10 stretch;
+     border-image: url("/systems/yzesrd-vtt/assets/images/white_box_not_checked.png") 10 stretch;
   background-color: transparent;
   color: white;
   margin-bottom: 1rem;
@@ -396,13 +396,13 @@ fieldset pre {
 .roll-fields input[type=text].box {
   min-width: 50px;
   border: 2px solid hsl(355, 53%, 31%);
-  -o-border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 stretch;
-     border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 stretch;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/white_box_not_checked.png") 10 stretch;
+     border-image: url("/systems/yzesrd-vtt/assets/images/white_box_not_checked.png") 10 stretch;
 }
 .roll-fields .group {
   border: 2px solid white;
-  -o-border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 repeat;
-     border-image: url("/systems/twdu/assets/images/white_box_not_checked.png") 10 repeat;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/white_box_not_checked.png") 10 repeat;
+     border-image: url("/systems/yzesrd-vtt/assets/images/white_box_not_checked.png") 10 repeat;
 }
 
 .dialog .dialog-buttons button.default,
@@ -721,32 +721,32 @@ table tr td {
 
 .border {
   border: 2px solid hsl(53, 14%, 15%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
 }
 
 .border-top {
   border-top: 3px solid hsl(53, 14%, 15%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
 }
 
 .border-bottom {
   border-bottom: 3px solid hsl(53, 14%, 15%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
 }
 
 .border-left {
   border-left: 3px solid hsl(53, 14%, 15%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
 }
 
 .border-right {
   border-right: 3px solid hsl(53, 14%, 15%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
 }
 
 .border-none {
@@ -1203,8 +1203,8 @@ li .document, li .folder, .document-type .actors, li .update {
   color: hsl(53, 14%, 15%);
   border-radius: 0;
   border: 2px solid hsl(355, 53%, 31%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
 }
 
 .dice-buttons {
@@ -1290,8 +1290,8 @@ a.content-link {
 
 .group {
   border: 2px solid hsl(355, 53%, 31%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 repeat;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 repeat;
 }
 
 .group-header {
@@ -1316,7 +1316,7 @@ a.content-link {
   text-shadow: hsla(36, 11%, 63%, 0.2) 1px 0 10px;
   font-size: 1.6rem;
   color: transparent;
-  background-image: url(/systems/twdu/assets/images/walkers.png);
+  background-image: url(/systems/yzesrd-vtt/assets/images/walkers.png);
   background-clip: text;
   -webkit-background-clip: text;
 }
@@ -1343,7 +1343,7 @@ a.content-link {
   color: hsl(57, 15%, 26%);
 }
 
-.twdu.threat-level-display {
+.yzesrdvtt.threat-level-display {
   margin: -8px;
   display: flex;
   flex-direction: column;
@@ -1358,8 +1358,8 @@ a.content-link {
   text-transform: uppercase;
   background-color: hsla(36, 11%, 53%, 0.3);
   border: 2px solid hsl(355, 53%, 31%);
-  -o-border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
-     border-image: url("/systems/twdu/assets/images/box_not_checked.png") 10 stretch;
+  -o-border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
+     border-image: url("/systems/yzesrd-vtt/assets/images/box_not_checked.png") 10 stretch;
   padding: 0.5rem;
   margin: 0.5rem;
   text-align: center;
@@ -1428,7 +1428,7 @@ a.content-link {
 
 .sidebar-dark {
   background-color: transparent;
-  background-image: url("/systems/twdu/assets/images/sidebar_bg.png");
+  background-image: url("/systems/yzesrd-vtt/assets/images/sidebar_bg.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1457,4 +1457,4 @@ header.journal-page-header h1 {
   --color-shadow-highlight: hsl(353, 53%, 65%);
   --color-border-highlight-alt: hsl(353, 53%, 40%);
   --color-border-highlight: hsl(353, 53%, 30%);
-}/*# sourceMappingURL=twdu.css.map */
+}/*# sourceMappingURL=yzesrdvtt.css.map */

@@ -10,20 +10,20 @@
       <div class="item group grid two-col">
         <div class="damage grid three-col middle border-right">
           <h2 class="m-0 pi-1 subheader middle">
-            {{localize "twdu.damage"}}:</h2>
+            {{localize "yzesrdvtt.damage"}}:</h2>
           <input name="system.damage" type="text" value="{{data.system.damage}}" placeholder="0" data-dtype="Number" />
 
 
           {{!-- A check box for explosive here --}}
-          <div class="explosive flex-row justify-self-end" title="{{localize 'twdu.isExplosiveTooltip'}}">
-          <b>{{localize "twdu.isExplosive"}}</b>
+          <div class="explosive flex-row justify-self-end" title="{{localize 'yzesrdvtt.isExplosiveTooltip'}}">
+          <b>{{localize "yzesrdvtt.isExplosive"}}</b>
           {{#unless item.system.isExplosive}}
-          <img class="toggle-boolean" data-path="isExplosive" src="systems/twdu/assets/images/box_not_checked.png"
+          <img class="toggle-boolean" data-path="isExplosive" src="systems/yzesrd-vtt/assets/images/box_not_checked.png"
             height="18px" width="18px">
           {{/unless}}
 
           {{#if item.system.isExplosive}}
-          <img class="toggle-boolean" data-path="isExplosive" src="systems/twdu/assets/images/box_checked.png"
+          <img class="toggle-boolean" data-path="isExplosive" src="systems/yzesrd-vtt/assets/images/box_checked.png"
             height="18px" width="18px">
           {{/if}}
         </div>
@@ -32,7 +32,7 @@
 
         <div class="bonus flex-row middle border-right">
           <h2 class="m-0 pi-1 subheader middle">
-            {{localize "twdu.bonus"}}:</h2>
+            {{localize "yzesrdvtt.bonus"}}:</h2>
           <input name="system.bonus" type="text" value="{{data.system.bonus}}" placeholder="0" data-dtype="Number" />
         </div>
 
@@ -42,7 +42,7 @@
         <div class="item  grid three-col middle">
 
         <div class="encumbrance flex-row group">
-          <h2 class="m-0 pi-1 subheader middle">{{localize "twdu.encSlots"}}:</h2>
+          <h2 class="m-0 pi-1 subheader middle">{{localize "yzesrdvtt.encSlots"}}:</h2>
           <div class="weight-select">
              <select name="system.weight" id="weight" data-dtype="Number">
               {{selectOptions config.weights selected=data.system.weight localize=true}}
@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="skill flex-row group">
-          <h2 class="m-0 pi-1 subheader middle">{{localize "twdu.skill"}}: </h2>
+          <h2 class="m-0 pi-1 subheader middle">{{localize "yzesrdvtt.skill"}}: </h2>
           <select name="system.skill">
             {{selectOptions config.combatSkills selected=data.system.skill localize=true}}
           </select>
@@ -60,7 +60,7 @@
           {{!-- Range should be set up as a select --}}
           {{#if (eq data.system.skill "rangedCombat")}}
           <h2 class="m-0 pi-1 subheader middle">
-            {{localize "twdu.range"}}:
+            {{localize "yzesrdvtt.range"}}:
           </h2>
           <select name="system.range">
             {{selectOptions config.ranges selected=data.system.range localize=true}}
@@ -68,7 +68,7 @@
           {{/if}}
         </div>
          <div class="span-3 group">
-          <b>{{localize "twdu.description"}}</b>
+          <b>{{localize "yzesrdvtt.description"}}</b>
           <textarea name="system.description">{{data.system.description}}</textarea>
         </div>
       </div>

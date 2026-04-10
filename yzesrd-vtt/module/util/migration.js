@@ -1,7 +1,7 @@
 export function migrate() {
   if (!game.user.isGM) return;
 
-  const currentVersion = game.settings.get("twdu", "systemMigrationVersion");
+  const currentVersion = game.settings.get("yzesrd-vtt", "systemMigrationVersion");
   // console.log("Data CurrentVersion", currentVersion);
   Object.keys(migrations).forEach(function (key) {
     // console.log("Data Key", key);
@@ -48,7 +48,7 @@ async function migrateTo4_0_3(){
   }
 
     await game.settings.set(
-    "twdu",
+    "yzesrd-vtt",
     "systemMigrationVersion",
     game.system.version
   );
@@ -87,7 +87,7 @@ async function migrateTo4_0_2(){
   }
 
     await game.settings.set(
-    "twdu",
+    "yzesrd-vtt",
     "systemMigrationVersion",
     game.system.version
   );
@@ -108,7 +108,7 @@ async function migrateTo3_0_12() {
   for (let actor of game.actors.contents) {
     const updateData = migrateActorData(actor, "3.0.12");
     if (!foundry.utils.isEmpty(updateData)) {
-      // console.log("TWDU Migration",{actor: actor, changes: updateData});
+      // console.log("YZSRD Migration",{actor: actor, changes: updateData});
       // for each item in updateData the key is the item id and the value is the new skill
       // update the document in the actor with the id that matches the key with the value of the key
       for (let key in updateData) {
@@ -121,16 +121,16 @@ async function migrateTo3_0_12() {
     }
   }
 
-  // for all items in the game, if the item has a system.skill defined check to see if it starts with twdu. and if it does remove twdu. from the data
+  // for all items in the game, if the item has a system.skill defined check to see if it starts with yzesrdvtt. and if it does remove yzesrdvtt. from the data
   for (let item of game.items.contents) {
-    if (item.system.skill && item.system.skill.startsWith("twdu.")) {
-      let skill = item.system.skill.replace("twdu.", "");
+    if (item.system.skill && item.system.skill.startsWith("yzesrdvtt.")) {
+      let skill = item.system.skill.replace("yzesrdvtt.", "");
       // console.log("Skill | ", skill);
       await item.update({ "system.skill": skill });
     }
 
-    if (item.system.range && item.system.range.startsWith("twdu.")) {
-      let range = item.system.range.replace("twdu.", "");
+    if (item.system.range && item.system.range.startsWith("yzesrdvtt.")) {
+      let range = item.system.range.replace("yzesrdvtt.", "");
 
       // console.log("Range | ", range);
 
@@ -139,7 +139,7 @@ async function migrateTo3_0_12() {
   }
 
   await game.settings.set(
-    "twdu",
+    "yzesrd-vtt",
     "systemMigrationVersion",
     game.system.version
   );
@@ -160,7 +160,7 @@ async function migrateTo3_0_1() {
   for (let actor of game.actors.contents) {
     const updateData = migrateActorData(actor, "3.0.1");
     if (!foundry.utils.isEmpty(updateData)) {
-      // console.log("TWDU Migration",{actor: actor, changes: updateData});
+      // console.log("YZSRD Migration",{actor: actor, changes: updateData});
       // for each item in updateData the key is the item id and the value is the new skill
       // update the document in the actor with the id that matches the key with the value of the key
       for (let key in updateData) {
@@ -173,15 +173,15 @@ async function migrateTo3_0_1() {
     }
   }
 
-  // for all items in the game, if the item has a system.skill defined check to see if it starts with twdu. and if it does remove twdu. from the data
+  // for all items in the game, if the item has a system.skill defined check to see if it starts with yzesrdvtt. and if it does remove yzesrdvtt. from the data
   for (let item of game.items.contents) {
-    if (item.system.skill && item.system.skill.startsWith("twdu.")) {
-      let skill = item.system.skill.replace("twdu.", "");
+    if (item.system.skill && item.system.skill.startsWith("yzesrdvtt.")) {
+      let skill = item.system.skill.replace("yzesrdvtt.", "");
       // console.log("Skill | ", skill);
       await item.update({ "system.skill": skill });
     }
-    if (item.system.range && item.system.range.startsWith("twdu.")) {
-      let range = item.system.range.replace("twdu.", "");
+    if (item.system.range && item.system.range.startsWith("yzesrdvtt.")) {
+      let range = item.system.range.replace("yzesrdvtt.", "");
 
       // console.log("Range | ", range);
 
@@ -190,7 +190,7 @@ async function migrateTo3_0_1() {
   }
 
   await game.settings.set(
-    "twdu",
+    "yzesrd-vtt",
     "systemMigrationVersion",
     game.system.version
   );
@@ -207,7 +207,7 @@ async function migrateTo3_0_0() {
   for (let actor of game.actors.contents) {
     const updateData = migrateActorData(actor, "3.0.0");
     if (!foundry.utils.isEmpty(updateData)) {
-      // console.log("TWDU Migration",{actor: actor, changes: updateData});
+      // console.log("YZSRD Migration",{actor: actor, changes: updateData});
       await actor.update(updateData);
     }
     if (actor.type === "animal") {
@@ -217,24 +217,24 @@ async function migrateTo3_0_0() {
 
     if (
       actor.type === "animal" &&
-      actor.img === "systems/twdu/assets/images/misc/walker_classic.webp"
+      actor.img === "systems/yzesrd-vtt/assets/images/misc/walker_classic.webp"
     ) {
-      await actor.update({ img: "systems/twdu/assets/images/twdu-animal.png" });
+      await actor.update({ img: "systems/yzesrd-vtt/assets/images/twdu-animal.png" });
       // also change the prototype token to this same image
       let token = actor.prototypeToken;
       // console.log("Token", token);
-      token.texture.src = "systems/twdu/assets/images/twdu-animal.png";
+      token.texture.src = "systems/yzesrd-vtt/assets/images/twdu-animal.png";
       await actor.update({ prototypeToken: token });
     } else if (
       actor.type === "npc" &&
       actor.img === "icons/svg/mystery-man.svg"
     ) {
-      await actor.update({ img: "systems/twdu/assets/images/twdu-npc.png" });
+      await actor.update({ img: "systems/yzesrd-vtt/assets/images/twdu-npc.png" });
     }
   }
 
   await game.settings.set(
-    "twdu",
+    "yzesrd-vtt",
     "systemMigrationVersion",
     game.system.version
   );
@@ -252,13 +252,13 @@ async function migrateTo1_2_1() {
   for (let actor of game.actors.contents) {
     const updateData = migrateActorData(actor, "1.2.1");
     if (!foundry.utils.isEmpty(updateData)) {
-      // console.log("TWDU Migration",{actor: actor, changes: updateData});
+      // console.log("YZSRD Migration",{actor: actor, changes: updateData});
       await actor.update(updateData);
     }
   }
 
   await game.settings.set(
-    "twdu",
+    "yzesrd-vtt",
     "systemMigrationVersion",
     game.system.version
   );
@@ -299,15 +299,15 @@ function migrateActorData(actor, version) {
       // console.log("Items | ", items);
       for (let item of items) {
         // console.log("Item | ", item);
-        // if the item has a system.skill defined check to see if it starts with twdu. and if it does remove twdu. from the data
-        if (item.system.skill && item.system.skill.startsWith("twdu.")) {
-          let skill = item.system.skill.replace("twdu.", "");
+        // if the item has a system.skill defined check to see if it starts with yzesrdvtt. and if it does remove yzesrdvtt. from the data
+        if (item.system.skill && item.system.skill.startsWith("yzesrdvtt.")) {
+          let skill = item.system.skill.replace("yzesrdvtt.", "");
           // console.log("Skill | ", skill);
           updateData[item.id] = skill;
         }
 
-        if (item.system.range && item.system.range.startsWith("twdu.")) {
-          let range = item.system.range.replace("twdu.", "");
+        if (item.system.range && item.system.range.startsWith("yzesrdvtt.")) {
+          let range = item.system.range.replace("yzesrdvtt.", "");
 
           // console.log("Range | ", range);
 
@@ -322,16 +322,16 @@ function migrateActorData(actor, version) {
       // console.log("Items | ", items);
       for (let item of items) {
         // console.log("Item | ", item);
-        // if the item has a system.skill defined check to see if it starts with twdu. and if it does remove twdu. from the data
-        if (item.system.skill && item.system.skill.startsWith("twdu.")) {
-          let skill = item.system.skill.replace("twdu.", "");
+        // if the item has a system.skill defined check to see if it starts with yzesrdvtt. and if it does remove yzesrdvtt. from the data
+        if (item.system.skill && item.system.skill.startsWith("yzesrdvtt.")) {
+          let skill = item.system.skill.replace("yzesrdvtt.", "");
           // console.log("Skill | ", skill);
 
           updateData[item.id] = skill;
         }
 
-        if (item.system.range && item.system.range.startsWith("twdu.")) {
-          let range = item.system.range.replace("twdu.", "");
+        if (item.system.range && item.system.range.startsWith("yzesrdvtt.")) {
+          let range = item.system.range.replace("yzesrdvtt.", "");
 
           // console.log("Range | ", range);
 
@@ -377,7 +377,7 @@ function setToken(actor) {
   let token = actor.prototypeToken;
   // console.log("Token", token);
 
-  token.texture.src = "systems/twdu/assets/images/twdu-animal.png";
+  token.texture.src = "systems/yzesrd-vtt/assets/images/twdu-animal.png";
   token.bar1 = { attribute: "healthMax" };
   actor.update({ prototypeToken: token });
 }
