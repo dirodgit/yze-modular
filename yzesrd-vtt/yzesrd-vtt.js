@@ -19,7 +19,7 @@
 import { YZSRD } from './system/config';
 import { ACTOR_TYPES, CAPACITIES, SETTINGS_KEYS, SYSTEM_ID } from './system/constants';
 import { ActionCollection } from './components/actor-action';
-import * as YZUR from 'yzur';
+import * as YZUR from './utils/yzur.js';
 import * as Chat from './system/chat';
 import * as BRMacro from './system/macros';
 import BRRollHandler from './components/roll/roller';

@@ -1,4 +1,4 @@
-import { YearZeroRoll } from 'yzur';
+import { YearZeroRoll } from '../../utils/yzur.js';
 import { YZSRD } from '../../system/config';
 import { ACTOR_TYPES, ITEM_TYPES, SYSTEM_ID } from '../../system/constants';
 import { chooseActor, getActiveActor } from '../../utils/get-actor';
