@@ -1,0 +1,66 @@
+{
+  "Actor": {
+    "types": ["character", "npc", "vehicle"],
+    "templates": {
+      "attributes": {
+        "attributes": {
+          "str": { "value": 2, "max": 5 },
+          "agi": { "value": 2, "max": 5 },
+          "int": { "value": 2, "max": 5 },
+          "emp": { "value": 2, "max": 5 }
+        }
+      },
+      "stats": {
+        "health": { "value": 0, "max": 0, "min": 0 },
+        "resolve": { "value": 0, "max": 0, "min": 0 }
+      },
+      "description": {
+        "description": "",
+        "notes": ""
+      }
+    },
+    "character": {
+      "templates": ["attributes", "stats", "description"]
+    },
+    "npc": {
+      "templates": ["attributes", "stats", "description"]
+    },
+    "vehicle": {
+      "templates": ["description"],
+      "hull": { "value": 1, "max": 1 },
+      "armor": 0,
+      "maneuverability": 0
+    }
+  },
+  "Item": {
+    "types": ["weapon", "armor", "gear", "talent", "criticalInjury"],
+    "templates": {
+      "base": {
+        "description": "",
+        "weight": 0,
+        "cost": 0
+      }
+    },
+    "weapon": {
+      "templates": ["base"],
+      "damage": 1,
+      "bonus": 0,
+      "range": "short"
+    },
+    "armor": {
+      "templates": ["base"],
+      "rating": 1
+    },
+    "gear": {
+      "templates": ["base"]
+    },
+    "talent": {
+      "templates": ["base"]
+    },
+    "criticalInjury": {
+      "templates": ["base"],
+      "lethal": false,
+      "healingTime": 0
+    }
+  }
+}

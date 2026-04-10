@@ -1,0 +1,39 @@
+{
+  "id": "yzesrd-vtt",
+  "title": "Year Zero Engine SRD",
+  "description": "A modular implementation of the Year Zero Engine SRD for Foundry VTT.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13.351"
+  },
+  "authors": [
+    {
+      "name": "Antigravity & User"
+    }
+  ],
+  "esmodules": [
+    "yzesrd-vtt.js"
+  ],
+  "styles": [
+    "yzesrd-vtt.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    }
+  ],
+  "grid": {
+    "distance": 1,
+    "units": "m"
+  },
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "resolve"
+}
