@@ -1,0 +1,8 @@
+{
+  "name": "fufs-vtt",
+  "version": "1.0.0",
+  "description": "FUFS Tabletop Companion Online",
+  "scripts": {
+    "build": "echo \"window.ENV = { SB_URL: '$SB_URL', SB_KEY: '$SB_KEY' };\" > config.js"
+  }
+}

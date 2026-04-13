@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUFS Companion</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        violet: {
+                            500: '#8B5CF6',
+                            600: '#7C3AED',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #020617;
+            overflow: hidden;
+        }
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0, transparent 50%),
+                        radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.15) 0, transparent 50%),
+                        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0, transparent 50%),
+                        radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.1) 0, transparent 50%);
+            animation: pulse-bg 10s ease-in-out infinite alternate;
+        }
+        @keyframes pulse-bg {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tag-bubble {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 8px;
+            font-size: 11px;
+            color: white;
+            transition: all 0.2s;
+        }
+        .tag-bubble:hover {
+            background: rgba(139, 92, 246, 0.3);
+        }
+        .tag-remove {
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+        }
+        .tag-remove:hover {
+            color: #ef4444;
+        }
+        .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="text-slate-100 font-sans h-screen w-screen flex flex-col">
+    <div class="mesh-bg"></div>
+
+    <!-- App Shell -->
+    <div class="flex-1 flex overflow-hidden">
+        <!-- Sidebar Navigation -->
+        <nav class="w-20 md:w-64 glass border-r border-white/10 flex flex-col p-4 z-50">
+            <div class="mb-8 px-2 flex items-center gap-3">
+                <div class="w-10 h-10 bg-violet-500 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/20">
+                    <span class="font-outfit text-xl text-white">F</span>
+                </div>
+                <h1 class="font-outfit text-xl hidden md:block tracking-tight text-white/90">FUFS <span class="text-violet-500">Companion</span></h1>
+            </div>
+
+            <div class="space-y-2 flex-1">
+                <button onclick="switchTab('dashboard')" class="nav-btn w-full flex items-center gap-3 p-3 rounded-xl transition-all glass-hover text-slate-400 hover:text-white group">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                    <span class="hidden md:block font-medium">Dashboard</span>
+                </button>
+                <button onclick="switchTab('characters')" class="nav-btn w-full flex items-center gap-3 p-3 rounded-xl transition-all glass-hover text-slate-400 hover:text-white group">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    <span class="hidden md:block font-medium">Personagens</span>
+                </button>
+                <button onclick="switchTab('oracle')" class="nav-btn w-full flex items-center gap-3 p-3 rounded-xl transition-all glass-hover text-slate-400 hover:text-white group">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                    <span class="hidden md:block font-medium">Oráculo Solo</span>
+                </button>
+                <button onclick="switchTab('combat')" class="nav-btn w-full flex items-center gap-3 p-3 rounded-xl transition-all glass-hover text-slate-400 hover:text-white group">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    <span class="hidden md:block font-medium">Combate</span>
+                </button>
+                <button onclick="switchTab('compendium')" class="nav-btn w-full flex items-center gap-3 p-3 rounded-xl transition-all glass-hover text-slate-400 hover:text-white group">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                    <span class="hidden md:block font-medium">Compêndio</span>
+                </button>
+                <button onclick="switchTab('multiplayer')" class="nav-btn w-full flex items-center gap-3 p-3 rounded-xl transition-all glass-hover text-slate-400 hover:text-white group border-t border-white/5 pt-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    <span class="hidden md:block font-medium">Mesa Online</span>
+                </button>
+            </div>
+
+            <div class="mt-auto pt-4 border-t border-white/5 space-y-2">
+                <button onclick="toggleSettings()" class="w-full flex items-center gap-3 p-3 rounded-xl transition-all glass-hover text-slate-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    <span class="hidden md:block font-medium">Ajustes</span>
+                </button>
+                <div id="auth-sidebar-area" class="min-h-[50px]">
+                    <!-- Injected by updateSession -->
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main id="app-content" class="flex-1 overflow-y-auto p-4 md:p-8 relative">
+            <!-- Dynamic Content Injected Here -->
+            <div id="tab-dashboard" class="tab-content">
+                <header class="mb-10">
+                    <h2 class="font-outfit text-4xl text-white mb-2">Bem-vindo, Viajante</h2>
+                    <p class="text-slate-400">Gerencie suas campanhas e personagens do FUFS.</p>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Quick Roll Card -->
+                    <div class="lg:col-span-2 glass p-8 rounded-3xl relative overflow-hidden group">
+                        <div class="absolute -top-24 -right-24 w-64 h-64 bg-violet-500/20 blur-[100px] group-hover:bg-violet-500/30 transition-all"></div>
+                        <h3 class="font-outfit text-2xl text-white mb-6 flex items-center gap-2">
+                             <svg class="w-6 h-6 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                             Ação Rápida
+                        </h3>
+                        <div class="flex flex-col items-center justify-center py-10 space-y-6">
+                            <div id="dice-display" class="w-32 h-32 glass border-violet-500/30 rounded-2xl flex items-center justify-center text-6xl font-outfit text-white shadow-2xl transition-all duration-300">?</div>
+                            <div id="oracle-result" class="text-center h-16 opacity-0 transition-opacity">
+                                <span id="oracle-title" class="block text-violet-400 font-semibold mb-1"></span>
+                                <span id="oracle-desc" class="text-slate-300"></span>
+                            </div>
+                                <button onclick="openOracleConfig()" class="bg-violet-500 hover:bg-violet-600 text-white font-outfit px-10 py-4 rounded-full shadow-lg shadow-violet-500/20 transition-all hover:scale-105 active:scale-95">
+                                    Configurar Rolagem
+                                </button>
+                        </div>
+                    </div>
+
+                    <!-- Hero Journey Status -->
+                    <div class="glass p-6 rounded-3xl">
+                        <h3 class="font-outfit text-xl text-white mb-6">Jornada do Herói</h3>
+                        <div class="space-y-4">
+                            <div class="journey-step glass p-3 rounded-xl flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full border-2 border-violet-500/50 flex items-center justify-center text-[10px] text-violet-400 font-bold">1</div>
+                                <span class="text-sm text-slate-300">Mundo Comum</span>
+                            </div>
+                             <div class="journey-step glass p-3 rounded-xl flex items-center gap-3 opacity-50">
+                                <div class="w-6 h-6 rounded-full border-2 border-white/20 flex items-center justify-center text-[10px] text-white/20 font-bold">2</div>
+                                <span class="text-sm text-slate-400">Chamado à Aventura</span>
+                            </div>
+                             <div class="journey-step glass p-3 rounded-xl flex items-center gap-3 opacity-50">
+                                <div class="w-6 h-6 rounded-full border-2 border-white/20 flex items-center justify-center text-[10px] text-white/20 font-bold">3</div>
+                                <span class="text-sm text-slate-400">Recusa do Chamado</span>
+                            </div>
+                            <!-- More steps... -->
+                            <div class="pt-4 mt-4 border-t border-white/5">
+                                <button class="w-full py-2 text-violet-400 hover:text-white text-xs font-semibold tracking-wider uppercase transition-colors">Ver Jornada Completa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-characters" class="tab-content hidden">
+                 <!-- Character logic here -->
+                <div id="character-list-header" class="flex flex-wrap gap-4 mb-6">
+                    <button onclick="openCharacterEditor()" class="bg-violet-500 hover:bg-violet-600 text-white font-outfit px-6 py-3 rounded-2xl transition-all shadow-lg shadow-violet-500/20">
+                        Novo Personagem
+                    </button>
+                    <button onclick="openImportModal()" class="glass border-white/10 hover:bg-white/5 text-white font-outfit px-6 py-3 rounded-2xl transition-all">
+                        Importar via Código
+                    </button>
+                </div>
+
+                <div id="character-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dynamic List -->
+                </div>
+            </div>
+
+            <div id="tab-compendium" class="tab-content hidden">
+                 <header class="mb-10">
+                    <h2 class="font-outfit text-4xl text-white mb-2">Compêndio FUFS</h2>
+                    <p class="text-slate-400">As regras oficiais sempre ao seu lado.</p>
+                </header>
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <aside id="compendium-nav" class="lg:col-span-1 glass p-4 rounded-2xl h-fit sticky top-0 space-y-1">
+                        <!-- Chapter links injected here -->
+                    </aside>
+                    <article id="compendium-viewer" class="lg:col-span-3 glass p-8 rounded-3xl prose prose-invert prose-violet max-w-none">
+                        <div class="text-center py-20 text-slate-500">
+                             Selecione um capítulo no menu lateral para começar a ler.
+                        </div>
+                    </article>
+                </div>
+            </div>
+            
+            <div id="tab-oracle" class="tab-content hidden">
+                <header class="mb-10">
+                    <h2 class="font-outfit text-4xl text-white mb-2">Oráculo Solo</h2>
+                    <p class="text-slate-400">Ferramentas de geração randômica para suas aventuras independentes.</p>
+                </header>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <button onclick="generateSolo('mission')" class="glass p-8 rounded-3xl text-left glass-hover transition-all group">
+                         <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4 text-blue-400 group-hover:scale-110 transition-transform">
+                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                         </div>
+                         <h4 class="font-outfit text-xl text-white mb-1">Missão</h4>
+                         <p class="text-sm text-slate-400">O que você precisa fazer agora?</p>
+                    </button>
+                    <button onclick="generateSolo('npc')" class="glass p-8 rounded-3xl text-left glass-hover transition-all group">
+                         <div class="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center mb-4 text-emerald-400 group-hover:scale-110 transition-transform">
+                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                         </div>
+                         <h4 class="font-outfit text-xl text-white mb-1">NPC</h4>
+                         <p class="text-sm text-slate-400">Quem você encontrou pelo caminho?</p>
+                    </button>
+                    <button onclick="generateSolo('twist')" class="glass p-8 rounded-3xl text-left glass-hover transition-all group">
+                         <div class="w-12 h-12 bg-rose-500/20 rounded-xl flex items-center justify-center mb-4 text-rose-400 group-hover:scale-110 transition-transform">
+                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                         </div>
+                         <h4 class="font-outfit text-xl text-white mb-1">Reviravolta</h4>
+                         <p class="text-sm text-slate-400">O que mudou na situação?</p>
+                    </button>
+                    <button onclick="generateSolo('location')" class="glass p-8 rounded-3xl text-left glass-hover transition-all group">
+                         <div class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center mb-4 text-amber-400 group-hover:scale-110 transition-transform">
+                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                         </div>
+                         <h4 class="font-outfit text-xl text-white mb-1">Local</h4>
+                         <p class="text-sm text-slate-400">Onde você está se metendo?</p>
+                    </button>
+                    <button onclick="generateSolo('conflict')" class="glass p-8 rounded-3xl text-left glass-hover transition-all group">
+                         <div class="w-12 h-12 bg-violet-500/20 rounded-xl flex items-center justify-center mb-4 text-violet-400 group-hover:scale-110 transition-transform">
+                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                         </div>
+                         <h4 class="font-outfit text-xl text-white mb-1">Conflito</h4>
+                         <p class="text-sm text-slate-400">O que impede seu progresso?</p>
+                    </button>
+                </div>
+                
+                <div id="solo-result-box" class="mt-8 glass p-8 rounded-3xl hidden min-h-[150px] flex flex-col justify-center items-center text-center">
+                    <div id="solo-result-type" class="text-violet-500 text-xs font-bold uppercase tracking-widest mb-2">Resultado</div>
+                    <div id="solo-result-text" class="text-2xl font-outfit text-white max-w-2xl"></div>
+                </div>
+            </div>
+
+            <div id="tab-combat" class="tab-content hidden">
+                <header class="mb-10 flex justify-between items-center">
+                    <div>
+                        <h2 class="font-outfit text-4xl text-white mb-2">Iniciativa de Combate</h2>
+                        <p class="text-slate-400">Gerencia o fluxo de ação e o estresse dos heróis.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="openEnemyCreator()" class="glass border-white/10 hover:bg-white/5 text-white font-outfit px-6 py-3 rounded-2xl transition-all">
+                            Adicionar Inimigo
+                        </button>
+                        <button onclick="toggleCombat()" id="combat-toggle-btn" class="bg-violet-500 hover:bg-violet-600 text-white font-outfit px-6 py-3 rounded-2xl transition-all shadow-lg shadow-violet-500/20">
+                            Iniciar Combate
+                        </button>
+                    </div>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Tracker Area -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div id="combat-actors" class="space-y-4">
+                           <!-- Dynamic Actors -->
+                           <div class="text-center py-20 text-slate-500 italic">Nenhum combate ativo. Selecione heróis e adicione inimigos para começar.</div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Log & Status -->
+                    <div class="space-y-6">
+                        <div class="glass p-6 rounded-3xl">
+                            <h3 class="font-outfit text-xl text-white mb-4">Relatório de Batalha</h3>
+                            <div id="combat-log" class="space-y-3 h-[400px] overflow-y-auto text-sm">
+                                <div class="text-slate-500 italic">Aguardando início do conflito...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-multiplayer" class="tab-content hidden">
+                <header class="mb-10">
+                    <h2 class="font-outfit text-4xl text-white mb-2">Mesa Online (VTT)</h2>
+                    <p class="text-slate-400">Conecte-se com seu mestre e amigos em tempo real.</p>
+                </header>
+
+                <div id="multiplayer-setup" class="max-w-xl mx-auto py-10">
+                    <div class="glass p-10 rounded-[40px] text-center space-y-8">
+                        <div class="w-20 h-20 bg-violet-500/20 rounded-3xl flex items-center justify-center mx-auto text-violet-400">
+                             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-outfit text-white">Pronto para a Aventura?</h3>
+                        
+                        <div class="space-y-4">
+                            <input id="room-code-input" type="text" placeholder="Código da Sala (ex: DRAGON)" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-violet-500 focus:outline-none text-center font-bold tracking-widest text-xl transition-all">
+                            <input id="player-name-input" type="text" placeholder="Seu Nome de Herói" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-violet-500 focus:outline-none text-center transition-all">
+                        </div>
+
+                        <div class="flex gap-4">
+                            <button onclick="onJoinRoom()" class="flex-1 bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-violet-500/20 transition-all">Entrar na Sala</button>
+                            <button onclick="onCreateRoom()" class="flex-1 glass border-white/10 hover:bg-white/5 text-white font-bold py-4 rounded-2xl transition-all">Criar Mesa (Mestre)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="multiplayer-active" class="hidden grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <!-- Sidebar: Room Info & Players -->
+                    <aside class="lg:col-span-1 space-y-6">
+                        <div class="glass p-6 rounded-3xl">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-outfit text-lg text-white">Sua Mesa</h3>
+                                <span id="active-room-code" class="px-3 py-1 bg-violet-500/20 text-violet-400 rounded-lg font-mono text-sm font-bold">----</span>
+                            </div>
+                            <div id="room-player-list" class="space-y-3">
+                                <!-- Players list -->
+                            </div>
+                            <button onclick="leaveRoom()" class="w-full mt-6 py-2 text-xs font-bold text-slate-500 hover:text-rose-400 transition-colors uppercase tracking-widest">Sair da Mesa</button>
+                        </div>
+                    </aside>
+
+                    <!-- Main Area: Adventure Log -->
+                    <div class="lg:col-span-3 flex flex-col h-[600px] glass rounded-[40px] overflow-hidden">
+                        <div class="px-6 py-4 bg-white/5 border-b border-white/5 flex justify-between items-center">
+                            <h3 class="font-outfit text-white font-medium">Log de Aventura</h3>
+                            <div class="flex gap-2">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Sincronizado</span>
+                            </div>
+                        </div>
+                        <div id="chat-messages" class="flex-1 p-6 overflow-y-auto space-y-4">
+                            <!-- Messages -->
+                        </div>
+                        
+                        <!-- Adventure Log Input -->
+                        <div class="p-4 bg-black/20 border-t border-white/5 flex gap-4 items-end">
+                            <div class="flex-1 relative">
+                                <textarea id="chat-textarea" placeholder="Narre sua ação ou role um dado..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-violet-500 focus:outline-none resize-none transition-all" rows="1"></textarea>
+                            </div>
+                            <button onclick="sendMessage()" class="p-4 bg-violet-500 rounded-2xl text-white shadow-lg shadow-violet-500/20 hover:scale-105 active:scale-95 transition-all">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-container" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+        <!-- Content dynamic -->
+    </div>
+
+    <!-- Logic -->
+    <script>
+        // State Management
+        let state = {
+            currentTab: 'dashboard',
+            characters: JSON.parse(localStorage.getItem('fufs_chars') || '[]'),
+            campaigns: JSON.parse(localStorage.getItem('fufs_camps') || '[]'),
+        const state = {
+            activeTab: 'dashboard',
+            characters: [],
+            activeCharacter: null,
+            room: null,
+            online: false,
+            messages: [],
+            session: null,
+            player: {
+                name: 'Viajante'
+            },
+            combat: {
+                active: false,
+                participants: [],
+                currentActor: null,
+                log: []
+            }
+        };
+
+        const ORACLE_MAP = {
+            1: { title: "Não, e...", desc: "Piora a situação drasticamente." },
+            2: { title: "Não", desc: "Falha sem complicações extras." },
+            3: { title: "Não, mas...", desc: "Falha, mas abre uma pequena vantagem." },
+            4: { title: "Sim, mas...", desc: "Sucesso, mas com um custo ou complicação." },
+            5: { title: "Sim", desc: "Sucesso direto." },
+            6: { title: "Sim, e...", desc: "Sucesso total com benefício extra." }
+        };
+
+        const SOLO_DATABASE = {
+            mission: [
+                "Escortar um diplomata por território hostil",
+                "Recuperar um artefato de uma ruína esquecida",
+                "Investigar o desaparecimento de um curandeiro",
+                "Defender um posto avançado de um ataque certeiro",
+                "Infiltrar-se em um culto secreto para obter informações",
+                "Negociar uma trégua entre duas facções em guerra"
+            ],
+            npc: [
+                "Um mercador nervoso que sabe demais",
+                "Uma cavaleira exilada em busca de redenção",
+                "Um órfão que vive nas sombras da cidade",
+                "Um estudioso de magias proibidas",
+                "Um camponês que afirma ter visto um deus",
+                "Uma espiã disfarçada de barda"
+            ],
+            twist: [
+                "Um aliado revela ser um traidor",
+                "O objetivo da missão era uma mentira",
+                "O vilão está tentando fazer a coisa certa pelo motivo errado",
+                "Uma terceira facção inesperada interfere agora",
+                "O tempo está acabando mais rápido do que o esperado",
+                "O local está amaldiçoado ou instável"
+            ],
+            location: [
+                "Uma taverna barulhenta na beira da estrada",
+                "Um templo antigo coberto por vegetação",
+                "As ruas lamacentas de um distrito industrial",
+                "Um laboratório alquímico abandonado",
+                "Um acampamento militar sob cerco",
+                "Uma floresta onde as árvores parecem sussurrar"
+            ],
+            conflict: [
+                "Tensão Social: Um mal-entendido causa hostilidade.",
+                "Perigo Físico: O ambiente se torna uma armadilha.",
+                "Dilema Moral: Ajudar alguém agora custará tempo valioso.",
+                "Mistério Oculto: Alguém está observando, mas não ataca.",
+                "Recurso Escasso: Algo essencial quebra ou acaba.",
+                "Rivalidade: Um antigo desafeto cruza seu caminho."
+            ]
+        };
+
+        const JOURNEY_STEPS = [
+            "Mundo Comum", "Chamado à Aventura", "Recusa do Chamado",
+            "Encontro com o Mentor", "Travessia do Primeiro Limiar",
+            "Testes, Aliados e Inimigos", "Aproximação da Caverna Oculta",
+            "Provação Suprema", "A Recompensa", "O Caminho de Volta",
+            "Ressurreição", "Retorno com o Elixir"
+        ];
+
+        // Journey Tracking
+        function renderJourney() {
+            const container = document.querySelector('#tab-dashboard .journey-list') || document.querySelector('#tab-dashboard .space-y-4');
+            container.innerHTML = '';
+            
+            const currentStep = state.journeyIndex || 0;
+
+            JOURNEY_STEPS.forEach((step, index) => {
+                const isPast = index < currentStep;
+                const isCurrent = index === currentStep;
+                
+                const stepEl = document.createElement('div');
+                stepEl.className = `journey-step cursor-pointer glass p-3 rounded-xl flex items-center gap-3 transition-all ${isCurrent ? 'border-violet-500/50 bg-violet-500/5' : isPast ? 'opacity-80' : 'opacity-40'}`;
+                stepEl.onclick = () => {
+                    state.journeyIndex = index;
+                    localStorage.setItem('fufs_journey', index);
+                    renderJourney();
+                };
+                
+                stepEl.innerHTML = `
+                    <div class="w-6 h-6 rounded-full border-2 ${isCurrent || isPast ? 'border-violet-500 text-violet-400' : 'border-white/20 text-white/20'} flex items-center justify-center text-[10px] font-bold">
+                        ${isPast ? '✓' : index + 1}
+                    </div>
+                    <span class="text-sm ${isCurrent ? 'text-white' : 'text-slate-400'}">${step}</span>
+                `;
+                container.appendChild(stepEl);
+            });
+        }
+
+        // Navigation
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            
+            // UI select state
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-white/10', 'text-white');
+                btn.classList.add('text-slate-400');
+            });
+            // Matching logic... simplified for now
+            
+            state.currentTab = tabId;
+            if (tabId === 'compendium') loadCompendiumNav();
+            if (tabId === 'characters') renderCharacterList();
+        }
+
+        // Oracle Logic
+        function openOracleConfig() {
+            const modal = document.getElementById('modal-container');
+            const char = state.activeCharacter !== null ? state.characters[state.activeCharacter] : null;
+            
+            modal.innerHTML = `
+                <div class="glass p-8 rounded-3xl w-full max-w-sm animate-in zoom-in-95 duration-200">
+                    <h3 class="font-outfit text-2xl text-white mb-6 flex items-center gap-2">
+                        <svg class="w-6 h-6 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /></svg>
+                        Oráculo
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between p-3 glass rounded-xl">
+                            <span class="text-sm font-medium">Vantagem (Conceito)</span>
+                            <input type="checkbox" id="check-adv" class="w-5 h-5 accent-violet-500">
+                        </div>
+                        <div class="flex items-center justify-between p-3 glass rounded-xl">
+                            <span class="text-sm font-medium">Desvantagem (Problema)</span>
+                            <input type="checkbox" id="check-dis" class="w-5 h-5 accent-rose-500">
+                        </div>
+                        
+                        <div class="p-4 glass rounded-xl space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium">Marcador Relevante (+1)</span>
+                                <input type="checkbox" id="check-marker" class="w-5 h-5 accent-emerald-500">
+                            </div>
+                            <select id="select-marker" class="w-full bg-white/5 border border-white/10 rounded-lg p-2 text-xs text-slate-300">
+                                ${char && char.markers.length > 0 
+                                    ? char.markers.map(m => `<option value="${m}">${m}</option>`).join('')
+                                    : '<option value="">Sem marcadores disponíveis</option>'}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 mt-8">
+                        <button onclick="closeModal()" class="flex-1 py-3 text-slate-400 font-semibold">Cancelar</button>
+                        <button onclick="applyRoll()" class="flex-1 py-3 bg-violet-500 rounded-xl text-white font-semibold shadow-lg shadow-violet-500/20">Rolar Dados</button>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function applyRoll() {
+            const adv = document.getElementById('check-adv').checked;
+            const dis = document.getElementById('check-dis').checked;
+            const bonus = document.getElementById('check-marker').checked ? 1 : 0;
+            const markerName = document.getElementById('select-marker').value;
+            
+            closeModal();
+            rollOracle({ adv, dis, bonus, markerName });
+        }
+
+        function rollOracle(opts = { adv: false, dis: false, bonus: 0, markerName: "" }) {
+            const display = document.getElementById('dice-display');
+            const resultBox = document.getElementById('oracle-result');
+            const title = document.getElementById('oracle-title');
+            const desc = document.getElementById('oracle-desc');
+
+            display.classList.add('scale-90', 'rotate-12', 'opacity-50');
+            resultBox.classList.add('opacity-0');
+
+            setTimeout(() => {
+                let r1 = Math.floor(Math.random() * 6) + 1;
+                let r2 = Math.floor(Math.random() * 6) + 1;
+                let final;
+
+                if (opts.adv && !opts.dis) final = Math.max(r1, r2);
+                else if (opts.dis && !opts.adv) final = Math.min(r1, r2);
+                else final = r1;
+
+                const resultWithBonus = final + opts.bonus;
+                const cappedResult = Math.min(Math.max(resultWithBonus, 1), 6);
+                
+                display.innerText = opts.bonus > 0 ? `${final}+${opts.bonus}` : final;
+                if (opts.adv || opts.dis) display.innerHTML = `<span class="text-xs absolute -top-2 opacity-50">${r1},${r2} -></span> ${final}${opts.bonus ? '+'+opts.bonus : ''}`;
+                
+                display.classList.remove('scale-90', 'rotate-12', 'opacity-50');
+                
+                const out = ORACLE_MAP[cappedResult];
+                title.innerText = out.title;
+                desc.innerText = out.desc;
+                resultBox.classList.remove('opacity-0');
+
+                // Combat Integration
+                if (state.combat.active && cappedResult <= 3) {
+                    handleCombatFailure();
+                }
+                
+                if (opts.bonus > 0 || opts.adv || opts.dis) {
+                    const logMsg = `Rolagem: ${final} ${opts.adv?'(Vant)':''} ${opts.dis?'(Desv)':''} ${opts.bonus?'+'+opts.markerName:''} = ${cappedResult} -> ${out.title}`;
+                    addCombatLog(logMsg);
+                    
+                    // Sync roll with Adventure Log (Supabase)
+                    if (state.online) {
+                        pushMessage({
+                            room_id: state.room.id,
+                            sender_name: state.player.name,
+                            content: logMsg,
+                            type: 'dice',
+                            metadata: {
+                                r1, r2, final, bonus: opts.bonus, 
+                                marker: opts.markerName, 
+                                result: cappedResult, 
+                                title: out.title, 
+                                desc: out.desc
+                            }
+                        });
+                    }
+                }
+            }, 500);
+        }
+
+        function handleCombatFailure() {
+            if (state.combat.active && state.combat.currentActor !== null) {
+                const char = state.characters[state.combat.currentActor];
+                char.stress = Math.min((char.stress || 0) + 1, 10);
+                localStorage.setItem('fufs_chars', JSON.stringify(state.characters));
+                renderCharacterList();
+                addCombatLog(`<span class="text-rose-400 font-bold"> FALHA!</span> ${char.name} sofre 1 de Estresse e perde a iniciativa.`);
+                renderCombatActors();
+                
+                // Show "Pass Turn" alert
+                const display = document.getElementById('oracle-desc');
+                display.innerHTML = `<span class="text-rose-500 font-bold underline animate-pulse">PASSE A VEZ!</span> (Sofrido 1 Estresse)`;
+            }
+        }
+
+        // Combat Module
+        function toggleCombat() {
+            state.combat.active = !state.combat.active;
+            const btn = document.getElementById('combat-toggle-btn');
+            
+            if (state.combat.active) {
+                btn.innerText = "Encerrar Combate";
+                btn.classList.replace('bg-violet-500', 'bg-rose-600');
+                
+                // Add all characters to combat by default
+                state.combat.participants = state.characters.map((c, i) => ({
+                    id: 'pc-' + i,
+                    name: c.name,
+                    type: 'pc',
+                    charIndex: i
+                }));
+                
+                addCombatLog("⚔️ O combate começou!");
+            } else {
+                btn.innerText = "Iniciar Combate";
+                btn.classList.replace('bg-rose-600', 'bg-violet-500');
+                state.combat.participants = [];
+                state.combat.currentActor = null;
+                addCombatLog("🏳️ Combate encerrado.");
+            }
+            
+            localStorage.setItem('fufs_combat', JSON.stringify(state.combat));
+            renderCombatActors();
+
+            // Sync with Supabase
+            if (state.online) syncCombatState();
+        }
+
+        async function syncCombatState() {
+            if (!state.room) return;
+            const { error } = await state.supabase
+                .from('rooms')
+                .update({ 
+                    combat_active: state.combat.active,
+                    current_actor_id: state.combat.currentActor !== null ? state.combat.currentActor.toString() : null
+                })
+                .eq('id', state.room.id);
+            
+            if (error) console.error("Erro ao sincronizar combate:", error);
+        }
+
+        function addCombatLog(msg) {
+            // Check if it's a raw string or already contains HTML
+            const cleanMsg = msg.replace(/<[^>]*>?/gm, '');
+            
+            // Redirect to main Adventure Log
+            addSystemMessage(cleanMsg);
+        }
+
+        function renderCombatActors() {
+            const container = document.getElementById('combat-actors');
+            container.innerHTML = '';
+            
+            if (state.combat.participants.length === 0) {
+                container.innerHTML = '<div class="text-center py-20 text-slate-500 italic">Nenhum combatente. Adicione heróis ou inimigos.</div>';
+                return;
+            }
+
+            state.combat.participants.forEach((p, index) => {
+                const isPC = p.type === 'pc';
+                const char = isPC ? state.characters[p.charIndex] : p;
+                const isCurrent = state.combat.currentActor === p.charIndex && isPC;
+
+                const actorEl = document.createElement('div');
+                actorEl.className = `glass p-6 rounded-3xl flex items-center justify-between transition-all ${isCurrent ? 'ring-2 ring-violet-500 bg-violet-500/10' : ''}`;
+                
+                if (isPC) {
+                    actorEl.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-violet-500 text-white rounded-2xl flex items-center justify-center font-outfit text-xl">${char.name[0]}</div>
+                            <div>
+                                <h4 class="font-outfit text-white">${char.name}</h4>
+                                <div class="flex gap-1 mt-1">
+                                    ${Array(10).fill(0).map((_, i) => `<div class="w-2.5 h-1.5 rounded-full ${i < char.stress ? 'bg-rose-500' : 'bg-white/10'}"></div>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            ${isCurrent ? '<span class="text-[10px] text-violet-400 font-bold uppercase tracking-widest animate-pulse">Iniciativa</span>' : ''}
+                            <button onclick="setInitiative(${p.charIndex})" class="px-4 py-2 text-xs font-bold glass-hover rounded-xl ${isCurrent ? 'text-violet-500' : 'text-slate-400'}">
+                                ${isCurrent ? 'Agindo' : 'Tomar Vez'}
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    // Enemy Clock
+                    actorEl.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-rose-500/20 text-rose-400 rounded-2xl flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-outfit text-white">${p.name}</h4>
+                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Ameaça: ${p.segments} Segmentos</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-1">
+                            ${Array(p.segments).fill(0).map((_, i) => `
+                                <button onclick="tickEnemy('${p.id}', ${i})" class="w-8 h-8 rounded-lg border-2 transition-all ${i < p.filled ? 'bg-rose-500 border-rose-500' : 'border-white/10 hover:border-white/30'}"></button>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+                
+                container.appendChild(actorEl);
+            });
+        }
+
+        function setInitiative(index) {
+            state.combat.currentActor = index;
+            state.activeCharacter = index; // Sync active character for rolls
+            addCombatLog(`📣 <b>${state.characters[index].name}</b> tomou a iniciativa!`);
+            renderCombatActors();
+            renderCharacterList();
+            localStorage.setItem('fufs_combat', JSON.stringify(state.combat));
+
+            if (state.online) syncCombatState();
+        }
+
+        function openEnemyCreator() {
+            const modal = document.getElementById('modal-container');
+            modal.innerHTML = `
+                <div class="glass p-8 rounded-3xl w-full max-w-sm animate-in zoom-in-95 duration-200">
+                    <h3 class="font-outfit text-2xl text-white mb-6">Nova Ameaça</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Nome do Inimigo/Obstáculo</label>
+                            <input id="enemy-name" type="text" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-violet-500 focus:outline-none transition-colors" placeholder="Ex: Ogro das Cavernas">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Dificuldade (Segmentos)</label>
+                            <div class="flex gap-2">
+                                <button onclick="selectSegments(4)" class="seg-btn flex-1 py-2 glass rounded-lg border-emerald-500/30 text-emerald-400 border text-xs">Fácil (4)</button>
+                                <button onclick="selectSegments(6)" class="seg-btn flex-1 py-2 glass rounded-lg border-amber-500/30 text-amber-400 border text-xs">Médio (6)</button>
+                                <button onclick="selectSegments(8)" class="seg-btn flex-1 py-2 glass rounded-lg border-rose-500/30 text-rose-400 border text-xs">Difícil (8)</button>
+                            </div>
+                            <input type="hidden" id="enemy-segments" value="4">
+                        </div>
+                    </div>
+                    <div class="flex gap-4 mt-8">
+                        <button onclick="closeModal()" class="flex-1 py-3 text-slate-400 font-semibold">Cancelar</button>
+                        <button onclick="saveEnemy()" class="flex-1 py-3 bg-rose-600 rounded-xl text-white font-semibold shadow-lg shadow-rose-600/20">Gerar Ameaça</button>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function selectSegments(n) {
+            document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('bg-white/10'));
+            event.target.classList.add('bg-white/10');
+            document.getElementById('enemy-segments').value = n;
+        }
+
+        function saveEnemy() {
+            const name = document.getElementById('enemy-name').value;
+            const segments = parseInt(document.getElementById('enemy-segments').value);
+            
+            if (!name) return alert("Dê um nome à ameaça!");
+            
+            state.combat.participants.push({
+                id: 'npc-' + Date.now(),
+                name,
+                type: 'npc',
+                segments,
+                filled: 0
+            });
+            
+            addCombatLog(`⚠️ Nova ameaça: <b>${name}</b> entrou na cena.`);
+            closeModal();
+            renderCombatActors();
+        }
+
+        function tickEnemy(id, index) {
+            const enemy = state.combat.participants.find(p => p.id === id);
+            if (enemy) {
+                enemy.filled = index + 1;
+                if (enemy.filled >= enemy.segments) {
+                    addCombatLog(`✨ Ameaça <b>${enemy.name}</b> foi superada!`);
+                }
+                renderCombatActors();
+            }
+        }
+
+        // Solo Generator
+        function generateSolo(type) {
+            const list = SOLO_DATABASE[type];
+            const result = list[Math.floor(Math.random() * list.length)];
+            const box = document.getElementById('solo-result-box');
+            const typeLabel = document.getElementById('solo-result-type');
+            const text = document.getElementById('solo-result-text');
+
+            typeLabel.innerText = type.charAt(0).toUpperCase() + type.slice(1);
+            text.innerText = result;
+            box.classList.remove('hidden');
+            box.classList.add('animate-in', 'fade-in', 'slide-in-from-bottom-4', 'duration-500');
+
+            // Sync with Adventure Log
+            addSystemMessage(`🔮 Oráculo Solo (${type}): ${result}`);
+        }
+
+        // Character Management
+        function viewCharacterSheet(index) {
+            const char = state.characters[index];
+            const isActive = state.activeCharacter === index;
+            const modal = document.getElementById('modal-container');
+            
+            modal.innerHTML = `
+                <div class="glass p-8 rounded-[40px] w-full max-w-2xl animate-in zoom-in-95 duration-200">
+                    <div class="flex justify-between items-start mb-8">
+                        <div>
+                            <h3 class="font-outfit text-4xl text-white mb-2">${char.name}</h3>
+                            <div class="flex gap-2">
+                                ${char.markers.map(m => `<span class="px-3 py-1 bg-violet-500/20 text-violet-400 rounded-full text-xs font-bold">${m}</span>`).join('')}
+                            </div>
+                        </div>
+                        <button onclick="closeModal()" class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div class="space-y-6">
+                            <section>
+                                <h4 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Conceito</h4>
+                                <p class="text-slate-200 leading-relaxed">${char.concept}</p>
+                            </section>
+                            <section>
+                                <h4 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Problema</h4>
+                                <p class="text-slate-200">${char.problem}</p>
+                            </section>
+                        </div>
+                        
+                        <div class="glass p-6 rounded-3xl">
+                            <label class="text-[10px] font-bold text-rose-500 uppercase tracking-widest block mb-4">Estresse (${char.stress || 0}/10)</label>
+                            <div class="grid grid-cols-5 gap-2">
+                                ${Array(10).fill(0).map((_, i) => `<div class="h-3 rounded-full ${i < (char.stress || 0) ? 'bg-rose-500' : 'bg-white/10'}"></div>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 pt-6 border-t border-white/5">
+                        <button onclick="setActiveHero(${index})" class="flex-1 py-4 ${isActive ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-violet-500 text-white'} rounded-2xl font-bold transition-all">
+                            ${isActive ? '✓ Herói Ativo' : 'Tornar Ativo'}
+                        </button>
+                        <button onclick="shareCharacter(${index})" class="px-6 py-4 glass rounded-2xl text-violet-400 font-bold hover:bg-violet-500/10 transition-all">Compartilhar</button>
+                        <button onclick="openCharacterEditor(${index})" class="px-6 py-4 glass rounded-2xl text-white font-bold">Editar</button>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function setActiveHero(index) {
+            state.activeCharacter = index;
+            renderCharacterList();
+            viewCharacterSheet(index);
+            addCombatLog(`👤 <b>${state.characters[index].name}</b> é agora o seu herói ativo.`);
+        }
+
+        function renderCharacterList() {
+            const listEl = document.getElementById('character-list');
+            listEl.innerHTML = '';
+            
+            if (state.characters.length === 0) {
+                listEl.innerHTML = '<div class="col-span-full py-20 text-center text-slate-500 italic">Nenhum herói encontrado. Comece sua história agora.</div>';
+                return;
+            }
+
+            state.characters.forEach((char, index) => {
+                const isActive = state.activeCharacter === index;
+                const card = document.createElement('div');
+                card.className = `glass p-6 rounded-3xl glass-hover cursor-pointer transition-all ${isActive ? 'ring-2 ring-violet-500 bg-violet-500/5' : ''}`;
+                card.onclick = () => viewCharacterSheet(index);
+                card.innerHTML = `
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 bg-violet-500/20 rounded-2xl flex items-center justify-center text-violet-400 font-outfit text-xl">
+                            ${char.name[0]}
+                        </div>
+                        <div class="px-3 py-1 bg-violet-500/10 rounded-full text-[10px] font-bold text-violet-500 uppercase tracking-tighter">Estresse: ${char.stress || 0}/10</div>
+                    </div>
+                    <h4 class="font-outfit text-xl text-white mb-1">${char.name}</h4>
+                    <p class="text-sm text-slate-400 line-clamp-1">${char.concept}</p>
+                    ${isActive ? '<div class="mt-4 text-[10px] text-violet-400 font-bold uppercase tracking-widest flex items-center gap-1"><span class="w-1.5 h-1.5 bg-violet-500 rounded-full animate-pulse"></span> Em Uso</div>' : ''}
+                `;
+                listEl.appendChild(card);
+            });
+        }
+
+        let tempMarkers = [];
+
+        function openCharacterEditor(index = null) {
+            const char = index !== null ? state.characters[index] : { name: '', concept: '', problem: '', markers: [] };
+            tempMarkers = [...char.markers];
+            
+            const modal = document.getElementById('modal-container');
+            modal.innerHTML = `
+                <div class="glass p-8 rounded-[40px] w-full max-w-2xl animate-in zoom-in-95 duration-200 overflow-y-auto max-h-[90vh]">
+                    <h3 class="font-outfit text-3xl text-white mb-6">${index !== null ? 'Editar Herói' : 'Novo Herói'}</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Nome do Herói</label>
+                                <input id="edit-char-name" type="text" value="${char.name}" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-violet-500 focus:outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Conceito Único</label>
+                                <textarea id="edit-char-concept" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-violet-500 focus:outline-none transition-all h-24 whitespace-pre-wrap">${char.concept}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Problema Pessoal</label>
+                                <textarea id="edit-char-problem" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-violet-500 focus:outline-none transition-all h-24 whitespace-pre-wrap">${char.problem}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Marcas e Vantagens (Enter para adicionar)</label>
+                                <div id="tag-container" class="flex flex-wrap gap-2 mb-3"></div>
+                                <input id="tag-input" type="text" onkeydown="handleTagInput(event)" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-violet-500 focus:outline-none transition-all" placeholder="Ex: Espadachim">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button onclick="closeModal()" class="flex-1 py-4 text-slate-400 font-bold hover:text-white transition-colors">Cancelar</button>
+                        ${index !== null ? `<button onclick="deleteCharacter(${index})" class="px-6 py-4 text-rose-500 font-bold hover:bg-rose-500/10 rounded-2xl transition-all">Apagar</button>` : ''}
+                        <button onclick="saveCharacter(${index})" class="flex-1 bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-violet-500/20 transition-all">
+                            ${index !== null ? 'Atualizar Ficha' : 'Criar Herói'}
+                        </button>
+                    </div>
+                </div>
+            `;
+            renderEditorTags();
+            modal.classList.remove('hidden');
+        }
+
+        function handleTagInput(e) {
+            if (e.key === 'Enter' || e.key === ',') {
+                e.preventDefault();
+                const val = e.target.value.trim().replace(',', '');
+                if (val && !tempMarkers.includes(val)) {
+                    tempMarkers.push(val);
+                    e.target.value = '';
+                    renderEditorTags();
+                }
+            } else if (e.key === 'Backspace' && e.target.value === '' && tempMarkers.length > 0) {
+                tempMarkers.pop();
+                renderEditorTags();
+            }
+        }
+
+        function renderEditorTags() {
+            const container = document.getElementById('tag-container');
+            container.innerHTML = tempMarkers.map((tag, i) => `
+                <div class="tag-bubble">
+                    ${tag}
+                    <span onclick="removeTag(${i})" class="tag-remove">&times;</span>
+                </div>
+            `).join('');
+        }
+
+        function removeTag(index) {
+            tempMarkers.splice(index, 1);
+            renderEditorTags();
+        }
+
+
+        async function saveCharacter(index) {
+            const name = document.getElementById('edit-char-name').value;
+            if (!name) return alert('Seu herói precisa de um nome!');
+
+            const newChar = {
+                name,
+                concept: document.getElementById('edit-char-concept').value,
+                problem: document.getElementById('edit-char-problem').value,
+                stress: index !== null ? state.characters[index].stress : 0,
+                markers: [...tempMarkers]
+            };
+
+            if (state.session) {
+                // Save to Supabase
+                const currentChar = state.characters[index];
+                const { data, error } = await state.supabase
+                    .from('characters')
+                    .upsert({
+                        id: currentChar?.supabase_id,
+                        owner_id: state.session.user.id,
+                        name: newChar.name,
+                        data: newChar
+                    })
+                    .select()
+                    .single();
+
+                if (error) return alert("Erro ao salvar no banco: " + error.message);
+                
+                newChar.supabase_id = data.id;
+                if (index !== null) state.characters[index] = newChar;
+                else state.characters.push(newChar);
+            } else {
+                // Save to LocalStorage
+                if (index !== null) state.characters[index] = newChar;
+                else state.characters.push(newChar);
+                localStorage.setItem('fufs_chars', JSON.stringify(state.characters));
+            }
+
+            closeModal();
+            renderCharacterList();
+        }
+
+        async function deleteCharacter(index) {
+            const char = state.characters[index];
+            if (confirm(`Tem certeza que deseja apagar ${char.name}?`)) {
+                if (state.session && char.supabase_id) {
+                    const { error } = await state.supabase
+                        .from('characters')
+                        .delete()
+                        .eq('id', char.supabase_id);
+                    if (error) return alert("Erro ao apagar do banco: " + error.message);
+                }
+
+                state.characters.splice(index, 1);
+                if (!state.session) localStorage.setItem('fufs_chars', JSON.stringify(state.characters));
+                
+                if (state.activeCharacter === index) state.activeCharacter = null;
+                else if (state.activeCharacter > index) state.activeCharacter--;
+                
+                closeModal();
+                renderCharacterList();
+            }
+        }
+
+        function toggleSettings() {
+            const modal = document.getElementById('modal-container');
+            modal.innerHTML = `
+                <div class="glass p-8 rounded-3xl w-full max-w-lg animate-in zoom-in-95 duration-200">
+                    <h3 class="font-outfit text-2xl text-white mb-6">Ajustes & Conectividade</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="text-[10px] uppercase font-bold text-slate-500 tracking-widest mb-2 block">Configuração Supabase (Manual)</label>
+                            <div class="space-y-3">
+                                <input id="set-sb-url" type="text" placeholder="Supabase URL" value="${SB_URL}" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-violet-500 focus:outline-none transition-all">
+                                <input id="set-sb-key" type="password" placeholder="Supabase Anon Key" value="${SB_KEY}" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-violet-500 focus:outline-none transition-all">
+                            </div>
+                            <p class="text-[10px] text-slate-500 mt-2">Dica: Se você configurou as variáveis no Vercel, deixe em branco para usar o automático.</p>
+                        </div>
+
+                        <div class="flex gap-4 pt-4">
+                            <button onclick="saveSettings()" class="flex-1 py-4 bg-violet-500 hover:bg-violet-600 text-white font-bold rounded-2xl shadow-lg shadow-violet-500/20 transition-all">Salvar e Reiniciar</button>
+                            <button onclick="closeModal()" class="flex-1 py-4 glass border-white/10 hover:bg-white/5 text-slate-400 font-bold rounded-2xl transition-all">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function saveSettings() {
+            const url = document.getElementById('set-sb-url').value.trim();
+            const key = document.getElementById('set-sb-key').value.trim();
+            
+            if (url) localStorage.setItem('fufs_sb_url', url);
+            else localStorage.removeItem('fufs_sb_url');
+            
+            if (key) localStorage.setItem('fufs_sb_key', key);
+            else localStorage.removeItem('fufs_sb_key');
+            
+            location.reload();
+        }
+
+        // Sharing Logic
+        async function shareCharacter(index) {
+            const char = state.characters[index];
+            const btn = event.target;
+            const originalText = btn.innerText;
+            
+            if (!state.supabase) {
+                return alert("O Supabase não está configurado. O compartilhamento em rede está desativado.");
+            }
+
+            try {
+                btn.innerText = "GERANDO...";
+                btn.disabled = true;
+
+                // Save to 'characters' table without a room_id to mark it as a "shared template"
+                const { data, error } = await state.supabase
+                    .from('characters')
+                    .insert([{
+                        name: char.name,
+                        data: char,
+                        is_npc: char.is_npc || false
+                    }])
+                    .select()
+                    .single();
+
+                if (error) throw error;
+
+                // Use the UUID as the share code
+                const code = data.id;
+
+                const shareModal = document.createElement('div');
+                shareModal.className = "fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4";
+                shareModal.innerHTML = `
+                    <div class="glass p-8 rounded-3xl w-full max-w-sm animate-in zoom-in-95 duration-200">
+                        <h4 class="font-outfit text-xl text-white mb-2">Código do Herói</h4>
+                        <p class="text-slate-400 text-sm mb-6">Ficha salva no Supabase. Compartilhe o ID abaixo para importação.</p>
+                        <div class="bg-black/40 p-4 rounded-xl mb-6 flex items-center justify-between border border-white/5">
+                            <code id="share-code" class="text-violet-400 font-mono text-[10px] break-all">${code}</code>
+                            <button onclick="copyToClipboard('${code}')" class="ml-4 text-violet-400 hover:text-white transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+                            </button>
+                        </div>
+                        <button onclick="this.parentElement.parentElement.remove()" class="w-full py-3 bg-violet-500 rounded-xl text-white font-semibold">Entendido</button>
+                    </div>
+                `;
+                document.body.appendChild(shareModal);
+            } catch (error) {
+                console.error(error);
+                alert("Erro ao salvar no Supabase: " + (error.message || "Verifique sua conexão"));
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const codeEl = document.getElementById('share-code');
+                const originalColor = codeEl.style.color;
+                codeEl.style.color = "#10b981";
+                setTimeout(() => codeEl.style.color = originalColor, 2000);
+            });
+        }
+
+        function openImportModal() {
+            const modal = document.getElementById('modal-container');
+            modal.innerHTML = `
+                <div class="glass p-8 rounded-3xl w-full max-w-lg animate-in zoom-in-95 duration-200">
+                    <h3 class="font-outfit text-2xl text-white mb-4">Importar Herói</h3>
+                    <p class="text-sm text-slate-400 mb-6">Cole o código do personagem abaixo.</p>
+                    
+                    <textarea id="import-code" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-violet-500 focus:outline-none transition-colors h-40 font-mono text-[10px] text-violet-400 mb-6" placeholder="Ex: 7b226e616d65223a22..."></textarea>
+                    
+                    <div class="flex gap-4">
+                        <button onclick="closeModal()" class="flex-1 py-3 text-slate-400 font-semibold">Cancelar</button>
+                        <button onclick="processImport()" class="flex-1 py-3 bg-emerald-600 rounded-xl text-white font-semibold shadow-lg shadow-emerald-600/20">Importar</button>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+        async function processImport() {
+            const raw = document.getElementById('import-code').value.trim();
+            if (!raw) return alert("Cole o código!");
+
+            let charData;
+
+            try {
+                // Check if it's a UUID (Supabase ID) or JSON blob
+                if (raw.length > 30 && raw.includes('-')) {
+                    if (!state.supabase) return alert("Supabase não configurado para importar via ID.");
+                    
+                    const { data, error } = await state.supabase
+                        .from('characters')
+                        .select('data')
+                        .eq('id', raw)
+                        .single();
+                    
+                    if (error || !data) throw new Error("Ficha não encontrada no Supabase.");
+                    charData = data.data;
+                } else {
+                    charData = JSON.parse(raw);
+                }
+                
+                if (!charData.name || !charData.concept) throw new Error("Ficha inválida.");
+                
+                state.characters.push(charData);
+                localStorage.setItem('fufs_chars', JSON.stringify(state.characters));
+                renderCharacterList();
+                closeModal();
+                alert("Herói importado com sucesso: " + charData.name);
+            } catch (e) {
+                alert("Erro na importação: " + e.message);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal-container').classList.add('hidden');
+        }
+
+        // Compendium Utility
+        const CHAPTERS = [
+            { id: "00", title: "Sumário" },
+            { id: "01", title: "Introdução" },
+            { id: "02", title: "Como Jogar" },
+            { id: "03", title: "Criação de Personagem" },
+            { id: "06", title: "Combate e Conflitos" },
+            { id: "07", title: "Ferramentas do Mestre" },
+            { id: "08", title: "Reino de Valderia" }
+        ];
+
+        function loadCompendiumNav() {
+            const nav = document.getElementById('compendium-nav');
+            nav.innerHTML = '';
+            CHAPTERS.forEach(ch => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3 rounded-xl transition-all hover:bg-white/5 text-slate-400 hover:text-white text-sm";
+                btn.innerText = ch.title;
+                btn.onclick = () => loadChapter(ch.id);
+                nav.appendChild(btn);
+            });
+        }
+
+        async function loadChapter(id) {
+            const viewer = document.getElementById('compendium-viewer');
+            viewer.innerHTML = '<div class="text-center py-20 text-slate-500 animate-pulse">Carregando sabedoria...</div>';
+            
+            try {
+                // Find file in /content
+                const response = await fetch(`./content/${id}${id === '00' ? ' - Sumário' : ''}${id === '01' ? ' - Introdução ao RPG e ao FUFS' : ''}${id === '02' ? ' - Como Jogar FUFS' : ''}${id === '03' ? ' - Criando um Personagem' : ''}${id === '06' ? ' - Combate e Conflitos' : ''}${id === '07' ? ' - Ferramentas do Mestre e Jogador Solo' : ''}${id === '08' ? ' - Cenário de Campanha - Reino de Valderia' : ''}.md`);
+                if (!response.ok) throw new Error();
+                const text = await response.text();
+                
+                // Professional Markdown parsing with marked.js
+                viewer.innerHTML = marked.parse(text);
+                
+                // Custom styles for markdown content
+                viewer.querySelectorAll('h1').forEach(h => h.classList.add('font-outfit', 'text-3xl', 'mb-6', 'text-white'));
+                viewer.querySelectorAll('h2').forEach(h => h.classList.add('font-outfit', 'text-2xl', 'mt-8', 'mb-4', 'text-violet-400'));
+                viewer.querySelectorAll('h3').forEach(h => h.classList.add('font-outfit', 'text-xl', 'mt-6', 'mb-3', 'text-violet-300'));
+                viewer.querySelectorAll('table').forEach(t => t.classList.add('w-full', 'border-collapse', 'my-6', 'text-sm'));
+                viewer.querySelectorAll('th').forEach(th => th.classList.add('bg-white/10', 'p-2', 'border', 'border-white/10', 'text-left'));
+                viewer.querySelectorAll('td').forEach(td => td.classList.add('p-2', 'border', 'border-white/10'));
+            } catch (err) {
+                viewer.innerHTML = '<div class="text-rose-500 py-20 text-center">Erro ao carregar capítulo. Certifique-se de que os arquivos estão na pasta /content.</div>';
+            }
+        }
+
+        // --- Supabase & Online Logic ---
+
+        // --- Supabase & Online Logic ---
+
+        let SB_URL = window.ENV?.SB_URL || localStorage.getItem('fufs_sb_url') || "";
+        let SB_KEY = window.ENV?.SB_KEY || localStorage.getItem('fufs_sb_key') || "";
+
+        function initSupabase() {
+            if (!SB_URL || !SB_KEY) {
+                console.warn("Supabase URL/Key não encontradas.");
+                updateAuthSidebar(false);
+                return;
+            }
+            try {
+                state.supabase = supabase.createClient(SB_URL, SB_KEY);
+                console.log("Supabase inicializado.");
+                updateAuthSidebar(true);
+                
+                const savedName = localStorage.getItem('fufs_player_name');
+                if (savedName) state.player.name = savedName;
+            } catch (e) {
+                console.error("Erro ao iniciar Supabase:", e);
+                updateAuthSidebar(false);
+            }
+        }
+
+        function updateAuthSidebar(isConnected) {
+            const area = document.getElementById('auth-sidebar-area');
+            if (!area) return;
+
+            if (!isConnected) {
+                area.innerHTML = `
+                    <button onclick="toggleSettings()" class="w-full flex items-center gap-3 p-3 rounded-xl transition-all bg-rose-500/10 text-rose-400 hover:bg-rose-500/20" title="Configurar Supabase">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.268 17c-.77 1.333.192 3 1.732 3z" /></svg>
+                        <span class="hidden md:block font-medium">Offline</span>
+                    </button>
+                `;
+            } else {
+                // If connected but not logged in, show login button
+                if (!state.session) {
+                    area.innerHTML = `
+                        <button onclick="openAuthModal()" class="w-full flex items-center gap-3 p-3 rounded-xl transition-all bg-violet-500/10 text-violet-400 hover:bg-violet-500/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
+                            <span class="hidden md:block font-medium">Entrar</span>
+                        </button>
+                    `;
+                }
+                // If logged in, updateSession will handle it
+            }
+        }
+
+        async function onCreateRoom() {
+            const code = document.getElementById('room-code-input').value.toUpperCase().trim();
+            const playerName = document.getElementById('player-name-input').value.trim();
+            
+            if (!code || !playerName) return alert("Preencha o código da sala e seu nome!");
+            
+            state.player.name = playerName;
+            localStorage.setItem('fufs_player_name', playerName);
+
+            const { data, error } = await state.supabase
+                .from('rooms')
+                .insert([{ code, gm_id: 'guest-gm-' + Date.now(), name: code }])
+                .select()
+                .single();
+
+            if (error) {
+                if (error.code === '23505') return alert("Esta sala já existe! Tente outro código ou entre nela.");
+                return alert("Erro ao criar sala: " + error.message);
+            }
+
+            enterRoom(data);
+        }
+
+        async function onJoinRoom() {
+            const code = document.getElementById('room-code-input').value.toUpperCase().trim();
+            const playerName = document.getElementById('player-name-input').value.trim();
+            
+            if (!code || !playerName) return alert("Preencha o código da sala e seu nome!");
+            
+            state.player.name = playerName;
+            localStorage.setItem('fufs_player_name', playerName);
+
+            const { data, error } = await state.supabase
+                .from('rooms')
+                .select('*')
+                .eq('code', code)
+                .single();
+
+            if (error || !data) return alert("Sala não encontrada!");
+
+            enterRoom(data);
+        }
+
+        function enterRoom(roomData) {
+            state.room = roomData;
+            state.online = true;
+            
+            document.getElementById('multiplayer-setup').classList.add('hidden');
+            document.getElementById('multiplayer-active').classList.remove('hidden');
+            document.getElementById('active-room-code').innerText = roomData.code;
+            
+            subscribeToRoom(roomData.id);
+            loadMessages(roomData.id);
+            
+            addSystemMessage(`Você entrou na sala ${roomData.code} como ${state.player.name}`);
+        }
+
+        function leaveRoom() {
+            state.online = false;
+            state.room = null;
+            document.getElementById('multiplayer-setup').classList.remove('hidden');
+            document.getElementById('multiplayer-active').classList.add('hidden');
+            // Unsubscribe logic would go here
+        }
+
+        function subscribeToRoom(roomId) {
+            // Subscribe to Messages
+            state.supabase
+                .channel(`room-msg-${roomId}`)
+                .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: `room_id=eq.${roomId}` }, payload => {
+                    handleNewMessage(payload.new);
+                })
+                .subscribe();
+
+            // Subscribe to Room State (Combat)
+            state.supabase
+                .channel(`room-state-${roomId}`)
+                .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'rooms', filter: `id=eq.${roomId}` }, payload => {
+                    handleRoomUpdate(payload.new);
+                })
+                .subscribe();
+        }
+
+        function handleRoomUpdate(updatedRoom) {
+            state.room = updatedRoom;
+            
+            // Sync Combat UI
+            if (updatedRoom.combat_active !== state.combat.active) {
+                state.combat.active = updatedRoom.combat_active;
+                if (state.combat.active) {
+                    state.combat.participants = state.characters.map((c, i) => ({ id: 'pc-' + i, name: c.name, type: 'pc', charIndex: i }));
+                } else {
+                    state.combat.participants = [];
+                    state.combat.currentActor = null;
+                }
+                updateCombatUI();
+            }
+
+            if (updatedRoom.current_actor_id !== null) {
+                const actorIdx = parseInt(updatedRoom.current_actor_id);
+                if (state.combat.currentActor !== actorIdx) {
+                    state.combat.currentActor = actorIdx;
+                    updateCombatUI();
+                }
+            }
+        }
+
+        function updateCombatUI() {
+            const btn = document.getElementById('combat-toggle-btn');
+            if (state.combat.active) {
+                btn.innerText = "Encerrar Combate";
+                btn.classList.replace('bg-violet-500', 'bg-rose-600');
+            } else {
+                btn.innerText = "Iniciar Combate";
+                btn.classList.replace('bg-rose-600', 'bg-violet-500');
+            }
+            renderCombatActors();
+        }
+
+        async function loadMessages(roomId) {
+            const { data, error } = await state.supabase
+                .from('messages')
+                .select('*')
+                .eq('room_id', roomId)
+                .order('created_at', { ascending: true })
+                .limit(50);
+
+            if (data) {
+                state.messages = data;
+                renderMessages();
+            }
+        }
+
+        function handleNewMessage(msg) {
+            state.messages.push(msg);
+            renderMessages();
+        }
+
+        async function sendMessage() {
+            const textarea = document.getElementById('chat-textarea');
+            const content = textarea.value.trim();
+            if (!content || !state.online) return;
+
+            textarea.value = '';
+            
+            await pushMessage({
+                room_id: state.room.id,
+                sender_name: state.player.name,
+                content: content,
+                type: 'text'
+            });
+        }
+
+        async function pushMessage(msgData) {
+            const { error } = await state.supabase
+                .from('messages')
+                .insert([msgData]);
+
+            if (error) console.error("Erro ao enviar:", error);
+        }
+
+        function addSystemMessage(text) {
+            const msg = {
+                id: Date.now(),
+                sender_name: 'SISTEMA',
+                content: text,
+                type: 'system',
+                created_at: new Date().toISOString()
+            };
+            state.messages.push(msg);
+            renderMessages();
+
+            // Sync system messages to room if online
+            if (state.online) {
+                pushMessage({
+                    room_id: state.room.id,
+                    sender_name: 'SISTEMA',
+                    content: text,
+                    type: 'system'
+                });
+            }
+        }
+
+        function renderMessages() {
+            const container = document.getElementById('chat-messages');
+            container.innerHTML = '';
+            
+            state.messages.forEach(msg => {
+                const isSystem = msg.type === 'system';
+                const isDice = msg.type === 'dice';
+                const isMe = msg.sender_name === state.player.name;
+                
+                const msgEl = document.createElement('div');
+                msgEl.className = `flex flex-col ${isSystem ? 'items-center text-center' : isMe ? 'items-end' : 'items-start'} animate-in fade-in slide-in-from-bottom-2 duration-300 w-full mb-4`;
+                
+                if (isSystem) {
+                    msgEl.innerHTML = `<span class="px-4 py-1.5 bg-white/5 border border-white/5 rounded-full text-[10px] text-slate-500 uppercase font-bold tracking-widest shadow-sm">${msg.content}</span>`;
+                } else if (isDice) {
+                    const meta = msg.metadata || {};
+                    const isSuccess = meta.result >= 4;
+                    const isFailure = meta.result <= 2;
+
+                    msgEl.innerHTML = `
+                        <div class="max-w-[90%] w-full sm:w-[420px] glass overflow-hidden rounded-[2rem] border ${isSuccess ? 'border-emerald-500/20' : isFailure ? 'border-rose-500/20' : 'border-amber-500/20'} relative group shadow-2xl transition-all hover:scale-[1.01]">
+                            <div class="px-6 py-3 bg-gradient-to-r ${isSuccess ? 'from-emerald-500/10 to-transparent' : isFailure ? 'from-rose-500/10 to-transparent' : 'from-amber-500/10 to-transparent'} flex items-center justify-between border-b border-white/5">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full ${isSuccess ? 'bg-emerald-500' : isFailure ? 'bg-rose-500' : 'bg-amber-500'} shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+                                    <span class="text-[10px] font-bold ${isMe ? 'text-violet-400' : 'text-slate-400'} uppercase tracking-tight">${msg.sender_name} rolou o Oráculo</span>
+                                </div>
+                                <span class="text-[8px] text-slate-500 uppercase font-mono tracking-widest">${new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                            </div>
+                            
+                            <div class="p-6 flex items-start gap-5">
+                                <div class="flex-none w-20 h-20 rounded-3xl bg-black/40 border border-white/5 flex flex-col items-center justify-center relative overflow-hidden ring-1 ring-white/10 shadow-inner">
+                                     <div class="absolute inset-0 bg-gradient-to-br ${isSuccess ? 'from-emerald-500/20' : isFailure ? 'from-rose-500/20' : 'from-amber-500/20'} opacity-30"></div>
+                                     <span class="text-4xl font-outfit text-white relative z-10 font-bold">${meta.final}</span>
+                                     <div class="flex gap-1 mt-1 opacity-50 relative z-10">
+                                        <span class="text-[9px] text-slate-300 font-mono">${meta.r1}</span>
+                                        <span class="text-[9px] text-slate-300 font-mono">+</span>
+                                        <span class="text-[9px] text-slate-300 font-mono">${meta.r2}</span>
+                                     </div>
+                                </div>
+                                
+                                <div class="flex-1 pt-1">
+                                    <h4 class="font-outfit text-2xl font-bold mb-1 ${isSuccess ? 'text-emerald-400' : isFailure ? 'text-rose-400' : 'text-amber-400'} leading-none tracking-tight">${meta.title}</h4>
+                                    <p class="text-[13px] text-slate-400 leading-snug mt-2 font-medium italic">"${meta.desc}"</p>
+                                    ${meta.marker ? `
+                                        <div class="mt-4 flex items-center gap-2">
+                                            <div class="px-2.5 py-1 bg-violet-500/10 border border-violet-500/20 rounded-lg flex items-center gap-2">
+                                                <svg class="w-3 h-3 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                                <span class="text-[10px] text-violet-400 font-bold uppercase tracking-wider">${meta.marker} ${meta.bonus > 0 ? '+'+meta.bonus : ''}</span>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    msgEl.innerHTML = `
+                        <div class="max-w-[85%] ${isMe ? 'bg-violet-600/10 border border-violet-500/20' : 'bg-white/5 border border-white/10'} p-5 rounded-[1.5rem] relative group shadow-xl backdrop-blur-md">
+                            <span class="text-[10px] font-bold ${isMe ? 'text-violet-400' : 'text-slate-400'} uppercase mb-2 block tracking-wider">${msg.sender_name}</span>
+                            <div class="text-white text-[15px] whitespace-pre-wrap leading-relaxed font-medium">${msg.content}</div>
+                            <div class="flex justify-between items-center mt-3 pt-3 border-t border-white/5">
+                                <span class="text-[8px] text-slate-600 font-mono uppercase tracking-widest">${new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                     <button class="text-[10px] text-slate-500 hover:text-white transition-colors">Responder</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                container.appendChild(msgEl);
+            });
+            
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Trigger on enter
+        document.getElementById('chat-textarea')?.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // --- Authentication ---
+        async function openAuthModal() {
+            const modal = document.getElementById('modal-container');
+            modal.innerHTML = `
+                <div class="glass p-10 rounded-[40px] w-full max-w-sm animate-in zoom-in-95 duration-200">
+                    <div id="auth-form" class="space-y-6">
+                        <div class="text-center mb-8">
+                            <div class="w-16 h-16 bg-violet-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <span class="font-outfit text-3xl text-white">F</span>
+                            </div>
+                            <h3 class="font-outfit text-2xl text-white">Bem-vindo</h3>
+                            <p class="text-slate-400 text-sm">Entre ou crie sua conta para salvar seus heróis na nuvem.</p>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <input id="auth-email" type="email" placeholder="Seu e-mail" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-violet-500 focus:outline-none transition-all">
+                            <input id="auth-password" type="password" placeholder="Sua senha" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-violet-500 focus:outline-none transition-all">
+                        </div>
+
+                        <div id="auth-actions" class="flex flex-col gap-3">
+                            <button onclick="handleLogin()" class="w-full py-4 bg-violet-500 hover:bg-violet-600 text-white font-bold rounded-2xl shadow-lg shadow-violet-500/20 transition-all">Entrar</button>
+                            <button onclick="handleRegister()" class="w-full py-4 glass border-white/10 hover:bg-white/5 text-white font-bold rounded-2xl transition-all">Criar Conta</button>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button onclick="closeModal()" class="text-slate-500 hover:text-white text-xs transition-colors">Depois eu faço isso</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        async function handleLogin() {
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+            if (!email || !password) return alert("Preencha todos os campos!");
+
+            const { data, error } = await state.supabase.auth.signInWithPassword({ email, password });
+            if (error) return alert("Erro no login: " + error.message);
+            
+            closeModal();
+            updateSession(data.session);
+        }
+
+        async function handleRegister() {
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+            if (!email || !password) return alert("Preencha todos os campos!");
+
+            const { data, error } = await state.supabase.auth.signUp({ email, password });
+            if (error) return alert("Erro no cadastro: " + error.message);
+            
+            alert("Conta criada! Verifique seu e-mail (se necessário) ou tente entrar.");
+        }
+
+        async function handleLogout() {
+            await state.supabase.auth.signOut();
+            updateSession(null);
+            location.reload(); // Hard reset for safety
+        }
+
+        async function updateSession(session) {
+            state.session = session;
+            const sidebar = document.getElementById('auth-sidebar-area');
+            
+            if (session) {
+                sidebar.innerHTML = `
+                    <div class="p-3 bg-violet-500/10 rounded-xl flex items-center justify-between">
+                        <div class="flex items-center gap-2 overflow-hidden">
+                            <div class="w-8 h-8 rounded-full bg-violet-500 flex items-center justify-center text-[10px] font-bold shrink-0">
+                                ${session.user.email[0].toUpperCase()}
+                            </div>
+                            <span class="text-xs text-violet-300 truncate font-semibold active-user-email">${session.user.email}</span>
+                        </div>
+                        <button onclick="handleLogout()" class="text-slate-500 hover:text-rose-500 transition-colors p-1" title="Sair">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
+                        </button>
+                    </div>
+                `;
+                document.getElementById('multiplayer-setup').classList.add('hidden'); // Simplified VTT flow
+                await loadCharacters();
+            } else {
+                sidebar.innerHTML = `
+                    <button onclick="openAuthModal()" class="w-full flex items-center gap-3 p-3 rounded-xl transition-all bg-violet-500/10 text-violet-400 hover:bg-violet-500/20">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
+                        <span class="hidden md:block font-medium">Entrar</span>
+                    </button>
+                `;
+            }
+        }
+
+        async function loadCharacters() {
+            if (state.session) {
+                const { data, error } = await state.supabase
+                    .from('characters')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                
+                if (data) {
+                    state.characters = data.map(dbChar => ({
+                        ...dbChar.data,
+                        supabase_id: dbChar.id
+                    }));
+                }
+            } else {
+                const saved = localStorage.getItem('fufs_chars');
+                if (saved) state.characters = JSON.parse(saved);
+            }
+            renderCharacterList();
+        }
+
+        // Initialize App
+        window.onload = async () => {
+            renderJourney();
+            initSupabase();
+            
+            if (state.supabase) {
+                const { data: { session } } = await state.supabase.auth.getSession();
+                updateSession(session);
+                
+                // Track auth changes
+                state.supabase.auth.onAuthStateChange((_event, session) => {
+                    updateSession(session);
+                });
+            } else {
+                loadCharacters();
+            }
+        };
+    </script>
+</body>
+</html>

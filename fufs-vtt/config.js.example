@@ -1,0 +1,5 @@
+// Exemplo de configuração local. Renomeie para config.js e preencha com seus dados.
+window.ENV = {
+    SB_URL: "SUA_SUPABASE_URL_AQUI",
+    SB_KEY: "SUA_SUPABASE_ANON_KEY_AQUI"
+};
