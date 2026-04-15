@@ -214,3 +214,5 @@
 [7. Estranhos Fenômenos Sobrenaturais (1d6)](#estranhos-fenômenos-sobrenaturais-1d6)
 
 [8. Ganchos para Campanhas de Horror (1d6)](#ganchos-para-campanhas-de-horror-1d6)
+
+[Capítulo 11: Direitos Autorais](#capítulo-11-direitos-autorais)
