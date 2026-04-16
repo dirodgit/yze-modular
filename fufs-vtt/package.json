@@ -1,7 +1,7 @@
 {
   "name": "fufs-vtt",
   "version": "1.0.0",
-  "description": "FUFS Tabletop Companion Online",
+  "description": "FUFS Tabletop Companion Local-First",
   "scripts": {
     "build": "echo 'Static build complete'"
   }
